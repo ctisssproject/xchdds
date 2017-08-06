@@ -64,271 +64,78 @@ require_once RELATIVITY_PATH.'sub/home/include/db_table.class.php';
         </div>
         <div class="menu_box" align="center">
             <div class="menu_div">
-                <div class="menu_list">首页</div>
-                <div class="menu_list">
-                    工作状态
-                    <div class="menu_j"></div>
-                    <div class="child_menu">
-                        <ul>
-                            <li>
+                <div class="menu_list" onclick="location='index.php'">首页</div>
+                <?php 
+                //读取栏目，构建导航菜单
+                $o_column=new Home_Column();
+                $o_column->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+				$o_column->PushWhere ( array ('&&', 'Parent', '=', 0) );
+				$o_column->PushWhere ( array ('&&', 'State', '=', 1 ) );
+				$o_column->PushOrder ( array ('Number', 'A' ) );
+				for($i=0;$i<$o_column->getAllCount();$i++)
+				{
+					if ($i==7)
+					{
+						//如果一级导航超过7个，那么就停止
+						break;
+					}
+					$s_onclick='';
+					//判断该栏目有没有子栏目，如果有没有子栏目，那么点击进入栏目页面
+					$o_sub_column=new Home_Column();
+					$o_sub_column->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+					$o_sub_column->PushWhere ( array ('&&', 'Parent', '=', $o_column->getColumnId($i)) );
+					$o_sub_column->PushWhere ( array ('&&', 'State', '=', 1 ) );
+					$o_sub_column->PushOrder ( array ('Number', 'A' ) );
+					if ($o_sub_column->getAllCount()==0)
+					{
+						$s_onclick=' onclick="location=\'index.php\'"';
+					}
+					echo('<div class="menu_list"'.$s_onclick.'>'.$o_column->getName($i));
+					//构建子栏目
+					$s_sub_column='';
+					for($j=0;$j<$o_sub_column->getAllCount();$j++)
+					{
+						//判断有没有三级栏目，如果有，那么构建三级栏目菜单，如果没有，那么本栏目按钮可以点击
+						$o_sub_sub_column=new Home_Column();
+						$o_sub_sub_column->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+						$o_sub_sub_column->PushWhere ( array ('&&', 'Parent', '=', $o_sub_column->getColumnId($j)) );
+						$o_sub_sub_column->PushWhere ( array ('&&', 'State', '=', 1 ) );
+						$o_sub_sub_column->PushOrder ( array ('Number', 'A' ) );
+						$s_sub_sub_column='';
+						for($k=0;$k<$o_sub_sub_column->getAllCount();$k++)
+						{
+							$s_sub_sub_column.='
+								<h3>'.$o_sub_sub_column->getName($k).'</h3>
+							';
+						}
+						if ($o_sub_sub_column->getAllCount()==0)
+						{
+							$s_sub_sub_column='
+								<h3>'.$o_sub_column->getName($j).'</h3>
+							';
+						}
+						$s_sub_column.='
+							<li>
                                 <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
+                                    <h2>'.$o_sub_column->getName($j).'</h2>
+                                    '.$s_sub_sub_column.'
                                 </div>
                             </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>工作流程</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu_list">
-                    政务公开
-                    <div class="menu_j"></div>
-                    <div class="child_menu">
-                        <ul>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>工作流程</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>综合督导</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu_list">
-                    督学工作
-                    <div class="menu_j"></div>
-                    <div class="child_menu">
-                        <ul>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>工作流程</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>综合督导</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu_list">
-                    督政工作
-                    <div class="menu_j"></div>
-                    <div class="child_menu">
-                        <ul>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>工作流程</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>综合督导</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu_list">
-                    专项督导
-                    <div class="menu_j"></div>
-                    <div class="child_menu">
-                        <ul>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>工作流程</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>综合督导</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu_list">
-                    科研工作
-                    <div class="menu_j"></div>
-                    <div class="child_menu">
-                        <ul>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>工作流程</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>综合督导</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu_list">
-                    评估监测
-                    <div class="menu_j"></div>
-                    <div class="child_menu">
-                        <ul>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>工作流程</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>评估标准</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="sec_menu_div">
-                                    <h2>综合督导</h2>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                    <h3>责任督学</h3>
-                                    <h3>督学责任区</h3>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+						';
+					}
+					if ($o_sub_column->getAllCount()>0)
+					{
+						echo('
+						<div class="child_menu">
+	                        <ul>
+	                            '.$s_sub_column.'
+	                        </ul>
+	                    </div>
+						');
+					}
+					echo('</div>');
+				}
+                ?>
                 <div class="search_box">
                     <input type="text" placeholder="搜索..." />
                     <div class="search_btn">
