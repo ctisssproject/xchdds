@@ -5,7 +5,7 @@ abstract class DB_Connect
    private $S_DatabaseServer = '127.0.0.1:3306';
    private $S_UserName = 'root';
    private $S_PassWord = 'chutaoIsss';
-   private $S_DataBaseName = 'xcdds';
+   private $S_DataBaseName = 'xchdds';
    protected $O_Result;
    protected $S_Id;
    protected $S_Error_Reason;

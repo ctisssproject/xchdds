@@ -1,0 +1,183 @@
+body {
+	margin: 0px; background-image: url("%E5%A7%94%E5%8E%85%E9%A2%86%E5%AF%BC/images/tou_01.jpg"); background-repeat: repeat-x;
+}
+img {
+	border: 0px currentColor; border-image: none;
+}
+.a {
+	color: rgb(219, 219, 219); font-size: 13px; text-decoration: none;
+}
+.div {
+	margin: 0px; padding: 0px;
+}
+.xin {
+	color: rgb(102, 102, 102); font-size: 14px;
+}
+.white1 a {
+	color: rgb(255, 255, 255);
+}
+.xin1 {
+	color: rgb(0, 0, 0); font-size: 14px; font-weight: bold;
+}
+#shoucang {
+	color: rgb(102, 102, 102); font-size: 14px;
+}
+#shouye {
+	font-size: 14px;
+}
+.zhuanti {
+	color: rgb(51, 51, 51); font-size: 16px;
+}
+.wei {
+	text-transform: none; font-family: Verdana, Geneva, sans-serif; font-size: 10px; font-style: normal; font-variant: normal; font-weight: 200;
+}
+.guan {
+	font-size: 14px; font-weight: 200;
+}
+.daohang {
+	width: 0px; color: rgb(255, 255, 255); line-height: normal; font-size: 16px; font-style: normal; font-weight: 600;
+}
+.we {
+	color: rgb(255, 0, 0); font-size: 24px;
+}
+.qqq {
+	color: rgb(255, 0, 0); font-size: 16px;
+}
+.qqqq {
+	color: rgb(255, 0, 0);
+}
+.rrr {
+	font-weight: 200;
+}
+.rrr {
+	font-size: 14px;
+}
+.rrr {
+	font-size: 16px;
+}
+td {
+	font-size: 12px;
+}
+ul {
+	font-size: 12px;
+}
+li {
+	font-size: 12px;
+}
+span {
+	font-size: 12px;
+}
+div {
+	font-size: 12px;
+}
+.p1 {
+	padding: 10px 10px 10px 15px;
+}
+.p2 {
+	padding: 5px 10px 0px;
+}
+.jgsz_bg {
+	padding: 1px; border: 1px solid rgb(204, 204, 204); border-image: none;
+}
+.w1 {
+	line-height: 25px; font-size: 12px;
+}
+.w1 p {
+	
+}
+.j1 {
+	padding: 15px 10px;
+}
+.j1 p {
+	text-indent: 26px;
+}
+.menub1_1 {
+	background: url("../images/kt-148.jpg") no-repeat; width: 155px; height: 35px; text-align: center; color: rgb(255, 255, 255); line-height: 32px; padding-top: 0px; font-size: 18px; float: left; cursor: pointer;
+}
+.menub1_1 a {
+	background: url("../images/kt-148.jpg") no-repeat; width: 155px; height: 35px; text-align: center; color: rgb(227, 227, 227); line-height: 32px; padding-top: 3px; font-size: 18px; text-decoration: none; float: left; cursor: pointer;
+}
+.menub1_2 {
+	background: url("../images/kt-149.jpg") no-repeat; width: 155px; height: 35px; text-align: center; color: rgb(255, 255, 255); line-height: 32px; padding-top: 0px; font-size: 18px; margin-right: 0px; float: left; cursor: pointer;
+}
+.menub1_2 a {
+	background: url("../images/kt-149.jpg") no-repeat; width: 155px; height: 35px; text-align: center; color: rgb(227, 227, 227); line-height: 32px; padding-top: 3px; font-size: 18px; text-decoration: none; margin-right: 0px; float: left; cursor: pointer;
+}
+.menub1_3 {
+	background: url("../images/kt-149.jpg") no-repeat; width: 155px; height: 35px; text-align: center; color: rgb(255, 255, 255); line-height: 32px; padding-top: 0px; font-size: 18px; margin-right: 0px; float: left; cursor: pointer;
+}
+.menub1_3 a {
+	background: url("../images/kt-149.jpg") no-repeat; width: 155px; height: 35px; text-align: center; color: rgb(227, 227, 227); line-height: 32px; padding-top: 3px; font-size: 18px; text-decoration: none; margin-right: 0px; float: left; cursor: pointer;
+}
+.menugtab {
+	padding: 6px; color: rgb(204, 204, 204);
+}
+.menugtab a {
+	margin: 0px 10px;
+}
+.a {
+	border: 1px solid crimson; border-image: none; width: 60px;
+}
+.B {
+	padding: 1px; width: 60px;
+}
+#body-left {
+	float: left;
+}
+#body-right {
+	float: left;
+}
+.STYLE100 {
+	color: rgb(255, 255, 255);
+}
+.STYLE100 a {
+	color: rgb(255, 255, 255);
+}
+.STYLE14 {
+	color: rgb(255, 255, 255); font-size: 12px; font-weight: bold;
+}
+.STYLE14 a {
+	color: rgb(255, 255, 255); font-weight: bold;
+}
+.table_border td {
+	border-color: blue; border-top-width: 1px; border-right-width: 1px; border-top-style: solid; border-right-style: solid;
+}
+.table_border {
+	border-color: blue; width: 100%; border-bottom-width: 1px; border-left-width: 1px; border-bottom-style: solid; border-left-style: solid;
+}
+.NewTableStyle {
+	border: 1px solid rgb(205, 224, 245); border-collapse: collapse;
+}
+.title_css a {
+	height: 25px; color: rgb(113, 113, 113); line-height: 25px; font-size: 13px; font-weight: normal; text-decoration: none;
+}
+.title_css a:hover {
+	color: rgb(249, 139, 66); font-weight: normal;
+}
+.title_date_align_css {
+	height: 25px; color: rgb(102, 102, 102); line-height: 25px; font-size: 13px; font-weight: normal;
+}
+.title_td_css {
+	height: 25px; line-height: 25px; font-weight: normal;
+}
+.title_td_css a {
+	height: 25px; color: rgb(82, 82, 82); line-height: 25px; font-size: 13px; font-weight: normal; text-decoration: none;
+}
+.title_td_css a:hover {
+	color: rgb(249, 139, 66); font-weight: normal;
+}
+.title_td_css td {
+	height: 25px; line-height: 25px; font-weight: normal;
+}
+a {
+	height: 25px; color: rgb(82, 82, 82); line-height: 25px; font-size: 13px; font-weight: normal; text-decoration: none;
+}
+a:hover {
+	color: rgb(249, 139, 66); font-weight: normal;
+}
+.title_td_css1 {
+	height: 24px; line-height: 25px;
+}
+.imglist_txt_css {
+	padding-top: 5px;
+}
