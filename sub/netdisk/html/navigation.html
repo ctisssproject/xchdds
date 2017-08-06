@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../images/org/ui.dynatree.css" rel="stylesheet" type="text/css" />
+    <link href="../../theme/default/layout_left.css" rel="stylesheet" type="text/css" />
+    <link href="../../theme/default/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/ajax.fun.js"></script>
+    <script type="text/javascript" src="../../js/ajax.class.js"></script>
+<script type="text/javascript" src="../../js/dialog.fun.js"></script>
+<script type="text/javascript" src="../../js/common.fun.js"></script>
+</head>
+<body style="padding-top:10px">
+    <table>
+        <tbody>
+            <tr>
+                <td id="left">
+                        <div id="tree">
+                            <ul class="dynatree-container" style="margin-bottom:15px; padding:0px">
+                                <li>
+                                    <span class="dynatree-node dynatree-folder dynatree-expanded dynatree-has-children dynatree-exp-e dynatree-ico-ef">
+                                        <img src="../../images/file_tree/root.png" alt="" align="absmiddle" style="width:32px; height:32px; display:none"/>
+                                        <img src="../../images/file_tree/root.png" alt="" align="absmiddle" style="width:32px; height:32px"/>
+                                        <a href="#" title="我的网盘" style="font-size:14px; margin-top:5px" ondblclick="openPath(this,1)" onclick="nameAddBold(this)">我的网盘
+                                        </a>
+                                    </span>
+                                    <ul>
+                                        <li>
+                                            <span class="dynatree-node dynatree-folder dynatree-expanded dynatree-has-children dynatree-exp-e dynatree-ico-ef">
+                                                <img src="../../images/file_tree/plus.gif" alt="" align="absmiddle" onclick="openPath(this,1)" />
+                                                <img src="../../images/notify_open.gif" alt="" align="absmiddle"/>
+                                                <a id="path_1" href="#" title="信息中心" style=" font-weight:normal" ondblclick="openPath(this,1)" onclick="nameAddBold(this)">
+                                                    信息中心
+                                                </a>
+                                                <img src="../../images/file_tree/loading.gif" alt="" align="absmiddle" style="display:none"/>
+                                            </span>                                            
+                                        </li>
+                                        <li>
+                                            <span class="dynatree-node dynatree-folder dynatree-expanded dynatree-has-children dynatree-exp-e dynatree-ico-ef">
+                                                <img src="../../images/file_tree/plus.gif" alt="" align="absmiddle"/>
+                                                <img src="../../images/notify_open.gif" alt="" align="absmiddle"/>
+                                                <a href="#" class="dynatree-title" title="信息中心" style=" font-weight:normal" onclick="refreshPath(1)">
+                                                    信息中心
+                                                </a>
+                                            </span>                                           
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="dynatree-container" style="margin:0px; padding:0px; display:none">
+                                <li>
+                                    <span class="dynatree-node dynatree-folder dynatree-expanded dynatree-has-children dynatree-exp-e dynatree-ico-ef">
+                                        <img src="../../images/file_tree/share.png" alt="" align="absmiddle" style="width:32px; height:32px"/>
+                                        <a href="#" title="共享邻居" style="font-size:14px; margin-top:5px">共享邻居
+                                        </a>
+                                    </span>
+                                    <ul>
+                                        <li>
+                                            <span class="dynatree-node dynatree-folder dynatree-expanded dynatree-has-children dynatree-exp-e dynatree-ico-ef">
+                                                <img src="../../images/file_tree/minus.gif" alt="" align="absmiddle"/>
+                                                <img src="../../images/notify_open.gif" alt="" align="absmiddle"/>
+                                                <a href="#" title="信息中心">
+                                                    信息中心
+                                                </a>
+                                            </span>
+                                            <ul style="display: block;">
+                                                <li class="">
+                                                    <span class="dynatree-node dynatree-folder dynatree-expanded dynatree-has-children dynatree-exp-e dynatree-ico-ef">
+                                                        <img src="../../images/file_tree/minus.gif" alt="" align="absmiddle"/>
+                                                        <img src="../../images/notify_open.gif" alt="" align="absmiddle"/>
+                                                        <a href="#" title="中心领导">
+                                                            中心领导
+                                                        </a>
+                                                    </span>
+                                                    <ul style="display: block;">
+                                                        <li class="">
+                                                            <span class="dynatree-node dynatree-folder dynatree-expanded dynatree-has-children dynatree-exp-e dynatree-ico-ef">
+                                                                <img src="../../images/file_tree/minus.gif" alt="" align="absmiddle"/>
+                                                                <img src="../../images/notify_open.gif" alt="" align="absmiddle"/>
+                                                                <a href="#" title="中心领导">
+                                                                    中心领导
+                                                                </a>
+                                                            </span>
+                                                            <ul style="display: block;">
+                                                                <li class="">
+                                                                    <span class="dynatree-node dynatree-folder dynatree-expanded dynatree-has-children dynatree-exp-e dynatree-ico-ef">
+                                                                        <img src="../../images/file_tree/plus.gif" alt="" align="absmiddle"/>
+                                                                        <img src="../../images/notify_open.gif" alt="" align="absmiddle"/>
+                                                                        <a href="#" title="中心领导">
+                                                                            中心领导
+                                                                        </a>
+                                                                    </span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span class="dynatree-node dynatree-folder dynatree-expanded dynatree-has-children dynatree-exp-e dynatree-ico-ef">
+                                                <img src="../../images/file_tree/plus.gif" alt="" align="absmiddle"/>
+                                                <img src="../../images/notify_open.gif" alt="" align="absmiddle"/>
+                                                <a href="javascript:;" class="dynatree-title" title="信息中心"> 
+                                                    信息中心
+                                                </a>
+                                            </span>                                           
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

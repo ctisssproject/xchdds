@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../images/org/ui.dynatree.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/common.css" rel="stylesheet" type="text/css" />
+    <link href="../../theme/default/style.css" rel="stylesheet" type="text/css" />
+    <link href="../../theme/default/layout_left.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="js/control.fun.js"></script>
+
+    <script type="text/javascript" src="js/ajax.fun.js"></script>
+
+    <script type="text/javascript" src="js/folder_operate.js"></script>
+
+    <script type="text/javascript" src="js/file_operate.js"></script>
+
+    <link href="../../css/group.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="../../js/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery/jquery-ui.custom.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery/jquery.ui.autocomplete.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery/jquery.effects.bounce.min.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery/jquery.cookie.js"></script>
+
+    <script type="text/javascript" src="../../js/jquery/jquery.plugins.js"></script>
+
+    <script type="text/javascript" src="../../js/group.fun.js"></script>
+
+    <script type="text/javascript" src="../../js/ajax.class.js"></script>
+
+    <script type="text/javascript" src="../../js/dialog.fun.js"></script>
+
+    <script type="text/javascript" src="../../js/common.fun.js"></script>
+
+</head>
+<body>
+    <div class="file_list">
+        <div class="off">
+            <div style="width:100%">
+                <input id="" value="" type="checkbox" onclick="selectedForCheck(this)" />
+            </div>
+            <div>
+                <div class="icon">
+                    <div class="img folder">
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+            <div class="file_name">
+                我的文件..我的.txt
+            </div>
+            <div class="file_info">
+                4.52M | 2012-12-12 | 张春玲
+            </div>
+            <div class="button_box">
+            <div class="button">
+                <a href="javascript:;" onclick="selected(this.parentNode.parentNode.parentNode);FolderRename(' . $o_tree->getFolderId ( $i ) . ',' . $o_tree->getParentId ( $i ) . ',\'' . $o_tree->getFolderName ( $i ) . '\');"
+                    class="operate">重命名</a>&nbsp;&nbsp;<a href="javascript:;" onclick="selected(this.parentNode.parentNode.parentNode);copyFolder(' . $o_tree->getFolderId ( $i ) . ');">复制</a>&nbsp;&nbsp;<a
+                        href="javascript:;" onclick="selected(this.parentNode.parentNode.parentNode);moveFolder(' . $o_tree->getFolderId ( $i ) . ');">移动</a>&nbsp;&nbsp;<a
+                            href="javascript:;" onclick="selected(this.parentNode.parentNode.parentNode);shareFile( ' . $o_tree->getFolderId ( $i ) . ',1);">共享</a>&nbsp;&nbsp;<a
+                                href="javascript:;" onclick="selected(this.parentNode.parentNode.parentNode);deleteFolder(' . $o_tree->getFolderId ( $i ) . ');">删除</a></div>
+            </div>
+        </div>
+        <div class="off">
+            <div>
+                <input id="Checkbox1" value="" type="checkbox" onclick="selectedForCheck(this)" />
+                文件名
+            </div>
+            <div>
+                <div class="icon">
+                    <div class="img folder">
+                    </div>
+                </div>
+            </div>
+            <div>
+                4.52M | 2012-12-12 | 张春玲
+            </div>
+            <div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

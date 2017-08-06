@@ -1,0 +1,68 @@
+A {
+	COLOR: #6f6f6f; TEXT-DECORATION: none
+}
+A:hover {
+	TEXT-DECORATION: none
+}
+A IMG {
+	BORDER-BOTTOM-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none
+}
+IMG {
+	BORDER-BOTTOM-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none
+}
+DIV {
+	OVERFLOW: hidden
+}
+BODY {
+	BACKGROUND-COLOR: #ebebeb; MARGIN: 0px; FONT: 16px/1.5 微软雅黑,Arial,Tahoma,Helvetica,SimSun,sans-serif,Hei; COLOR: #333333
+}
+.radio.input {
+	OUTLINE-STYLE: none; DISPLAY: none
+}
+INPUT.checkbox {
+	OUTLINE-STYLE: none; DISPLAY: none
+}
+HTML .container {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.container {
+	BACKGROUND-COLOR: #ffffff; MARGIN: 0px auto; WIDTH: 800px; HEIGHT: 100%; OVERFLOW: hidden; PADDING-TOP: 40px
+}
+.title {
+	FONT-FAMILY: 黑体; MARGIN-LEFT: -75px; FONT-SIZE: 14px;
+	z-index:9999999;
+}
+.top_centent {
+	TEXT-INDENT: 25px; WIDTH: 750px; MARGIN-LEFT: 8px
+}
+INPUT.open {
+	WIDTH: 650px
+}
+TEXTAREA {
+	WIDTH: 650px
+}
+.qcontainer TD {
+	WIDTH: 700px; PADDING-TOP: 5px
+}
+.qcontainer {
+	PADDING-LEFT: 30px; PADDING-TOP: 30px
+}
+.first {
+	MARGIN-TOP: 0px
+}
+.second {
+	MARGIN-TOP: 40px
+}
+TEXTAREA {
+	BORDER-BOTTOM: #555 1px solid; BORDER-LEFT: #555 1px solid; HEIGHT: 50px; BORDER-TOP: #555 1px solid; BORDER-RIGHT: #555 1px solid
+}
+.qbody {
+	MARGIN-LEFT: 30px
+}
+.sv_submit
+{
+	font-size:16px;
+	padding:10px;
+	padding-top:5px;
+	padding-bottom:5px;
+	}

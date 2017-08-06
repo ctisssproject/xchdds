@@ -1,0 +1,49 @@
+﻿body /*主页背景统一样式*/
+{
+	margin: 0px;
+	font: 12px/1.5 微软雅黑,Microsoft Yahei,Arial,Tahoma,Helvetica,SimSun,sans-serif,Hei;
+	color: #6f6f6f;
+	background: none repeat scroll 0% 0% rgb(246,247,249);
+	height: 100%;
+}
+*
+{
+	margin: 0px;
+	padding: 0px;
+}
+input, textarea, select, button
+{
+	color: #444;
+	font: 12px/1.5 微软雅黑,Arial,Tahoma,Helvetica,SimSun,sans-serif,Hei;
+}
+input, select, button
+{
+	vertical-align: middle;
+	color: #444;
+}
+form
+{
+	padding: 0px;
+	margin: 0px;
+}
+div
+{
+
+}
+a
+{
+	text-decoration: none;
+	color: #6f6f6f;
+}
+a:hover
+{
+	text-decoration: none;
+}
+a img
+{
+	border: none;
+}
+img
+{
+	border: none;
+}

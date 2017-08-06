@@ -1,0 +1,339 @@
+﻿#north
+{
+	height: 78px;
+	overflow: hidden;
+}
+#north #north_left
+{
+	float: left;
+}
+#north #north_left table
+{
+	height: 78px;
+}
+#north #north_left table td
+{
+	vertical-align: middle;
+	font-weight: bold;
+	font-size: 18pt;
+}
+#north #north_right
+{
+	padding-top: 5px;
+	padding-right: 10px;
+	float: right;
+}
+#north #north_right #datetime
+{
+	float: right;
+	padding-left: 20px;
+	line-height: 25px;
+	font-size: 14px;
+	height: 78px;
+}
+#north #north_right #datetime td
+{
+	text-align: left;
+}
+#north #north_right #datetime #time_area
+{
+	padding: 0px;
+	font-size: 32px;
+	font-family: Arial;
+	font-weight: bold;
+	padding-left:10px;
+}
+#taskbar
+{
+	height: 40px;
+	overflow: hidden;
+}
+#taskbar #taskbar_left
+{
+	float: left;
+	padding: 0px 10px;
+}
+#taskbar #taskbar_center
+{
+	float: left;
+	padding-top: 10px;
+}
+#taskbar #taskbar_right
+{
+	float: right;
+	padding-left: 10px;
+}
+#taskbar #taskbar_left #start_menu
+{
+	display: block;
+	width: 97px;
+	height: 40px;
+}
+#taskbar #taskbar_left #start_menu:link
+{
+	text-decoration: none;
+}
+
+#taskbar #taskbar_left #start_menu
+{
+	outline: medium one;
+}
+#taskbar #taskbar_center #tabs_left_scroll
+{
+	float: left;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+#taskbar #taskbar_center #tabs_right_scroll
+{
+	float: right;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+#taskbar #taskbar_center #tabs_container
+{
+	height: 30px;
+	float: left;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#taskbar #taskbar_center #tabs_container div
+{
+	display: inline-block !important;
+	margin-right: 3px;
+	padding-right: 5px;
+	white-space: nowrap;
+	float: left; /*border-top-left-radius:5px;*/ /*border-top-right-radius:5px;*/
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+	-webkit-border-top-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+}
+#taskbar #taskbar_center #tabs_container div a.tab
+{
+	display: inline-block;
+	padding-left: 10px;
+	padding-right: 0px;
+	min-width: 64px !important;
+	width: auto !important;
+	height: 30px;
+	line-height: 30px;
+	text-align: center; /*border-top-left-radius:5px;*/ /*border-top-right-radius:5px;*/
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+	-webkit-border-top-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+}
+#taskbar #taskbar_center #tabs_container div.selected a.tab
+{
+	font-size: 14px;
+	font-weight: bold;
+}
+#taskbar #taskbar_center #tabs_container div.selected a.close
+{
+	display: inline-block;
+}
+#taskbar #taskbar_center #tabs_container div a.close
+{
+	width: 16px;
+	height: 16px;
+	margin-bottom: -2px !important;
+}
+#funcbar
+{
+	height: 30px;
+	overflow: hidden;
+}
+#funcbar #funcbar_left
+{
+	height:30px;
+	}
+/* 主操作区域 */
+#center {
+   width:100%;
+   height:100%;
+   overflow:hidden;
+   position:relative;
+	height: 500px;
+}
+#center .tabs-panel{
+   width:100%;
+   height:100%;
+   display:none;
+}
+#center .selected{
+   display:block;
+}
+#center .tabs-panel iframe{
+   width:100%;
+   height:100%;
+   height:500px;
+}
+
+#south
+{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	overflow: hidden;
+}
+#south table
+{
+	width: 100%;
+	border: 0px none;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+#south table td.left
+{
+	cursor: pointer;
+	width: 120px;
+}
+#south table td.left div
+{
+	width: 120px;
+	padding-left: 10px;
+	text-align: center;
+}
+#south table td.left div span
+{
+	padding: 0px 10px;
+	font-weight: bold;
+	cursor: pointer;
+}
+#south table td.right
+{
+	width: 140px;
+	padding-right: 10px;
+	text-align: right;
+}
+#south table td.right a.ipanel_tab:link, #south table td.right a.ipanel_tab:hover, #south table td.right a.ipanel_tab:active, #south table td.right a.ipanel_tab:visited
+{
+	display: inline-block;
+	width: 30px;
+	height: 25px;
+	line-height: 25px;
+	text-decoration: none;
+	text-align: center;
+	z-index: 5;
+	margin-right: 10px;
+}
+
+#sysmsg
+{
+	left:0px;
+	top:0px;
+	position:absolute;
+	display:none;
+	}
+#sysmsg table tr td.t_l
+{
+	background: url(  '../images/sysmsg/t_l.png' ) no-repeat 0px 0px;
+	height:37px;
+	width:12px;
+	}
+#sysmsg table tr td.t_c
+{
+	background: url(  '../images/sysmsg/t_c.png' ) repeat 0px 0px;
+	height:27px;
+	width:220px;
+	color:White;
+	font-size:14px;
+	font-weight:bold;
+	vertical-align:top;
+	padding-left:15px;
+	}
+#sysmsg table tr td.t_c div
+{
+	float:left;
+	margin-top:12px;
+	}	
+#sysmsg table tr td.t_c div.close
+{
+	float:right;
+	cursor:pointer;
+	width:37px;
+	height:18px;
+	background: url(  '../images/sysmsg/close_off.png' ) no-repeat 0px 0px;
+	margin-top:7px;
+	}	
+#sysmsg table tr td.t_c div.close:hover
+{
+	background: url(  '../images/sysmsg/close_on.png' ) no-repeat 0px 0px;
+	}	
+#sysmsg table tr td.t_r
+{
+	background: url(  '../images/sysmsg/t_r.png' ) no-repeat 0px 0px;
+	height:37px;
+	width:12px;
+	}
+#sysmsg table tr td.c_l
+{
+	background: url(  '../images/sysmsg/c_l.png' ) repeat 0px 0px;
+	width:12px;
+	}
+#sysmsg table tr td.content
+{
+	background-color:White;
+	padding:15px;
+	height:110px;
+	vertical-align:top;
+	overflow:auto;
+	padding-right:5px;
+	}
+#sysmsg table tr td.content #sysmsg_content
+{
+	height:110px;
+	overflow:auto;
+	}
+#sysmsg table tr td.content #sysmsg_content div
+{
+	margin-bottom:5px;
+	}
+#sysmsg table tr td.content a
+{
+	color:#333333;
+	}
+#sysmsg table tr td.content a:hover
+{
+	color:#338A5A;
+	font-weight:bold;
+	}
+#sysmsg table tr td.content span
+{
+	font-weight:bold;
+	color:#C97A03;
+	margin-left:5px;
+	margin-right:5px;
+	}
+#sysmsg table tr td.content #sysmsg_content div.clicked
+{
+	color:#999999;
+	text-decoration:line-through;
+	}
+#sysmsg table tr td.content #sysmsg_content div.clicked span
+{
+	color:#999999;
+	}
+#sysmsg table tr td.c_r
+{
+	background: url(  '../images/sysmsg/c_r.png' ) repeat 0px 0px;
+	width:12px;
+	}
+#sysmsg table tr td.d_l
+{
+	background: url(  '../images/sysmsg/d_l.png' ) no-repeat 0px 0px;
+	width:12px;
+	height:12px;
+	}
+#sysmsg table tr td.d_c
+{
+	background: url(  '../images/sysmsg/d_c.png' ) repeat 0px 0px;
+	height:12px;
+	}
+#sysmsg table tr td.d_r
+{
+	background: url(  '../images/sysmsg/d_r.png' ) no-repeat 0px 0px;
+	}

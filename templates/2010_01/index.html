@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={charset}" />
+<link rel="stylesheet" type="text/css" href="/templates/2010_01/index.css" />
+<link rel="shortcut icon" href="/images/tongda.ico" />
+{javascript}
+</head>
+<body onload="javascript:document.form1.{focus_filed}.focus();" scroll="auto">
+{update_tips}
+<form name="form1" method="post" action="logincheck.php" {autocomplete} onsubmit="{form_submit}">
+<div id="logo">
+   <div id="form">
+      <div class="left">
+         <div class="user"><input type="text" class="text" name="UNAME" maxlength="20" onmouseover="this.focus()" onfocus="this.select()" value="{username_cookie}"></div>
+         <div class="pwd"><input type="password" class="text" name="PASSWORD" onmouseover="this.focus()" onfocus="this.select()" value=""></div>
+      </div>
+      <div class="right">
+         <input type="submit" class="submit" title="µÇÂ¼" value="" />
+      </div>
+   </div>
+   <div class="msg">
+      <div>{tips}</div>
+      <div>{usb_key_option}</div>
+      <div>{miibeian}</div>
+   </div>
+</div>
+{usbkey_object}
+{antivirus_script}
+</form>
+</body>
+</html>

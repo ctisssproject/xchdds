@@ -1,0 +1,144 @@
+﻿body
+{
+}
+.group
+{
+	width: 100%;
+}
+.group td
+{
+	text-align:left;
+}
+.group .left
+{
+	width: 180px;
+	vertical-align:top;
+}
+.group .right
+{
+	vertical-align:top;
+}
+.group .right .name
+{
+	border: solid 1px #CCCCCC;
+	background-color:White;
+	height:30px;
+	width:80px;
+	margin-left:5px;
+	margin-bottom:10px;
+	text-align:center;
+}
+.group .right .all
+{
+	border: solid 1px #A7BD74;
+	background-color:#C4DE83;
+	height:30px;
+	width:80px;
+	margin-left:5px;
+	margin-bottom:10px;
+	text-align:center;
+}
+.group .right .delall
+{
+	border: solid 1px #A7BD74;
+	background-color:#C4DE83;
+	height:30px;
+	width:80px;
+	margin-left:5px;
+	margin-bottom:10px;
+	text-align:center;
+}
+.group .right .selected
+{
+	border: solid 1px #CCCCCC;
+	background-color:#E5E5E5;
+	height:30px;
+	width:80px;
+	margin-left:5px;
+	margin-bottom:10px;
+	text-align:center;
+}
+.group .dept
+{
+	border: solid 1px #5B99CA;
+	width:178px;
+	border-bottom: none;
+}
+.group .dept .dept1
+{
+	padding-left: 20px;
+	line-height:30px;
+	height: 30px;
+	overflow:hidden;
+}
+.group .dept .dept1 a
+{
+	font-weight: bold;
+}
+.group .dept .dept1 a:hover
+{
+	text-decoration:underline;
+}
+.group .dept .dept2
+{
+	padding-left: 40px;
+	line-height:25px;
+	height: 25px;
+	overflow:hidden;
+}
+.group .dept .dept2 a
+{
+	color: Black;
+}
+.group .dept .dept2 a:hover
+{
+	font-weight:bold;
+}
+.group .dept .dept3
+{
+	padding-left: 60px;
+	line-height:25px;
+	height: 25px;
+	overflow:hidden;
+}
+.group .dept .dept3 a
+{
+	color: Black;
+}
+.group .dept .dept3 a:hover
+{
+	font-weight:bold;
+}
+.group .dept .dept4
+{
+	padding-left: 75px;
+	line-height:25px;
+	height: 25px;
+	overflow:hidden;
+}
+.group .dept .dept4 a
+{
+	color: Black;
+}
+.group .dept .dept4 a:hover
+{
+	font-weight:bold;
+}
+.group .role
+{
+	border: solid 1px #5B99CA;
+	border-top:none;
+	width:178px;
+}
+.group .role td
+{
+padding-left: 40px; height: 20px
+}
+.group .role td a
+{
+	color:Black;
+}
+.group .role td a:hover
+{
+	font-weight:bold;
+}

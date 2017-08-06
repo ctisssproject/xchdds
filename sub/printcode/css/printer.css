@@ -1,0 +1,17 @@
+body 
+{
+	margin:0px;
+	padding:0px;
+	font-size:18px;
+}
+table
+{
+	width:100%;
+	}
+table td
+{
+	padding:6px;
+	border-bottom:1px #000000 dashed;
+	padding-left:50px;
+	}
+

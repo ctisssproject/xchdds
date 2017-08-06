@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={charset}">
+<link rel="stylesheet" type="text/css" href="/templates/2009/index.css">
+<link rel="shortcut icon" href="/images/tongda.ico">
+{javascript}
+</head>
+<body onload="javascript:document.form1.{focus_filed}.focus();">
+{update_tips}
+<div align="center">
+<form name="form1" method="post" action="logincheck.php" {autocomplete} onsubmit="{form_submit}">
+<div class="login_div" align="center">
+  <b>ÓÃ»§Ãû</b> <input type="text" class="text" name="UNAME" maxlength="20" onmouseover="this.focus()" onfocus="this.select()" value="{username_cookie}" />&nbsp;&nbsp;
+  <b>ÃÜÂë</b> <input type="password" class="text" name="PASSWORD" onmouseover="this.focus()" onfocus="this.select()" value="" />&nbsp;&nbsp;
+  <input type="submit" class="submit" value="µÇ Â¼" />
+</div>
+<br>
+<br>{usb_key_option}
+{usbkey_object}
+</form>
+{tips}
+{antivirus_script}
+<br />
+{miibeian}
+</div>
+</body>
+</html>

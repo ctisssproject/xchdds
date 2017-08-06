@@ -1,0 +1,2 @@
+UPDATE `xcjwszpj_temp`.`base_module` SET `wait_read_table` = 'home_setup' WHERE `base_module`.`module_id` = 64 LIMIT 1;
+UPDATE `xcjwszpj_temp`.`base_module` SET `path` = 'sub/home/' WHERE `base_module`.`module_id` = 64 LIMIT 1;

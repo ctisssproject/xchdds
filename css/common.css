@@ -1,0 +1,423 @@
+body /*主页背景统一样式*/
+{
+	margin: 0px;
+	font: 12px/1.5 Arial,Tahoma,Helvetica,SimSun,sans-serif,Hei;
+	color: #6f6f6f;
+	background: none repeat scroll 0% 0% rgb(246,247,249);
+	height: 100%;
+}
+*
+{
+	margin: 0px;
+	padding: 0px;
+}
+input, textarea, select, button
+{
+	color: #444;
+	font: 12px/1.6em Verdana,Helvetica,Arial,sans-serif;
+}
+input, select, button
+{
+	vertical-align: middle;
+	color: #444;
+}
+form
+{
+	padding: 0px;
+	margin: 0px;
+}
+div
+{
+	overflow: hidden;
+}
+a
+{
+	text-decoration: none;
+	color: #6f6f6f;
+}
+a:hover
+{
+	text-decoration: none;
+}
+a img
+{
+	border: none;
+}
+img
+{
+	border: none;
+}
+.dialog_message
+{
+    font-size: 14px;
+    line-height: 25px;
+    color:#393939;
+    
+}
+.dialog_icon_success
+{
+    background: url(  '../images/success.gif' ) no-repeat center center;
+}
+.dialog_icon_error
+{
+    background: url(  '../images/error.gif' ) no-repeat center center;
+}
+.dialog_icon_message
+{
+    background: url(  '../images/message.gif' ) no-repeat center center;
+}
+.dialog_icon_confirm
+{
+    background: url(  '../images/confirm.gif' ) no-repeat center center;
+}
+.dialog_button_table
+{
+    background-color: #F2F2F2;
+    border-top: solid 1px #CCCCCC;
+}
+/*14号黑字不加粗------------------------------------------------------*/
+.f_14_1
+{
+    font-size: 14px;
+    color:Black;
+    font-weight:normal;
+}
+/*14号深灰不加粗*/
+.f_14_2
+{
+    font-size: 14px;
+    color: #444;
+    font-weight:normal;
+}
+/*14号浅灰不加粗*/
+.f_14_3
+{
+    font-size: 14px;
+    color: #999999;
+    font-weight:normal;
+}
+/*14号蓝字不加粗*/
+.f_14_4
+{
+    font-size: 14px;
+    color: #2B65B7;
+    font-weight:normal;
+}
+/*14号橙红色不加粗*/
+.f_14_5
+{
+    font-size: 14px;
+    color: #F26C4F;
+    font-weight:normal;
+}
+/*14号红色不加粗*/
+.f_14_6
+{
+    font-size: 14px;
+    color: #FF0000;
+    font-weight:normal;
+}
+/*14号绿色不加粗*/
+.f_14_7
+{
+    font-size: 14px;
+    color: #006600;
+    font-weight:normal;
+}
+/*14号黑字加粗--------------------------------------------------------*/
+.f_14b_1
+{
+    font-size: 14px;
+    color:Black;
+    font-weight:bold;
+}
+/*14号深灰加粗*/
+.f_14b_2
+{
+    font-size: 14px;
+    color: #444;
+    font-weight:bold;
+}
+/*14号浅灰加粗*/
+.f_14b_3
+{
+    font-size: 14px;
+    color: #999999;
+    font-weight:bold;
+}
+/*14号蓝字加粗*/
+.f_14b_4
+{
+    font-size: 14px;
+    color: #2B65B7;
+    font-weight:bold;
+}
+/*14号橙红色加粗*/
+.f_14b_5
+{
+    font-size: 14px;
+    color: #F26C4F;
+    font-weight:bold;
+}
+/*14号红色加粗*/
+.f_14b_6
+{
+    font-size: 14px;
+    color: #FF0000;
+    font-weight:bold;
+}
+/*14号绿色加粗*/
+.f_14b_7
+{
+    font-size: 14px;
+    color: #006600;
+    font-weight:bold;
+}
+/*12号黑字不加粗------------------------------------------------------*/
+.f_12_1
+{
+    font-size: 12px;
+    color:Black;
+    font-weight:normal;
+}
+/*12号深灰不加粗*/
+.f_12_2
+{
+    font-size: 12px;
+    color: #444;
+    font-weight:normal;
+}
+/*12号浅灰不加粗*/
+.f_12_3
+{
+    font-size: 12px;
+    color: #999999;
+    font-weight:normal;
+}
+/*12号蓝字不加粗*/
+.f_12_4
+{
+    font-size: 12px;
+    color: #2B65B7;
+    font-weight:normal;
+}
+/*12号橙红色不加粗*/
+.f_12_5
+{
+    font-size: 12px;
+    color: #F26C4F;
+    font-weight:normal;
+}
+/*12号红色不加粗*/
+.f_12_6
+{
+    font-size: 12px;
+    color: #FF0000;
+    font-weight:normal;
+}
+/*12号绿色不加粗*/
+.f_12_7
+{
+    font-size: 12px;
+    color: #006600;
+    font-weight:normal;
+}
+/*12号黑字加粗------------------------------------------------------*/
+.f_12b_1
+{
+    font-size: 12px;
+    color:Black;
+    font-weight:bold;
+}
+/*12号深灰加粗*/
+.f_12b_2
+{
+    font-size: 12px;
+    color: #444;
+    font-weight:bold;
+}
+/*12号浅灰加粗*/
+.f_12b_3
+{
+    font-size: 12px;
+    color: #999999;
+    font-weight:bold;
+}
+/*12号蓝字加粗*/
+.f_12b_4
+{
+    font-size: 12px;
+    color: #2B65B7;
+    font-weight:bold;
+}
+/*12号橙红色加粗*/
+.f_12b_5
+{
+    font-size: 12px;
+    color: #F26C4F;
+    font-weight:bold;
+}
+/*12号红色加粗*/
+.f_12b_6
+{
+    font-size: 12px;
+    color: #FF0000;
+    font-weight:bold;
+}
+/*12号绿色加粗*/
+.f_12b_7
+{
+    font-size: 12px;
+    color: #006600;
+    font-weight:bold;
+}
+/*----------------------------------------------------------*/
+/*高亮内容*/
+.highlight_1
+{
+    color: #FF0000;
+    font-weight: bold;
+}
+
+.dialog_border
+{
+    background: url(          '../images/style_1/dialog_border.gif' ) 0px 0px;
+}
+.dialog_closebutton
+{
+    background-image: url(          '../images/style_1/close1.gif' );
+    margin: 5px;
+    width: 20px;
+    cursor: pointer;
+    position: relative;
+    height: 20px;
+}
+.dialog_closebutton_over
+{
+    background-image: url(          '../images/style_1/close2.gif' );
+    margin: 5px;
+    width: 20px;
+    cursor: pointer;
+    position: relative;
+    height: 20px;
+}
+.dialog_loading
+{
+    font-weight: bold;
+    color: #336699;
+    font-size: 14px;
+    padding-left: 60px;
+    background: url(          '../images/loading_blue.gif' ) no-repeat 2px center;
+}
+.dialog_title
+{
+    font-weight: bold;
+    color: #336699;
+    font-size: 14px;
+    padding-left: 20px;
+    height: 35px;
+}
+.submitButton
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #C2D5E3 #336699 #336699 #C2D5E3;
+    margin: 10px;
+    padding: 0 10px;
+    height: 24px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #E5EDF2;
+    color: #336699;
+    line-height: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.submitButton2
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #C2D5E3 #336699 #336699 #C2D5E3;
+    margin: 10px;
+    padding: 0 10px;
+    height: 24px;
+    font-size: 12px;
+    background: #E5EDF2;
+    color: #336699;
+    line-height: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.submitButton3
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #C2D5E3 #336699 #336699 #C2D5E3;
+    margin: 10px;
+    padding: 0 10px;
+    height: 24px;
+    font-size: 12px;
+    background: #E5EDF2;
+    color: #FF0000;
+    line-height: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.font_14_1
+{
+    font-size: 14px;
+}
+.font_11_hui
+{
+    font-size: 11px;
+    color: #999999;
+}
+.font_12_black
+{
+    color: Black;
+}
+.user_photo_48
+{
+    border-width: 1px;
+    border-color: #F2F2F2 #CDCDCD #CDCDCD #F2F2F2;
+    border-style: solid;
+    height: 51px;
+    width: 51px;
+    margin: 4px;
+    background-color: White;
+}
+.user_photo_48 img
+{
+    padding: 2px 2px 1px 2px;
+    height: 48px;
+    width: 48px;
+}
+.user_photo_120
+{
+    border-width: 1px;
+    border-color: #F2F2F2 #CDCDCD #CDCDCD #F2F2F2;
+    border-style: solid;
+    height: 128px;
+    width: 128px;
+    margin: 4px;
+    background-color: White;
+}
+.user_photo_120 img
+{
+    padding: 4px;
+    height: 120px;
+    width: 120px;
+}
+.dialog_progress
+{
+    font-weight: bold;
+    color: #336699;
+    font-size: 14px;
+    padding-left:20px;
+}
+.menu_notice
+{
+	color:White;
+	font-size:10px;
+	float:left;
+	}

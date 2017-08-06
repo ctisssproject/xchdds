@@ -1,0 +1,273 @@
+
+table
+{
+	border-collapse: collapse;
+}
+iframe
+{
+	width: 100%;
+}
+.unread_title
+{
+	font-weight: bold;
+}
+.unread_title a
+{
+	font-weight: normal;
+}
+a.red
+{
+	color: Red;
+}
+.green
+{
+	color: #42B475;
+}
+body
+{
+	background-color: #F6F7F9;
+}
+.mar_top_20
+{
+	margin-top: 20px;
+}
+.xuan
+{
+	width: 40px;
+}
+.blue
+{
+	color: #3399CC;
+}
+.green
+{
+	color: #009900;
+}
+.desk_icon
+{
+	background: url(  '../images/netdisk.jpg' ) left center no-repeat;
+}
+.folder_top
+{
+	width: 100%;
+	background: url(  '../images/bg_tablist_big.gif' ) left center;
+	margin: 0px;
+	border: 1px solid #C0BFBF;
+	border-left: none;
+}
+.folder_top td
+{
+	height: 34px;
+}
+.folder_top td .email
+{
+	height: 26px;
+	width: 83px;
+	cursor: pointer;
+	background: url(  '../images/send_email_off.png' );
+	margin-left: 5px;
+}
+.folder_top td .email:hover
+{
+	background: url(  '../images/send_email_on.png' );
+}
+.folder_top td .msg
+{
+	height: 26px;
+	width: 83px;
+	cursor: pointer;
+	background: url(  '../images/send_msg_off.png' );
+	margin-left: 5px;
+}
+.folder_top td .msg:hover
+{
+	background: url(  '../images/send_msg_on.png' );
+}
+.folder_top td .search
+{
+	height: 26px;
+	width: 59px;
+	cursor: pointer;
+	background: url(  '../images/search_off.png' );
+	margin-left: 5px;
+}
+.folder_top td .search:hover
+{
+	background: url(  '../images/search_on.png' );
+}
+.TableBlock_Editor tr td span
+{
+	color:#999999;
+}
+.folder_title
+{
+	width: 100%;
+	margin: 0px;
+	border: 1px solid #C0BFBF;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	background-color: #F9F8F8;
+}
+.folder_title td
+{
+	height: 20px;
+	padding-left: 10px;
+	border-right: 1px solid #C0BFBF;
+}
+
+.folder_body
+{
+	width: 100%;
+	margin: 0px;
+	border: 1px solid #EBEBEB;
+	border-left: none;
+	border-top: none;
+	background-color: #F9F8F8;
+}
+.folder_body tr.title td
+{
+	height: 10px;
+	border-right: 1px solid #C0BFBF;
+}
+.folder_body tr
+{
+	height: 30px;
+	padding-left: 10px;
+	cursor: pointer;
+}
+.folder_body tr.title
+{
+	height: 20px;
+	cursor:inherit;
+}
+.folder_body tr.title td
+{
+	height: 20px;
+	border-right: 1px solid #C0BFBF;
+	border-bottom: 1px solid #C0BFBF;
+	cursor:inherit;
+}
+.folder_body tr.on
+{
+	background-color: #9BC3EE;
+}
+.folder_body tr.on td
+{
+	color: White;
+}
+.folder_body tr.off
+{
+}
+.folder_body tr.off:hover
+{
+	background-color: #F2F2F2;
+}
+.folder_body td
+{
+	height: 30px;
+	padding-left: 10px;
+	border-bottom: 1px solid #EBEBEB;
+}
+.folder_body td div
+{
+
+}
+.folder_body td .icon
+{
+	height: 16px;
+	width: 16px;
+	line-height:16px;
+	position:relative;
+	margin:0px auto;
+   text-align:center; 
+   display: block;
+   cursor: pointer;
+}
+.folder_body td .icon .man
+{
+	display:block;
+	position:static;   
+	height: 16px;
+	width: 16px;
+	background-image: url( '../images/user_man.png' );
+	background-repeat: no-repeat;
+}
+.folder_body td .icon .woman
+{
+	display:block;
+	position:static;   
+	height: 16px;
+	width: 16px;
+	background-image: url( '../images/user_woman.png' );
+	background-repeat: no-repeat;
+}
+.folder_body td div.icon .share
+{
+	display: block;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 32px;
+	height: 32px;
+	background-image: url( '../images/share_hand.png' );
+	background-repeat: no-repeat;
+	background-position: left bottom;
+}
+.folder_body td a:hover
+{
+	text-decoration: underline;
+	color: Black;
+}
+.folder_body td .folder
+{
+	background-position: -242px 0px;
+}
+.folder_body td .mov
+{
+	background-position: -171px 0px;
+}
+.folder_body td .excel
+{
+	background-position: -136px 0px;
+}
+.folder_body td .ppt
+{
+	background-position: -206px 0px;
+}
+.folder_body td .word
+{
+	background-position: -104px 0px;
+}
+.folder_body td .image
+{
+	background-position: -70px 0px;
+}
+.folder_body td .pdf
+{
+	background-position: 0px -35px;
+}
+.folder_body td .txt
+{
+	background-position: -34px -35px;
+}
+.folder_body td .psd
+{
+	background-position: -70px -35px;
+}
+.folder_body td .rar
+{
+	background-position: -104px -35px;
+}
+.folder_body td .html
+{
+	background-position: -136px -35px;
+}
+.folder_body td .exe
+{
+	background-position: -171px -35px;
+}
+.folder_body td .other
+{
+	background-position: -206px -35px;
+}
