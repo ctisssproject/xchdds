@@ -1,2 +1,9 @@
-UPDATE `xcjwszpj_temp`.`base_module` SET `wait_read_table` = 'home_setup' WHERE `base_module`.`module_id` = 64 LIMIT 1;
-UPDATE `xcjwszpj_temp`.`base_module` SET `path` = 'sub/home/' WHERE `base_module`.`module_id` = 64 LIMIT 1;
+CREATE TABLE  `home_column_tags` (
+ `id` MEDIUMINT( 8 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  '标签编号',
+ `name` CHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT  '标签名称',
+ `column_id` MEDIUMINT( 8 ) NOT NULL COMMENT  '栏目编号',
+ `color` CHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT  '颜色',
+ `number` INT( 2 ) NOT NULL COMMENT  '顺序'
+) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT =  '文章的标签';
+
+ALTER TABLE `home_article` ADD `tag_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0' COMMENT '标签编号' AFTER `logo`;

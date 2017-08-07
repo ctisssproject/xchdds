@@ -54,6 +54,7 @@ class Home_Article extends CRUD
    protected $Delete;
    protected $LastUid;
    protected $LastDate;
+   protected $TagId;
    protected $IsComment;
 	 
    protected function DefineKey()
@@ -78,6 +79,7 @@ class Home_Article extends CRUD
       				'column_id' => 'ColumnId',
       				'state' => 'State',
       				'audit' => 'Audit',
+      				'tag_id' => 'TagId',
       				'audit_uid' => 'AuditUid',
       				'unaudit_reason' => 'UnauditReason',
      				'delete' => 'Delete',
@@ -392,5 +394,32 @@ class Home_Focus extends CRUD
      				'number' => 'Number'
                    ));
    }
+}
+class Home_Column_Tags extends CRUD
+{
+    protected $Id;
+    protected $Name;
+    protected $ColumnId;
+    protected $Color;
+    protected $Number;
+
+    protected function DefineKey()
+    {
+        return 'id';
+    }
+    protected function DefineTableName()
+    {
+        return 'home_column_tags';
+    }
+    protected function DefineRelationMap()
+    {
+        return(array(
+                    'id' => 'Id',
+                    'name' => 'Name',
+                    'column_id' => 'ColumnId',
+                    'color' => 'Color',
+                    'number' => 'Number'
+        ));
+    }
 }
 ?>
