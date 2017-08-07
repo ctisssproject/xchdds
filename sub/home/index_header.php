@@ -5,6 +5,7 @@ header ( 'Expires: Thu, 01 Jan 1970 00:00:00 GMT' );
 header ( 'Last-Modified:' . gmdate ( 'D, d M Y H:i:s' ) . ' GMT' );
 header ( 'content-type:text/html; charset=utf-8' );
 require_once RELATIVITY_PATH.'sub/home/include/db_table.class.php';
+$s_title='北京市西城区人民政府教育督导室';
 ?>
 <!DOCTYPE html>
 <html>

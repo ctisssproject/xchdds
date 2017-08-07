@@ -1,6 +1,6 @@
 <?php
 define ( 'RELATIVITY_PATH', '../../' );
-require_once 'header.php';
+require_once 'index_header.php';
 ?>
 <script type="text/javascript" src="js/slick/slick.js"></script>
 <link type="text/css" rel="stylesheet" href="css/slick.css" />
@@ -281,5 +281,5 @@ require_once 'header.php';
             </div>
         </div>
 <?php 
-require_once 'footer.php';
+require_once 'index_footer.php';
 ?>
