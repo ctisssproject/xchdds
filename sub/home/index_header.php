@@ -4,8 +4,47 @@ header ( 'Pragma: no-cache' );
 header ( 'Expires: Thu, 01 Jan 1970 00:00:00 GMT' );
 header ( 'Last-Modified:' . gmdate ( 'D, d M Y H:i:s' ) . ' GMT' );
 header ( 'content-type:text/html; charset=utf-8' );
+if (isset ( $_COOKIE ['SESSIONID'] )) {
+
+} else {
+	echo ('<script>location=\'' . RELATIVITY_PATH . 'index.php\'+\'?url=\'+document.location</script>');
+	exit ( 0 );
+}
 require_once RELATIVITY_PATH.'sub/home/include/db_table.class.php';
+require_once RELATIVITY_PATH.'sub/home/include/db_view.class.php';
 $s_title='北京市西城区人民政府教育督导室';
+function get_page_button_for_column($s_filename,$n_all_count, $n_page_size = 20, $n_page = 1)
+{
+	if (fmod ( $n_all_count, $n_page_size ) == 0) {
+			$n_page_count = floor ( $n_all_count / $n_page_size );
+		} else {
+			$n_page_count = floor ( $n_all_count / $n_page_size ) + 1;
+		}
+		if ($n_page_count <= 1) {
+			//return '';
+		}
+		//$s_pagebutton .= ' 共 ' . $n_all_count . ' 篇&nbsp;&nbsp;&nbsp;&nbsp;第 ' . $n_page . ' / ' . $n_page_count . ' </span>页&nbsp;&nbsp;';
+		if ($n_page > 1) {
+			$s_pagebutton .= '<div class="page_btn" onclick="location=\'' . $s_filename . 'page=' . ($n_page - 1) . '\'" title="上一页">上一页</div>';
+		} else {
+			//$s_pagebutton .= '&nbsp;&nbsp;&nbsp;&nbsp;上一页';
+		}
+		for($i=1;$i<=$n_page_count;$i++)
+		{
+			$s_class='';
+			if ($i==$n_page)
+			{
+				$s_class=' no_btn_on';
+			}
+			$s_pagebutton .= '<div class="no_btn'.$s_class.'" onclick="location=\'' . $s_filename . 'page=' . ($i) . '\'" title="第'.$i.'页">'.$i.'</div>';
+		}
+		if ($n_page < $n_page_count) {
+			$s_pagebutton .= '<div class="page_btn" onclick="location=\'' . $s_filename . 'page=' . ($n_page + 1) . '\'" title="下一页">下一页</div>';
+		} else {
+			//$s_pagebutton .= '&nbsp;&nbsp;&nbsp;&nbsp;下一页';
+		}
+		return $s_pagebutton;	
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -72,14 +111,11 @@ $s_title='北京市西城区人民政府教育督导室';
                 $o_column->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
 				$o_column->PushWhere ( array ('&&', 'Parent', '=', 0) );
 				$o_column->PushWhere ( array ('&&', 'State', '=', 1 ) );
+				$o_column->PushWhere ( array ('&&', 'ColumnId', '>', 1 ) );
+				$o_column->PushWhere ( array ('&&', 'ColumnId', '<',9 ) );
 				$o_column->PushOrder ( array ('Number', 'A' ) );
 				for($i=0;$i<$o_column->getAllCount();$i++)
 				{
-					if ($i==7)
-					{
-						//如果一级导航超过7个，那么就停止
-						break;
-					}
 					$s_onclick='';
 					//判断该栏目有没有子栏目，如果有没有子栏目，那么点击进入栏目页面
 					$o_sub_column=new Home_Column();
@@ -89,7 +125,7 @@ $s_title='北京市西城区人民政府教育督导室';
 					$o_sub_column->PushOrder ( array ('Number', 'A' ) );
 					if ($o_sub_column->getAllCount()==0)
 					{
-						$s_onclick=' onclick="location=\'index.php\'"';
+						$s_onclick=' onclick="location=\'index_article_list.php?id='.$o_column->getColumnId($i).'\'"';						
 					}
 					echo('<div class="menu_list"'.$s_onclick.'>'.$o_column->getName($i));
 					//构建子栏目
@@ -106,13 +142,13 @@ $s_title='北京市西城区人民政府教育督导室';
 						for($k=0;$k<$o_sub_sub_column->getAllCount();$k++)
 						{
 							$s_sub_sub_column.='
-								<h3>'.$o_sub_sub_column->getName($k).'</h3>
+								<h3 onclick="location=\'index_article_list.php?id='.$o_sub_sub_column->getColumnId($k).'\'">'.$o_sub_sub_column->getName($k).'</h3>
 							';
 						}
 						if ($o_sub_sub_column->getAllCount()==0)
 						{
 							$s_sub_sub_column='
-								<h3>'.$o_sub_column->getName($j).'</h3>
+								<h3 onclick="location=\'index_article_list.php?id='.$o_sub_column->getColumnId($j).'\'">'.$o_sub_column->getName($j).'</h3>
 							';
 						}
 						$s_sub_column.='

@@ -1,6 +1,29 @@
 <?php
 define ( 'RELATIVITY_PATH', '../../' );
 require_once 'index_header.php';
+function get_week($date){
+        //强制转换日期格式
+    $date_str=date('Y-m-d',strtotime($date));    
+    //封装成数组
+    $arr=explode("-", $date_str);     
+    //参数赋值
+    //年
+    $year=$arr[0];         
+        //月，输出2位整型，不够2位右对齐
+    $month=sprintf('%02d',$arr[1]);         
+        //日，输出2位整型，不够2位右对齐
+    $day=sprintf('%02d',$arr[2]);         
+    //时分秒默认赋值为0；
+    $hour = $minute = $second = 0;            
+    //转换成时间戳
+    $strap = mktime($hour,$minute,$second,$month,$day,$year);        
+    //获取数字型星期几
+    $number_wk=date("w",$strap);         
+    //自定义星期数组
+    $weekArr=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");     
+    //获取数字对应的星期
+    return $weekArr[$number_wk];
+}
 ?>
 <script type="text/javascript" src="js/slick/slick.js"></script>
 <link type="text/css" rel="stylesheet" href="css/slick.css" />
@@ -88,18 +111,32 @@ require_once 'index_header.php';
                 </div>
                 <!--通知公告-->
                 <div class="inform_box">
-                    <h2>通知公告<span>2017年12月16日，星期二</span></h2>
+                <?php 
+                $o_table=new Home_Column(1);
+                $o_date = new DateTime ( 'Asia/Chongqing' );
+                $a_week=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+                ?>
+                    <h2><?php echo($o_table->getName())?><span><?php echo($o_date->format ( 'Y' ))?>年<?php echo((int)$o_date->format ( 'm' ))?>月<?php echo((int)$o_date->format ( 'd' ))?>日，<?php echo(get_week($o_date->format ( 'Y' ) . '-' . $o_date->format ( 'm' ) . '-' . $o_date->format ( 'd' )))?></span></h2>
                     <div class="inform_list">
                         <ul>
-                            <li>转发市督导室《关于开展北京市中小学</li>
-                            <li>关于召开2016年综合督导学校自评年综合督导学校自评</li>
-                            <li>转发市督导室《关于做好2016年北京年综合督导学校自评</li>
-                            <li>关于举办督学大讲堂的通知(转发)</li>
-                            <li>关于选聘第六届责任督学的通知</li>
-                            <li>转发市督导室《关于开展北京市中小学</li>
-                            <li>关于召开2016年综合督导学校自评年综合督导学校自评</li>
-                            <li>转发市督导室《关于做好2016年北京年综合督导学校自评</li>
-                            <li>转发市督导室《关于做好2016年北京年综合督导学校自评</li>
+                        <?php 
+	                        $o_temp=new Home_Article();
+							$o_temp->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+							$o_temp->PushWhere ( array ('&&', 'Audit', '=', 3) );
+							$o_temp->PushWhere ( array ('&&', 'ColumnId', '=', $o_table->getColumnId() ) );
+							$o_temp->PushWhere ( array ('&&', 'State', '=', 1 ) );
+							$o_temp->PushOrder ( array ('Date', 'D' ) );
+							$o_temp->setStartLine ( 0 ); //起始记录
+							$o_temp->setCountLine (9);
+							$o_temp->getAllCount ();
+							$n_count = $o_temp->getCount ();
+							for($i=0;$i<$n_count;$i++)
+							{
+								echo('
+								<li onclick="location=\'index_article.php?id='.$o_temp->getArticleId($i).'\'">'.$o_temp->getTitle($i).'</li>
+								');
+							}
+                        ?>                       
                         </ul>
                     </div>
                 </div>
@@ -182,10 +219,22 @@ require_once 'index_header.php';
                 <div class="open_government">
                     <img class="government_title" alt="" src="images/government_img.jpg" />
                     <div class="government_btn_box">
-                        <div class="government_btn">组织机构</div>
-                        <div class="government_btn">政策法规</div>
-                        <div class="government_btn">督导文件</div>
-                        <div class="government_btn">督评报告</div>
+                        <div class="government_btn" onclick="location='index_article_list.php?id=<?php 
+                        	$o_table=new Home_Column(12);//组织机构
+                        	echo($o_table->getColumnId());
+                        ?>'"><?php echo($o_table->getName())?></div>
+                        <div class="government_btn" onclick="location='index_article_list.php?id=<?php 
+                        	$o_table=new Home_Column(13);//政策法规
+                        	echo($o_table->getColumnId());
+                        ?>'"><?php echo($o_table->getName())?></div>
+                        <div class="government_btn" onclick="location='index_article_list.php?id=<?php 
+                        	$o_table=new Home_Column(14);//督导文件
+                        	echo($o_table->getColumnId());
+                        ?>'"><?php echo($o_table->getName())?></div>
+                        <div class="government_btn" onclick="location='index_article_list.php?id=<?php 
+                        	$o_table=new Home_Column(15);//督评报告
+                        	echo($o_table->getColumnId());
+                        ?>'"><?php echo($o_table->getName())?></div>
                     </div>
                     <div class="qr_code_box">
                         <img alt="" src="images/QR_code.jpg" />

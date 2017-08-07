@@ -3,31 +3,28 @@
 					<div class="article_bottom_box">
                         <img class="l_t_img" alt="" src="images/nes_icon.png" />
                         <ul>
-                            <li>
+                        <?php 
+                        //获取最新的文章
+                        $o_temp=new Home_Article();
+						$o_temp->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+						$o_temp->PushWhere ( array ('&&', 'Audit', '=', 3) );
+						$o_temp->PushWhere ( array ('&&', 'State', '=', 1 ) );
+						$o_temp->PushOrder ( array ('Date', 'D' ) );
+						$o_temp->setStartLine ( 0 ); //起始记录
+						$o_temp->setCountLine (5);
+						$o_temp->getAllCount ();
+						$n_count = $o_temp->getCount ();
+						for($i=0;$i<$n_count;$i++)
+						{
+							echo('
+							<li>
                                 <div class="dot"></div>
-                                <h2>2017年西城区教育系统党风廉政建设工作会议召开</h2>
-                                <h3>2017-05-11</h3>
+                                <h2 onclick="location=\'index_article.php?id='.$o_temp->getArticleId($i).'\'">'.$o_temp->getTitle($i).'</h2>
+                                <h3>'.$o_temp->getDate($i).'</h3>
                             </li>
-                            <li>
-                                <div class="dot"></div>
-                                <h2>2017年西城区教育系统党风廉政建设工作会议召开西城区教育系统党风廉政建设工作会议召开</h2>
-                                <h3>2017-05-11</h3>
-                            </li>
-                            <li>
-                                <div class="dot"></div>
-                                <h2>2017年西城区教育系统党风廉政建设工作会议召开西城区教育系统党风廉政建设工作会议召开</h2>
-                                <h3>2017-05-11</h3>
-                            </li>
-                            <li>
-                                <div class="dot"></div>
-                                <h2>2017年西城区教育系统党风廉政建设工作会议召开西城区教育系统党风廉政建设工作会议召开</h2>
-                                <h3>2017-05-11</h3>
-                            </li>
-                            <li>
-                                <div class="dot"></div>
-                                <h2>2017年西城区教育系统党风廉政建设工作会议召开西城区教育系统党风廉政建设工作会议召开</h2>
-                                <h3>2017-05-11</h3>
-                            </li>
+							');
+						}
+                        ?>
                         </ul>
                         <div class="qr_code_box">
                             <img alt="" src="images/QR_code.jpg" />

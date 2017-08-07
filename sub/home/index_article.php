@@ -1,19 +1,38 @@
 <?php
 define ( 'RELATIVITY_PATH', '../../' );
 require_once 'index_header.php';
+if (is_numeric ( $_GET ['id'] )) {
+	$n_articleid = $_GET ['id'];
+} else {
+	echo ('<script>location=\'index.php\'</script>');
+	exit ( 0 );
+}
+$o_article = new View_Home_Article ( $n_articleid );
+$n_columnid = $o_article->getColumnId ();
+if (! ($o_article->getColumnId () > 0) || $o_article->getColumnState () == 0 || $o_article->getState () == 0 || $o_article->getDelete () == 1) {
+	echo ('<script>location=\'index.php\'</script>');
+	exit ( 0 );
+}
+$o_visit = new Home_Article ( $n_articleid );
+if ($o_article->getAudit () == 3) {
+	//只有审核过的文章才可以记录访问量
+	$o_visit->setVisit ( $o_visit->getVisit () + 1 );
+	$o_visit->Save ();
+}
+$o_column=new Home_Column($n_columnid);
 ?>
         <div class="page_body">
             <div class="location_box">
-                <h2>首页</h2><h3>&gt;</h3><h2>督学工作</h2>
+                <h2 onclick="location='index.php'">首页</h2><h3>&gt;</h3><h2 onclick="location='index_article_list.php?id=<?php echo($o_column->getColumnId())?>'"><?php echo($o_column->getName())?></h2>
             </div>
             <div class="article_page">
                 <div class="article_title">
-                    <h1>传媒附小举办小苑文化节“高参小”项目展示活动</h1>
-                    <p>2017年03月28日&nbsp;&nbsp;&nbsp;&nbsp;浏览： 226次</p>
+                    <h1><?php echo($o_article->getTitle())?></h1>
+                    <p><?php echo($o_article->getDate())?>&nbsp;&nbsp;&nbsp;&nbsp;浏览：<?php echo($o_article->getVisit())?>次</p>
                 </div>
                 <div class="article_content">
                     <p>
-                        5月31日，中国传媒大学附属小学举办“最初的梦想 最美的未来”学校文化节高校支持附中附小建设项目展示活动。活动以“美丽童年”为主线，分为四个篇章：“最初的我们”、“成长的故事”、”精彩的童年“、”梦想的殿堂“。
+                       <?php echo($o_article->getContent())?>
                     </p>
                     <?php require_once 'index_article_footer.php';?>
                 </div>
