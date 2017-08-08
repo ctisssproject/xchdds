@@ -34,7 +34,24 @@ if($o_temp->getAllCount()==1)
 ?>
         <div class="page_body">
             <div class="location_box">
-                <h2 onclick="location='index.php'">首页</h2><h3>&gt;</h3><h2 onclick="location='index_article_list.php?id=<?php echo($o_column->getColumnId())?>'"><?php echo($o_column->getName())?></h2>
+                <h2 onclick="location='index.php'">首页</h2>
+                <?php 
+                	//显示栏目路径
+                	if($o_column->getParent()>0)
+                	{
+                		$o_parent_column=new Home_Column($o_column->getParent());
+                		if ($o_parent_column->getParent()>0)
+                		{
+                			$o_parent_parent_column=new Home_Column($o_parent_column->getParent());
+                			echo('<h3>&gt;</h3>');
+                			echo('<h2 onclick="location=\'index_article_list.php?id='.$o_parent_parent_column->getColumnId().'\'">'.$o_parent_parent_column->getName().'</h2>');
+                		}
+                		echo('<h3>&gt;</h3>');
+                		echo('<h2 onclick="location=\'index_article_list.php?id='.$o_parent_column->getColumnId().'\'">'.$o_parent_column->getName().'</h2>');
+                	}
+                ?>
+                <h3>&gt;</h3>
+                <h2 onclick="location='index_article_list.php?id=<?php echo($o_column->getColumnId())?>'"><?php echo($o_column->getName())?></h2>
             </div>
             <div class="list_page">
                 <div class="list_title"><?php echo($o_column->getName())?></div>
@@ -42,10 +59,19 @@ if($o_temp->getAllCount()==1)
                     <div class="list_box">
                     <?php 
                     $o_article = new View_Home_Article ();
-					$o_article->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+					$o_article->PushWhere ( array ('||', 'Delete', '=', 0 ) );
 					$o_article->PushWhere ( array ('&&', 'State', '=', 1 ) );
 					$o_article->PushWhere ( array ('&&', 'Audit', '=', 3 ) );
 					$o_article->PushWhere ( array ('&&', 'ColumnId', '=', $n_columnid ) );
+					$o_column=new Home_Column();
+					$o_column->PushWhere ( array ('||', 'Parent', '=', $n_columnid ) );
+					for($i=0;$i<$o_column->getAllCount();$i++)
+					{
+						$o_article->PushWhere ( array ('||', 'Delete', '=', 0 ) );
+						$o_article->PushWhere ( array ('&&', 'State', '=', 1 ) );
+						$o_article->PushWhere ( array ('&&', 'Audit', '=', 3 ) );
+						$o_article->PushWhere ( array ('&&', 'ColumnId', '=', $o_column->getColumnId($i) ) );
+					}
 					$o_article->PushOrder ( array ('Date', 'D' ) );
 					$o_article->setStartLine ( ($n_page - 1) * $n_pagesize ); //起始记录
 					$o_article->setCountLine ( $n_pagesize );

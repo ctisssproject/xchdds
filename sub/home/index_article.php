@@ -23,7 +23,24 @@ $o_column=new Home_Column($n_columnid);
 ?>
         <div class="page_body">
             <div class="location_box">
-                <h2 onclick="location='index.php'">首页</h2><h3>&gt;</h3><h2 onclick="location='index_article_list.php?id=<?php echo($o_column->getColumnId())?>'"><?php echo($o_column->getName())?></h2>
+                <h2 onclick="location='index.php'">首页</h2>
+                <?php 
+                	//显示栏目路径
+                	if($o_column->getParent()>0)
+                	{
+                		$o_parent_column=new Home_Column($o_column->getParent());
+                		if ($o_parent_column->getParent()>0)
+                		{
+                			$o_parent_parent_column=new Home_Column($o_parent_column->getParent());
+                			echo('<h3>&gt;</h3>');
+                			echo('<h2 onclick="location=\'index_article_list.php?id='.$o_parent_parent_column->getColumnId().'\'">'.$o_parent_parent_column->getName().'</h2>');
+                		}
+                		echo('<h3>&gt;</h3>');
+                		echo('<h2 onclick="location=\'index_article_list.php?id='.$o_parent_column->getColumnId().'\'">'.$o_parent_column->getName().'</h2>');
+                	}
+                ?>
+                <h3>&gt;</h3>
+                <h2 onclick="location='index_article_list.php?id=<?php echo($o_column->getColumnId())?>'"><?php echo($o_column->getName())?></h2>
             </div>
             <div class="article_page">
                 <div class="article_title">
