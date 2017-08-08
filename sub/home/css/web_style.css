@@ -770,8 +770,7 @@
     width:100%;
     float:left;
     padding:30px 0px;
-    border-top:1px solid #e0e0e0;
-    cursor:pointer;
+    border-top:1px solid #e0e0e0;    
 }
 .search_body .results_list .results_content ul li:first-of-type{
     border:0;
@@ -783,6 +782,10 @@
     line-height:18px;
     color:#3e3a39;
     text-align:left;
+    cursor:pointer;
+}
+.search_body .results_list .results_content ul li h2:hover{
+	text-decoration: underline;
 }
 .search_body .results_list .results_content ul li h2 span{
     font-size:18px;
@@ -803,9 +806,16 @@
     line-height:23px;
     overflow:hidden;
     text-align:left;
+    cursor:pointer;
+}
+.search_body .results_list .results_content .no_img_div p:hover{
+	text-decoration: underline;
 }
 .search_body .results_list .results_content .no_img_div p{
     max-height:48px;
+}
+.search_body .results_list .results_content .img_div p:hover{
+	text-decoration: underline;
 }
 .search_body .results_list .results_content .img_div p{
     max-height:72px;

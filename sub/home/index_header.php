@@ -174,10 +174,29 @@ function get_page_button_for_column($s_filename,$n_all_count, $n_page_size = 20,
 				}
                 ?>
                 <div class="search_box">
-                    <input type="text" placeholder="搜索..." />
-                    <div class="search_btn">
+                    <input id="Vcl_KeySearchArticle" type="text" value="<?php echo($_GET['key'])?>" placeholder="搜索..."/>
+                    <div class="search_btn" onclick="search_article()">
                         <img alt="" src="images/search.png" />
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+        $(function(){
+        	$('#Vcl_KeySearchArticle').keypress(function(event){  
+        	    var keycode = (event.keyCode ? event.keyCode : event.which);  
+        	    if(keycode == '13'){  
+        	    	search_article()   
+        	    }  
+        	});
+        })
+        function search_article()
+        {
+        	var id='Vcl_KeySearchArticle';
+        	if (document.getElementById(id).value=='')
+        	{
+            	return;
+            }
+            location='index_search.php?key='+encodeURIComponent(document.getElementById(id).value);
+        }
+        </script>
