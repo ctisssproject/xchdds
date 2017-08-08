@@ -83,7 +83,7 @@ $o_focus = new Home_NewsFocus ( $n_columnid );
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">上传新图片：</td>
 			<td class="TableData"><input id="Vcl_File" name="Vcl_File"
-				type="file" />&nbsp;&nbsp;如不需要修改可以不选。<br/>注：图片最佳尺寸：高：206像素，宽：305像素，格式为：jpg，bmp，png。</td>
+				type="file" />&nbsp;&nbsp;如不需要修改可以不选。<br/>注：图片最佳尺寸：高：300像素，宽：300像素，格式为：jpg，bmp，png。</td>
 		</tr>
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">显示顺序：</td>
