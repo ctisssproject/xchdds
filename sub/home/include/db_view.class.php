@@ -18,6 +18,7 @@ class View_Home_Article extends CRUD
    protected $Delete;
    protected $Name;
    protected $Parent;
+   protected $TagId;
    protected $UserName;
    protected $ColumnState;
    protected $Audit;
@@ -41,6 +42,7 @@ class View_Home_Article extends CRUD
       				'home_article.uid' => 'Uid',
       				'home_article.home' => 'Home',
      				'home_article.date' => 'Date',
+      'home_article.tag_id' => 'TagId',
       'home_article.upload_date' => 'UploadDate',
       				'home_article.scroll' => 'Scroll',
       				'home_article.visit' => 'Visit',

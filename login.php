@@ -5,14 +5,19 @@ header ( 'Pragma: no-cache' );
 header ( 'Expires: Thu, 01 Jan 1970 00:00:00 GMT' );
 header ( 'Last-Modified:' . gmdate ( 'D, d M Y H:i:s' ) . ' GMT' );
 header ( 'content-type:text/html; charset=utf-8' );
+require_once RELATIVITY_PATH . 'include/bn_session.class.php';
+$O_Session = new Session ();
+if ($O_Session->Login () == true) //如果没有注册，跳转到首页
+{
+	echo ('<script type="text/javascript">location=\'main.php\'</script>');
+	exit (0);
+}
 $o_date = new DateTime ( 'Asia/Chongqing' );
 $n_nowTime = $o_date->format ( 'U' );
 $S_Session_Id = md5 ( $_SERVER ['REMOTE_ADDR'] . $_SERVER ['HTTP_USER_AGENT'] . rand ( 0, 9999 ) . $n_nowTime );
 setcookie ( 'VISITER', '', 0 );
 setcookie ( 'SESSIONID', $S_Session_Id, 0 );
 setcookie ( 'VALIDCODE', '', 0 );
-require_once RELATIVITY_PATH . 'include/bn_session.class.php';
-$O_Session = new Session ();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

@@ -1,57 +1,147 @@
 <?php
 define ( 'RELATIVITY_PATH', '../../' );
 require_once 'index_header.php';
+if (is_numeric ( $_GET ['page'] )) {
+	$n_page = $_GET ['page'];
+} else {
+	$n_page = 1;
+}
+if (is_numeric ( $_GET ['id'] )) {
+	$n_columnid = $_GET ['id'];
+	if ($n_columnid == 19) {
+		$n_columnid = $_GET ['id'];
+	} else {
+		echo ('<script>location=\'index.php\'</script>');
+		exit ( 0 );
+	}
+} else {
+	echo ('<script>location=\'index.php\'</script>');
+	exit ( 0 );
+}
+$n_pagesize=20;
+$o_column=new Home_Column($n_columnid);
+//判断是否只有一篇文章,直接跳转到文章页
+$o_temp=new Home_Article();
+$o_temp->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+$o_temp->PushWhere ( array ('&&', 'Audit', '=', 3) );
+$o_temp->PushWhere ( array ('&&', 'ColumnId', '=', $n_columnid) );
+$o_temp->PushWhere ( array ('&&', 'State', '=', 1 ) );
+if($o_temp->getAllCount()==1)
+{
+	echo ('<script>location=\'index_article.php?id='.$o_temp->getArticleId(0).'\'</script>');
+	exit ( 0 );
+}
 ?>
         <div class="page_body">
             <div class="location_box">
-                <h2>首页</h2><h3>&gt;</h3><h2>工作动态</h2>
+                <h2 onclick="location='index.php'">首页</h2>
+                <?php 
+                	//显示栏目路径
+                	if($o_column->getParent()>0)
+                	{
+                		$o_parent_column=new Home_Column($o_column->getParent());
+                		if ($o_parent_column->getParent()>0)
+                		{
+                			$o_parent_parent_column=new Home_Column($o_parent_column->getParent());
+                			echo('<h3>&gt;</h3>');
+                			echo('<h2 onclick="location=\'index_article_list.php?id='.$o_parent_parent_column->getColumnId().'\'">'.$o_parent_parent_column->getName().'</h2>');
+                		}
+                		echo('<h3>&gt;</h3>');
+                		echo('<h2 onclick="location=\'index_article_list.php?id='.$o_parent_column->getColumnId().'\'">'.$o_parent_column->getName().'</h2>');
+                	}
+                ?>
+                <h3>&gt;</h3>
+                <h2 onclick="location='index_article_list.php?id=<?php echo($o_column->getColumnId())?>'"><?php echo($o_column->getName())?></h2>
             </div>
             <div class="list_page">
-                <div class="list_title">工作动态</div>
+                <div class="list_title"><?php echo($o_column->getName())?></div>
                 <div class="article_list">
                     <ul>
-                        <li>
-                            <div class="article_list_title">
-                                <div class="type_b">学校（教育机构）督导</div>
-                                <h2>团中央和<span>教育</span>部出台意见推荐高校共青团思政工作</h2>
-                                <h3>发布时间：2017.06.05</h3>
-                            </div>
-                            <div class="no_img_div">
-                                <p>近日，共青团中央、教育部联合印发《关于加强和改进新形势下高校共青团思想政治工作的意见》，在深化高校共青团改革的大局中，其实加强和改进新形势下高校共青团思想政治工作。</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="article_list_title">
-                                <div class="type_r">非学历民办教育机构督导</div>
-                                <h2>团中央和<span>教育</span>部出台意见推荐高校共青团思政工作</h2>
-                                <h3>发布时间：2017.06.05</h3>
-                            </div>
-                            <div class="no_img_div">
-                                <p>近日，共青团中央、教育部联合印发《关于加强和改进新形势下高校共青团思想政治工作的意见》，在深化高校共青团改革的大局中，其实加强和改进新形势下高校共青团思想政治工作。</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="article_list_title">
-                                <div class="type_g">社区教育学校督导</div>
-                                <h2>第三届“互联网+<span>教育</span>”创新周在京召开</h2>
-                                <h3>发布时间：2017.06.05</h3>
-                            </div>
-                            <div class="img_div">
-                                <img alt="" src="images/search_img.jpg" />
-                                <p>近日，共青团中央、教育部联合印发《关于加强和改进新形势下高校共青团思想政治工作的意见》，在深化高校共青团改革的大局中，其实加强和改进新形势下高校共青团思想政治工作。近日，共青团中央、教育部联合印发《关于加强和改进新形势下高校共青团思想政治工作的意见》，在深化高校共青团改革的大局中，其实加强和改进新形势下高校共青团思想政治工作。</p>
-                            </div>
-                        </li>
+	                    <?php 
+	                    $o_article = new View_Home_Article ();
+						$o_article->PushWhere ( array ('||', 'Delete', '=', 0 ) );
+						$o_article->PushWhere ( array ('&&', 'State', '=', 1 ) );
+						$o_article->PushWhere ( array ('&&', 'Audit', '=', 3 ) );
+						$o_article->PushWhere ( array ('&&', 'ColumnId', '=', $n_columnid ) );
+						$o_article->PushOrder ( array ('Date', 'D' ) );
+						$o_article->setStartLine ( ($n_page - 1) * $n_pagesize ); //起始记录
+						$o_article->setCountLine ( $n_pagesize );
+						$n_count = $o_article->getAllCount ();
+						if (($n_pagesize * ($n_page - 1)) >= $n_count) {
+							$n_page = ceil ( $n_count / $n_pagesize );
+							$n_yu = $n_count % $n_pagesize;
+							$o_article->setStartLine ( ($n_page - 1) * $n_pagesize);
+							$o_article->setCountLine ( $n_pagesize );
+						}
+						$n_allcount = $o_article->getAllCount ();
+						$n_count = $o_article->getCount ();
+						$s_article = '';
+						for($i = 0; $i < $n_count; $i ++) {
+							//自动生成标签
+							$s_tag='';
+							if($o_article->getTagId($i)>0)
+							{
+								$o_tags=new Home_Column_Tags($o_article->getTagId($i));
+								$s_tag='<div class="'.$o_tags->getColor().'">'.$o_tags->getName().'</div>';
+							}
+							//先查找文章内是否有图片，如果有图片，那么使用图片的模板
+	                        $s_content=$o_article->getContent($i);
+	                    	$a_img=explode('<img', $s_content);
+	                    	if (count($a_img)>1)
+	                    	{
+	                    		$a_img=explode('src="', $a_img[1]);
+	                    		$a_img=explode('"', $a_img[1]);
+	                    		if (count(explode('.gif', $a_img[0]))<=1)
+	                    		{
+	                    			//如果是小图标，那么跳过
+	                    			echo('
+	                    			<li>
+			                            <div class="article_list_title">
+			                                '.$s_tag.'
+			                                <h2 onclick="location=\'index_article.php?id='.$o_article->getArticleId($i).'\'">'.$o_article->getTitle($i).'</h2>
+			                                <h3>发布时间：'.$o_article->getDate($i).'</h3>
+			                            </div>
+			                            <div class="img_div">
+			                                <img alt="" src="'.$a_img[0].'" />
+			                                <p onclick="location=\'index_article.php?id='.$o_article->getArticleId($i).'\'">'.get_highline_content($s_content,'',300).'</p>
+			                            </div>
+			                        </li>		                   			
+		                   			');
+	                    		}else{
+	                    			echo('
+		                   			<li>
+			                   			<div class="article_list_title">
+			                                '.$s_tag.'
+			                                <h2 onclick="location=\'index_article.php?id='.$o_article->getArticleId($i).'\'">'.$o_article->getTitle($i).'</h2>
+			                                <h3>发布时间：'.$o_article->getDate($i).'</h3>
+			                            </div>
+		                                <div class="no_img_div">
+		                                    <p onclick="location=\'index_article.php?id='.$o_article->getArticleId($i).'\'">'.get_highline_content($s_content,'',210).'</p>
+		                                </div>
+		                            </li>
+		                   			');
+	                    		}             		
+	                    	}else{
+	                   			echo('
+	                   			<li>
+		                   			<div class="article_list_title">
+		                                '.$s_tag.'
+		                                <h2 onclick="location=\'index_article.php?id='.$o_article->getArticleId($i).'\'">'.$o_article->getTitle($i).'</h2>
+		                                <h3>发布时间：'.$o_article->getDate($i).'</h3>
+		                            </div>
+	                                <div class="no_img_div">
+	                                    <p onclick="location=\'index_article.php?id='.$o_article->getArticleId($i).'\'">'.get_highline_content($s_content,'',210).'</p>
+	                                </div>
+	                            </li>
+	                   			');
+	                    	}
+						}
+	                    ?>                        
                     </ul>
                     <div class="pageno_box">
-                        <div class="page_btn">上一页</div>
-                        <div class="no_btn">1</div>
-                        <div class="no_btn">2</div>
-                        <div class="no_btn">3</div>
-                        <div class="no_btn">4</div>
-                        <div class="no_btn">5</div>
-                        <div class="no_btn">10</div>
-                        <div class="no_btn">22</div>
-                        <div class="page_btn">下一页</div>
+						<?php 
+						echo(get_page_button_for_column('index_article_list_special.php?id=' . $n_columnid . '&',$n_allcount,$n_pagesize,$n_page));
+						?>
                     </div>
                 </div>
             </div>

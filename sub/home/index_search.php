@@ -41,32 +41,6 @@ if (($n_pagesize * ($n_page - 1)) >= $n_count) {
 }
 $n_allcount = $o_article->getAllCount ();
 $n_count = $o_article->getCount ();
-function get_highline_content($s_content,$s_key,$n_sum)
-{
-	$s_content=str_replace('&nbsp;', '', $s_content);
-	$s_content=str_replace(' ', '', $s_content);
-	$s_content=str_replace('	', '', $s_content);
-	$s_content=strip_tags($s_content);
-	$a_content=explode($s_key, $s_content);
-	if (count($a_content)>1)
-	{
-		$n_len=rand ( 10,50 );
-		$s_content=mb_substr($a_content[0],mb_strlen($a_content[0],'utf-8')-$n_len,$n_len,'utf-8');
-		$s_content.='<span style="color: #ed0000;">'.$s_key.'</span>'.$a_content[1];
-	}
-	return cut_str($s_content,$n_sum);
-}
-function cut_str($string, $length) {
-	preg_match_all ( "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|\xe0[\xa0-\xbf][\x80-\xbf]|[\xe1-\xef][\x80-\xbf][\x80-\xbf]|\xf0[\x90-\xbf][\x80-\xbf][\x80-\xbf]|[\xf1-\xf7][\x80-\xbf][\x80-\xbf][\x80-\xbf]/", $string, $info );
-	for($i = 0; $i < count ( $info [0] ); $i ++) {
-		$wordscut .= $info [0] [$i];
-		$j = ord ( $info [0] [$i] ) > 127 ? $j + 2 : $j + 1;
-		if ($j > $length - 3) {
-			return $wordscut . " ...";
-		}
-	}
-	return join ( '', $info [0] );
-}
 ?>
         <div class="page_body">
             <div class="search_body">
@@ -94,7 +68,7 @@ function cut_str($string, $length) {
 		                                <h2 onclick="window.open(\'index_article.php?id='.$o_article->getArticleId($i).'\',\'_blank\')">'.str_replace($_GET['key'], '<span style="font-weight:bold">'.$_GET['key'].'</span>',$o_article->getTitle($i)).'</h2>
 		                                <div class="img_div">
 		                                	<img alt="" src="'.$a_img[0].'" />
-		                                    <p onclick="window.open(\'index_article.php?id='.$o_article->getArticleId($i).'\',\'_blank\')">'.get_highline_content($s_content,$_GET['key'],210).'</p>
+		                                    <p onclick="window.open(\'index_article.php?id='.$o_article->getArticleId($i).'\',\'_blank\')">'.get_highline_content($s_content,$_GET['key'],260).'</p>
 		                                    <h3>发布时间：'.$o_article->getDate($i).'</h3>
 		                                </div>
 		                            </li>

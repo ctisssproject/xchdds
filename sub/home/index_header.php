@@ -45,6 +45,32 @@ function get_page_button_for_column($s_filename,$n_all_count, $n_page_size = 20,
 		}
 		return $s_pagebutton;	
 }
+function get_highline_content($s_content,$s_key,$n_sum)
+{
+	$s_content=str_replace('&nbsp;', '', $s_content);
+	$s_content=str_replace(' ', '', $s_content);
+	$s_content=str_replace('	', '', $s_content);
+	$s_content=strip_tags($s_content);
+	$a_content=explode($s_key, $s_content);
+	if (count($a_content)>1)
+	{
+		$n_len=rand ( 10,50 );
+		$s_content=mb_substr($a_content[0],mb_strlen($a_content[0],'utf-8')-$n_len,$n_len,'utf-8');
+		$s_content.='<span style="color: #ed0000;">'.$s_key.'</span>'.$a_content[1];
+	}
+	return cut_str($s_content,$n_sum);
+}
+function cut_str($string, $length) {
+	preg_match_all ( "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|\xe0[\xa0-\xbf][\x80-\xbf]|[\xe1-\xef][\x80-\xbf][\x80-\xbf]|\xf0[\x90-\xbf][\x80-\xbf][\x80-\xbf]|[\xf1-\xf7][\x80-\xbf][\x80-\xbf][\x80-\xbf]/", $string, $info );
+	for($i = 0; $i < count ( $info [0] ); $i ++) {
+		$wordscut .= $info [0] [$i];
+		$j = ord ( $info [0] [$i] ) > 127 ? $j + 2 : $j + 1;
+		if ($j > $length - 3) {
+			return $wordscut . " ...";
+		}
+	}
+	return join ( '', $info [0] );
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -94,7 +120,7 @@ function get_page_button_for_column($s_filename,$n_all_count, $n_page_size = 20,
                     <h2>欢迎访问北京市西城区人民政府教育督导室！</h2>
                     <h3>关于我们</h3>
                     <h3>网站声明</h3>
-                    <h3>平台登录</h3>﻿﻿
+                    <h3 onclick="location='<?php echo(RELATIVITY_PATH)?>login.php'">平台登录</h3>﻿﻿
                 </div>
             </div>
             <div class="head_logo">

@@ -79,18 +79,25 @@ function get_week($date){
                     
                     <div class="news_list_content">
                         <div class="news_img_box">
-                            <div class="news_img_div">
-                                <img alt="" src="images/news_img_1.jpg" />
-                                <h2>区教委召开视频安全培训会</h2>
+                        <?php 
+                        $o_temp=new Home_NewsFocus();
+                        $o_temp->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+						$o_temp->PushOrder ( array ('Number', 'A' ) );
+						$n_count=$o_temp->getAllCount();
+						for($i=0;$i<$n_count;$i++)
+						{
+							if ($i>3)
+							{
+								break;
+							}
+							echo('
+							<div class="news_img_div" onclick="location=\'index_article.php?id='.$o_temp->getArticleId($i).'\'">
+                                <img alt="" src="'.$o_temp->getPhoto($i).'" />
+                                <h2>'.$o_temp->getTitle($i).'</h2>
                             </div>
-                            <div class="news_img_div">
-                                <img alt="" src="images/news_img_1.jpg" />
-                                <h2>区教委召开视频安全培训会2</h2>
-                            </div>
-                            <div class="news_img_div">
-                                <img alt="" src="images/news_img_1.jpg" />
-                                <h2>区教委召开视频安全培训会3</h2>
-                            </div>
+							');
+						}
+                        ?>
                         </div>
                         <div class="news_list_div">
                             <ul>

@@ -18,6 +18,12 @@ if (is_numeric ( $_GET ['id'] )) {
 	echo ('<script>location=\'index.php\'</script>');
 	exit ( 0 );
 }
+if ($n_columnid==19)
+{
+	//跳转到综合督导专用页面
+	echo ('<script>location=\'index_article_list_special.php?id='.$n_columnid.'\'</script>');
+	exit ( 0 );
+}
 $n_pagesize=20;
 $o_column=new Home_Column($n_columnid);
 //判断是否只有一篇文章,直接跳转到文章页

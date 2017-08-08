@@ -12,9 +12,8 @@
                     </ul>
                 </div>
                 <div class="quick_link">
-                    <h2>网站纠错</h2>
                     <h2>联系我们</h2>
-                    <h2>网站地图</h2>
+                    <h2 onclick="location='index_website_map.php'">网站地图</h2>
                     <h2>网站声明</h2>
                     <h2>关于本网</h2>
                 </div>
