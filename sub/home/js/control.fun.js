@@ -302,6 +302,7 @@ function getColume2()
     o_ajax_request.setFunction ('GetColumn2');
     o_ajax_request.setPage('include/it_ajax.svr.php');
     o_ajax_request.PushParameter(document.getElementById('Vcl_Parent').value);
+    document.getElementById('tags').innerHTML='';
     o_ajax_request.SendRequest()
 }
 function setColume2(a_columnid,a_name)
@@ -309,7 +310,7 @@ function setColume2(a_columnid,a_name)
     eval('a_columnid='+a_columnid)
     eval('a_name='+a_name)
     var a_arr=[];
-    a_arr.push('<select name="Vcl_ColumnId" id="Vcl_ColumnId" class="BigSelect"><option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>')
+    a_arr.push('<select name="Vcl_ColumnId" id="Vcl_ColumnId" class="BigSelect" onchange="getTags()"><option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>')
     for(var i=0;i<a_columnid.length;i++)
     {
         a_arr.push('<option value="'+a_columnid[i]+'">'+a_name[i]+'</option>')
@@ -317,6 +318,29 @@ function setColume2(a_columnid,a_name)
     }    
     a_arr.push('</select> （可选）')
     document.getElementById('column2').innerHTML=a_arr.join('\n')
+}
+function getTags()
+{
+    var o_ajax_request=new AjaxRequest();
+    o_ajax_request.setFunction ('GetTags');
+    o_ajax_request.setPage('include/it_ajax.svr.php');
+    o_ajax_request.PushParameter(document.getElementById('Vcl_ColumnId').value);
+    document.getElementById('tags').innerHTML='';
+    o_ajax_request.SendRequest()
+}
+function setTags(a_columnid,a_name)
+{
+    eval('a_columnid='+a_columnid)
+    eval('a_name='+a_name)
+    var a_arr=[];
+    a_arr.push('标签：<select name="Vcl_TagId" id="Vcl_TagId" class="BigSelect">')
+    for(var i=0;i<a_columnid.length;i++)
+    {
+        a_arr.push('<option value="'+a_columnid[i]+'">'+a_name[i]+'</option>')
+        
+    }    
+    a_arr.push('</select>')
+    document.getElementById('tags').innerHTML=a_arr.join('\n')
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
  function selectAll(o_obj)

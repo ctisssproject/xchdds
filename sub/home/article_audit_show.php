@@ -89,6 +89,22 @@ if ($o_article->getTitle () == false || $o_article->getDelete ()==1 || $o_articl
 			?>
 			</td>
 		</tr>
+		<?php 
+		if ($o_article->getTagId()>0)
+		{
+			?>
+		<tr>
+			<td class="TableData" nowrap="nowrap" width="120">标签：</td>
+			<td class="TableData">
+			<?php
+			$o_column = new Home_Column_Tags($o_article->getTagId());
+			echo($o_column->getName());
+			?>
+			</td>
+		</tr>	
+			<?php
+		}
+		?>
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">文章标题：</td>
 			<td class="TableData fuja" align="center" style="font-size:16px;font-weight:bold"><?php

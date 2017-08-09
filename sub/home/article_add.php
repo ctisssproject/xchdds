@@ -76,10 +76,12 @@ var S_Root='../../';
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">二级栏目：</td>
 			<td class="TableData">
-			<div id="column2"><select name="Vcl_ColumnId" id="Vcl_ColumnId"
+			<div id="column2" style="float:left"><select name="Vcl_ColumnId" id="Vcl_ColumnId"
 				style="width: 200px" class="BigSelect">
 				<option value=""></option>
 			</select> （可选）</div>
+			<div id="tags" style="float:left;margin-left:50px">
+			</div>
 			</td>
 		</tr>
 		<tr>
