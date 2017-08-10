@@ -488,6 +488,7 @@ class Operate extends Bn_Basic {
 			$o_article->setUploadDate ($this->GetDate());
 			$o_article->setUid ( $n_uid );
 			$o_article->setLastUid ( $n_uid );
+			$o_article->setTagId( $_POST ['Vcl_TagId'] );
 			$o_article->Save ();
 			//加入桌面图标提醒，加入消息提醒
 			$this->AddWaitReadForHome ( $_POST ['Vcl_AuditUid'] );
@@ -530,6 +531,7 @@ class Operate extends Bn_Basic {
 			$b_modify = false; //判断文章是否已经修改，如果修改需要重新审核
 			$b_modifyAuditUid = false;
 			$o_article = new Home_Article ( $_POST ['Vcl_ArticleId'] );
+			$o_article->setTagId( $_POST ['Vcl_TagId'] );
 			if ($o_article->getUid () != $n_uid) {
 				//如果编辑的文章，不是自己的，属于非法。直接退出系统
 				//$this->Result = FALSE;
@@ -617,6 +619,7 @@ class Operate extends Bn_Basic {
 			$b_modify = false; //判断文章是否已经修改，如果修改需要重新审核
 			$b_modifyAuditUid = false;
 			$o_article = new Home_Article ( $_POST ['Vcl_ArticleId'] );
+			$o_article->setTagId( $_POST ['Vcl_TagId'] );
 			if ($o_article->getUid () != $n_uid) {
 				//如果编辑的文章，不是自己的，属于非法。直接退出系统
 				$this->Result = FALSE;

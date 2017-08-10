@@ -80,17 +80,13 @@
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         ,toolbars:[
-            ['fullscreen', 'source', '|', 'undo', 'redo', '|',
-                'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch','autotypeset','blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist','selectall', 'cleardoc', '|',
-                'rowspacingtop', 'rowspacingbottom','lineheight','|',
-                'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-                'directionalityltr', 'directionalityrtl', 'indent', '|',
-                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|','touppercase','tolowercase','|',
-                'link', 'unlink', '|', 'imagenone', 'imageleft', 'imageright','imagecenter', '|',
-                'emotion','|','insertimage', 'insertvideo','attachment','map','|','background',
-                'horizontal', 'date', 'time', 'spechars','|',
-                'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
-                'print', 'preview', 'searchreplace']
+            ['fullscreen','undo', 'redo', '|',
+             'fontsize','bold', 'italic', 'underline', 'strikethrough', 'removeformat', 'pasteplain', '|', 'forecolor', 'backcolor','selectall', 'cleardoc', '|',
+                'lineheight',
+                
+                'indent',
+                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+                'link', 'unlink','insertimage','attachment','map']
         ]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         ,labelMap:{
@@ -126,7 +122,7 @@
 
         //,autoClearinitialContent:true //是否自动清除编辑器初始内容，注意：如果focus属性设置为true,这个也为真，那么编辑器一上来就会触发导致初始化的内容看不到了
 
-        //,iframeCssUrl: URL + '/themes/iframe.css' //给编辑器内部引入一个css文件
+        ,iframeCssUrl: URL + '/themes/iframe.css' //给编辑器内部引入一个css文件
 
         //,textarea:'editorValue' // 提交表单时，服务器获取编辑器提交内容的所用的参数，多实例时可以给容器name属性，会将name给定的值最为每个实例的键值，不用每次实例化的时候都设置这个值
 

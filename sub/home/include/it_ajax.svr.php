@@ -54,6 +54,10 @@ switch ($O_Request->getFunction ()) {
 		$s_command = '$S_Request=' . $O_Request->getCommand ( '$O_Request' );
 		eval ( $s_command );
 		break;
+	case 'GetTags' :
+		$s_command = '$S_Request=' . $O_Request->getCommand ( '$O_Request' );
+		eval ( $s_command );
+		break;
 	case 'ArticleAudit' :
 		$s_command = '$S_Request=' . $O_Request->getCommand ( '$O_Request' );
 		eval ( $s_command );
@@ -248,6 +252,34 @@ function GetColumn2($a_id) {
 	$s_column_id .= ')';
 	$s_column_name .= ')';
 	$O_Request->setFunction ( 'setColume2' );
+	$O_Request->PushParameter ( $s_column_id );
+	$O_Request->PushParameter ( $s_column_name );
+	return $O_Request->getSendXml ();
+
+}
+function GetTags($a_id) {
+	global $O_Session;
+	global $O_Request;
+	require_once 'db_table.class.php';
+	//构造弹出菜单的一级栏目
+	$s_column_id = 'new Array(';
+	$s_column_name = 'new Array(';
+	$o_column = new Home_Column_Tags ();
+	$o_column->PushWhere ( array ('&&', 'ColumnId', '=', $a_id ) );
+	$o_column->PushOrder ( array ('Number', 'A' ) );
+	for($i = 0; $i < $o_column->getAllCount (); $i ++) {
+		$s_column_id .= '\'' . $o_column->getId ( $i ) . '\',';
+		$s_column_name .= '\'' . $o_column->getName ( $i ) . '\',';
+	}
+	if ($o_column->getAllCount () > 0) {
+		$s_column_id = substr ( $s_column_id, 0, strlen ( $s_column_id ) - 1 );
+		$s_column_name = substr ( $s_column_name, 0, strlen ( $s_column_name ) - 1 );
+	}else{
+		return;
+	}
+	$s_column_id .= ')';
+	$s_column_name .= ')';
+	$O_Request->setFunction ( 'setTags' );
 	$O_Request->PushParameter ( $s_column_id );
 	$O_Request->PushParameter ( $s_column_name );
 	return $O_Request->getSendXml ();

@@ -103,8 +103,8 @@ var S_Root='../../';
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">二级栏目：</td>
 			<td class="TableData">
-			<div id="column2"><select name="Vcl_ColumnId" id="Vcl_ColumnId"
-				style="width: 200px" class="BigSelect">
+			<div id="column2" style="float:left;"><select name="Vcl_ColumnId" id="Vcl_ColumnId"
+				style="width: 200px" class="BigSelect" onchange="getTags()">
 				<option value=""></option>
 			<?php
 			$o_column = new Home_Column ();
@@ -120,6 +120,27 @@ var S_Root='../../';
 			}
 			?>
 			</select> （可选）</div>
+			<div id="tags" style="float:left;margin-left:50px">
+			<?php 
+			if ($o_article->getTagId()>0)
+			{
+				$o_tag=new Home_Column_Tags();
+				$o_tag->PushWhere ( array ('&&', 'ColumnId', '=', $o_article->getColumnId() ) );
+				$o_tag->PushOrder ( array ('Number', 'A' ) );
+				echo('标签：<select name="Vcl_TagId" id="Vcl_TagId" class="BigSelect">');
+				for($i=0;$i<$o_tag->getAllCount();$i++)
+				{
+					if ($o_article->getTagId()==$o_tag->getId($i))
+					{
+						echo('<option value="'.$o_tag->getId($i).'" selected="selected">'.$o_tag->getName($i).'</option>');
+					}else{
+						echo('<option value="'.$o_tag->getId($i).'">'.$o_tag->getName($i).'</option>');
+					}
+				}
+				echo('</select>');
+			}
+			?>
+			</div>
 			</td>
 		</tr>
 		<tr>
