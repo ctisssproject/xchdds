@@ -1,9 +1,50 @@
-CREATE TABLE  `home_column_tags` (
- `id` MEDIUMINT( 8 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  '标签编号',
- `name` CHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT  '标签名称',
- `column_id` MEDIUMINT( 8 ) NOT NULL COMMENT  '栏目编号',
- `color` CHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT  '颜色',
- `number` INT( 2 ) NOT NULL COMMENT  '顺序'
-) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT =  '文章的标签';
+CREATE TABLE `home_column_tags` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '标签编号',
+  `name` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '标签名称',
+  `column_id` mediumint(8) NOT NULL COMMENT '栏目编号',
+  `color` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '颜色',
+  `number` int(2) NOT NULL COMMENT '顺序',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='文章的标签' AUTO_INCREMENT=4 ;
+
+-- 
+-- 导出表中的数据 `home_column_tags`
+-- 
+
+INSERT INTO `home_column_tags` (`id`, `name`, `column_id`, `color`, `number`) VALUES 
+(1, '学校（教育机构）督导', 19, 'type_b', 1),
+(2, '非学历民办教育机构督导', 19, 'type_r', 2),
+(3, '社区教育学校督导', 19, 'type_g', 3);
+
 
 ALTER TABLE `home_article` ADD `tag_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0' COMMENT '标签编号' AFTER `logo`;
+
+TRUNCATE TABLE  `home_column`
+
+INSERT INTO `home_column` (`column_id`, `name`, `number`, `parent`, `state`, `delete`, `allow_delete`, `url`, `logo`) VALUES 
+(1, '通知公告', 1, 0, 1, 0, 1, '', NULL),
+(2, '工作动态', 2, 0, 1, 0, 1, '', NULL),
+(3, '政务公开', 3, 0, 1, 0, 1, '', NULL),
+(4, '督学工作', 4, 0, 1, 0, 1, '', NULL),
+(5, '督政工作', 5, 0, 1, 0, 1, '', NULL),
+(6, '专项督导', 6, 0, 1, 0, 1, '', NULL),
+(7, '科研工作', 7, 0, 1, 0, 1, '', NULL),
+(8, '评估检测', 8, 0, 1, 0, 1, '', NULL),
+(9, '学习交流', 9, 0, 1, 0, 1, '', NULL),
+(12, '组织机构', 1, 3, 1, 0, 1, '', NULL),
+(13, '政策法规', 2, 3, 1, 0, 1, '', NULL),
+(14, '督导文件', 3, 3, 1, 0, 1, '', NULL),
+(15, '督评报告', 4, 3, 1, 0, 1, '', NULL),
+(16, '评估标准', 1, 4, 1, 1, 1, '', NULL),
+(17, '工作流程', 2, 4, 1, 0, 1, '', NULL),
+(18, '挂牌督导', 3, 4, 1, 0, 1, '', NULL),
+(19, '综合督导', 4, 4, 1, 0, 1, '', NULL),
+(20, '评估标准', 1, 5, 1, 0, 1, '', NULL),
+(21, '工作流程', 2, 5, 1, 0, 1, '', NULL),
+(22, '委办局督导', 3, 5, 1, 0, 1, '', NULL),
+(23, '街道办事处督导', 4, 5, 1, 0, 1, '', NULL),
+(24, '督政责任区', 5, 5, 1, 0, 1, '', NULL),
+(25, '责任督学', 1, 18, 1, 0, 1, '', NULL),
+(26, '督学责任区', 2, 18, 1, 0, 1, '', NULL);
+
+TRUNCATE `home_article`;
