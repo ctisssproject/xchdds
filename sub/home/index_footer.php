@@ -6,9 +6,10 @@
                         链接
                     </div>
                     <ul>
-                        <li>北京市教育委员会</li>
-                        <li>北京市人民政府教育督导室</li>
-                        <li>西城区人民政府</li>
+                        <li onclick="window.open('http://www.bjedu.gov.cn/','_blank')">北京市教育委员会</li>
+                        <li onclick="window.open('http://www.bjjydd.gov.cn/','_blank')">北京市人民政府教育督导室</li>
+                        <li onclick="window.open('http://www.bjxch.gov.cn','_blank')">西城区人民政府</li>
+                        <li onclick="window.open('http://www.xchjw.gov.cn','_blank')">西城区教育委员会</li>
                     </ul>
                 </div>
                 <div class="quick_link">
