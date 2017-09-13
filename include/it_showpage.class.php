@@ -719,6 +719,7 @@ class ShowPage extends It_Basic {
 			require_once RELATIVITY_PATH . 'sub/home/include/db_table.class.php';
 			$o_temp=new Home_Article();
 			$o_temp->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+			$o_temp->PushWhere ( array ('&&', 'ColumnId', '>', 0 ) );
 			$o_temp->PushWhere ( array ('&&', 'Audit', '=', 1 ) );
 			$n_sum=$n_sum+$o_temp->getAllCount();
 		}else{

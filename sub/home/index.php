@@ -57,8 +57,7 @@ function get_week($date){
 					$o_temp->setStartLine ( 0 ); //起始记录
 					$o_temp->setCountLine (8);
 					$o_temp->getAllCount ();
-					$n_count = $o_temp->getCount ();	
-					if ($n_count>0)
+					if ($o_temp->getCount ()>0)
 					{
 						echo('
 						<div class="newest_div" onclick="location=\'index_article.php?id='.$o_temp->getArticleId(0).'\'">
@@ -80,10 +79,10 @@ function get_week($date){
                     <div class="news_list_content">
                         <div class="news_img_box">
                         <?php 
-                        $o_temp=new Home_NewsFocus();
-                        $o_temp->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
-						$o_temp->PushOrder ( array ('Number', 'A' ) );
-						$n_count=$o_temp->getAllCount();
+                        $o_temp2=new Home_NewsFocus();
+                        $o_temp2->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
+						$o_temp2->PushOrder ( array ('Number', 'A' ) );
+						$n_count=$o_temp2->getAllCount();
 						for($i=0;$i<$n_count;$i++)
 						{
 							if ($i>3)
@@ -91,9 +90,9 @@ function get_week($date){
 								break;
 							}
 							echo('
-							<div class="news_img_div" onclick="location=\'index_article.php?id='.$o_temp->getArticleId($i).'\'">
-                                <img alt="" src="'.$o_temp->getPhoto($i).'" />
-                                <h2>'.$o_temp->getTitle($i).'</h2>
+							<div class="news_img_div" onclick="location=\'index_article.php?id='.$o_temp2->getArticleId($i).'\'">
+                                <img alt="" src="'.$o_temp2->getPhoto($i).'" />
+                                <h2>'.$o_temp2->getTitle($i).'</h2>
                             </div>
 							');
 						}
@@ -102,7 +101,7 @@ function get_week($date){
                         <div class="news_list_div">
                             <ul>
                             <?php 
-                            for($i=1;$i<$n_count;$i++)
+                            for($i=1;$i<$o_temp->getCount ();$i++)
 							{
 								echo('
 								<li>

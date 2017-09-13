@@ -460,6 +460,10 @@ class Operate extends Bn_Basic {
 		if ($o_user->ValidModule ( 95 )) {
 			$o_article = new Home_Article ();
 			if ($_POST ['Vcl_ColumnId'] == '') {
+				if ($_POST ['Vcl_Parent']=='')
+				{
+					return 3;
+				}
 				$o_article->setColumnId ( $_POST ['Vcl_Parent'] );
 				$o_articleId=$_POST ['Vcl_Parent'];
 			} else {
@@ -538,6 +542,10 @@ class Operate extends Bn_Basic {
 				//return;
 			}
 			if ($_POST ['Vcl_ColumnId'] == '') {
+				if ($_POST ['Vcl_Parent']=='')
+				{
+					return 3;
+				}
 				if ($o_article->getColumnId () != $_POST ['Vcl_Parent']) {
 					$b_modify = true;
 				}

@@ -259,6 +259,11 @@ function AddArticle() {
 	$o_operate = new Operate ();
 	$o_user = $O_Session->getUserObject ();
 	$result=$o_operate->AddArticle ( $O_Session->getUid () );
+	if ($result==3)
+	{
+		echo ('<script type="text/javascript" language="javascript">parent.parent.parent.Dialog_Error("一级栏目不能为空！")</script>');
+		return;
+	}
 	if ($o_operate->getResult () == false) {
 		echo ('<script type="text/javascript" language="javascript">parent.goLoginPage(\'' . RELATIVITY_PATH . '\')</script>');
 	} else if($_POST['Vcl_GoBack']==''){
@@ -274,6 +279,11 @@ function ModifyArticle() {
 	$o_operate = new Operate ();
 	$o_user = $O_Session->getUserObject ();
 	$result=$o_operate->ModifyArticle ( $O_Session->getUid () );
+	if ($result==3)
+	{
+		echo ('<script type="text/javascript" language="javascript">parent.parent.parent.Dialog_Error("一级栏目不能为空！")</script>');
+		return;
+	}
 	if ($o_operate->getResult () == false) {
 		echo ('<script type="text/javascript" language="javascript">parent.goLoginPage(\'' . RELATIVITY_PATH . '\')</script>');
 	} else {
