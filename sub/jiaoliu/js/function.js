@@ -37,6 +37,16 @@
         	return
 		}		
 	}
+	var s_title=document.getElementById ('Vcl_StartTime').value
+    if (s_title.length==0){
+        parent.parent.Dialog_Message('[ 到校时间] 不能为空 ！');
+        return
+    }
+	var s_title=document.getElementById ('Vcl_EndTime').value
+    if (s_title.length==0){
+        parent.parent.Dialog_Message('[ 离校时间] 不能为空 ！');
+        return
+    }
     document.getElementById ('Vcl_Content').value=UE.getEditor('editor').getContent()
     var s_content=document.getElementById ('Vcl_Content').value
     if (s_content.length<10){

@@ -22,6 +22,8 @@ class Operate extends Bn_Basic {
 			$o_article->setContent ( rawurldecode ( $_POST ['Vcl_Content'] ) );
 			$o_date = new DateTime ( 'Asia/Chongqing' );
 			$o_article->setDate ( $_POST ['Vcl_Date'] );
+			$o_article->setStartTime ( $_POST ['Vcl_StartTime'] );
+			$o_article->setEndTime ( $_POST ['Vcl_EndTime'] );
 			$o_article->setLastDate ( $o_date->format ( 'Y' ) . '-' . $o_date->format ( 'm' ) . '-' . $o_date->format ( 'd' ) . ' ' . $o_date->format ( 'H' ) . ':' . $o_date->format ( 'i' ) . ':' . $o_date->format ( 's' ) );
 			$o_article->setSchoolJoin ( $_POST ['Vcl_SchoolJoin'] );
 			//构建督学名单
@@ -84,6 +86,8 @@ class Operate extends Bn_Basic {
 			$o_article->setSchoolJoin ( $_POST ['Vcl_SchoolJoin'] );
 			$o_article->setDuxueJoin ( $_POST ['Vcl_DuxueJoin'] );
 			$o_article->setDate ( $_POST ['Vcl_Date'] );
+			$o_article->setStartTime ( $_POST ['Vcl_StartTime'] );
+			$o_article->setEndTime ( $_POST ['Vcl_EndTime'] );
 			$o_article->setFeedback ($this->AilterTextArea($_POST ['Vcl_Feedback'])  );
 			$o_article->setLastDate ( $o_date->format ( 'Y' ) . '-' . $o_date->format ( 'm' ) . '-' . $o_date->format ( 'd' ) . ' ' . $o_date->format ( 'H' ) . ':' . $o_date->format ( 'i' ) . ':' . $o_date->format ( 's' ) );
 			$o_article->setType ( $_POST ['Vcl_Type'] );

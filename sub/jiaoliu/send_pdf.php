@@ -57,6 +57,24 @@ ob_start();
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2" style="width:25%;">
+                        到校时间
+                    </td>
+                    <td style="width:40%">
+                        <?php
+				echo ($o_article->getStartTime ());
+				?>                    
+                    </td>
+                    <td style="width:20%">
+                        离校时间
+                    </td>
+                    <td style="width:15%">
+                       <?php
+				echo ($o_article->getEndTime ());
+				?>
+                    </td>
+                </tr>
+                <tr>
                     <td rowspan="2">
                         参加人员
                     </td>

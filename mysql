@@ -1,3 +1,1 @@
-ALTER TABLE `netdisk_file` CHANGE `filename` `filename` CHAR(255) CHARACTER SET gbk COLLATE gbk_chinese_ci NOT NULL COMMENT '文件名';
-ALTER TABLE  `home_article` CHANGE  `title`  `title` CHAR( 255 ) CHARACTER SET gbk COLLATE gbk_chinese_ci NOT NULL COMMENT  '标题';
-
+ALTER TABLE `jiaoliu_article` ADD `start_time` DATETIME NOT NULL COMMENT '到校时间' AFTER `feedback`, ADD `end_time` DATETIME NOT NULL COMMENT '离校时间' AFTER `start_time`;

@@ -405,8 +405,11 @@ function get_week($date){
                 <?php
             		$o_table=new Home_Column(9);//学习交流
             	?>                
-                <div class="communication_box">
-                    <h2>学习交流</h2>
+                <div class="category_list_box communication_box">
+                	<div class="category_list_title">
+                    <h2 style="width:auto;border:0px;margin-left:0px;">学习交流</h2>
+                    <div class="more_btn" onclick="location='index_article_list.php?id=<?php echo($o_table->getColumnId())?>'">更多</div>
+                    </div>
                     <?php 
 	                    $o_temp=new Home_Article();
 						$o_temp->PushWhere ( array ('||', 'Delete', '=', 0 ) );

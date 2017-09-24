@@ -16,6 +16,8 @@ class Jiaoliu_Article extends CRUD
    protected $SchoolJoin;
    protected $DuxueJoin;
    protected $Feedback;
+   protected $StartTime;
+   protected $EndTime;
    
    protected function DefineKey()
    {
@@ -38,6 +40,8 @@ class Jiaoliu_Article extends CRUD
           'school_join' => 'SchoolJoin',
           'duxue_join' => 'DuxueJoin',
       'feedback' => 'Feedback',
+      'start_time' => 'StartTime',
+      'end_time' => 'EndTime',
 				    'dept' => 'Dept'      				
                    ));
    }

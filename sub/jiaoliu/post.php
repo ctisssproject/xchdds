@@ -107,6 +107,20 @@ var S_Root='../../';
 			</td>
 		</tr>
 		<tr>
+			<td class="TableData" nowrap="nowrap" width="120">到校时间：</td>
+			<td class="TableData fuja"><input id="Vcl_StartTime" name="Vcl_StartTime"
+				size="30" maxlength="50" class="BigInput" value="" type="text"
+				style="font-size: 14px; height: 20px" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+				/></td>
+		</tr>
+		<tr>
+			<td class="TableData" nowrap="nowrap" width="120">离校时间：</td>
+			<td class="TableData fuja"><input id="Vcl_EndTime" name="Vcl_EndTime"
+				size="30" maxlength="50" class="BigInput" value="" type="text"
+				style="font-size: 14px; height: 20px" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+				/></td>
+		</tr>
+		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">同时转其他处理：</td>
 			<td class="TableData"><select name="Vcl_Transfer"
 				id="Vcl_Transfer" class="BigSelect">
