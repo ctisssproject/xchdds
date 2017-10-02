@@ -1683,5 +1683,80 @@ class ShowPage extends It_Basic {
 		';
 		return $s_html;
 	}
+	public function getZcSummaryList($n_page) {
+		$this->N_PageSize = 2000;
+		$this->N_Page = $n_page;
+		//读取所有责任督学
+		$o_type = new View_User_List ();
+		$o_type->PushWhere ( array ('&&', 'State', '=', 1 ) );
+		$o_type->PushWhere ( array ('&&', 'DeptId', '=', 138 ) );
+		$o_type->PushOrder ( array ('Name', 'A' ) );
+		$n_count=$o_type->getAllCount();
+		for($i=0;$i<$n_count;$i++)
+		{
+			$o_article = new GPDD_Zc(); 
+			$o_article->PushWhere ( array ('&&', 'OwnerId', '=',$o_type->getUid($i)) );
+			if ($_GET['start']!='')
+			{
+				$o_article->PushWhere ( array ('&&', 'Date', '>=',$_GET['start']) );
+			}
+			if ($_GET['end']!='')
+			{
+				$o_article->PushWhere ( array ('&&', 'Date', '<=',$_GET['end']) );
+			}
+			$o_body .= '
+		            <tr class="TableLine1">
+		            	<td align="center">
+		                   ' .( $i+1 ) . '
+		                </td>
+		                <td align="center">
+		                   ' . $o_type->getName ( $i ) . '
+		                </td>
+		                <td align="center">
+		                 '.$o_article->getAllCount().'
+		                </td>	
+		                	                
+		            </tr>
+			';
+		}		
+		$o_head .= '    <table class="small" align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+					        <tbody>
+					        	<tr>					                				                
+					                <td class="small1" align="left"  valign="bottom" nowrap="nowrap">
+					                    共<span class="big4">&nbsp;' . $n_count . '</span>&nbsp;人&nbsp;&nbsp;&nbsp;&nbsp;
+					                    <input class="BigInput" id="Vcl_StartDate" style="height: 20px;width:100px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['start'].'" placeholder="开始日期" onclick="WdatePicker({dateFmt:\'yyyy-MM-dd\'})">
+					                    &nbsp;至&nbsp;
+					                    <input class="BigInput" id="Vcl_EndDate" style="height: 20px;width:100px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['end'].'" placeholder="结束日期" onclick="WdatePicker({dateFmt:\'yyyy-MM-dd\'})">
+					                    &nbsp;&nbsp;
+					                    <input class="BigButtonA" onclick="search()" type="button" value="搜索">
+					                    &nbsp;&nbsp;
+					                    <input class="BigButtonB" onclick="location=\'summary.php\'" type="button" value="全部显示">
+					                </td>
+					                 <td class="small1" align="right" valign="bottom">
+			                		</td>
+					            </tr>
+					        </tbody>
+					    </table>
+					    <table class="TableList" align="center" width="98%" style="margin-top:5px">
+					        <tbody>
+					            <tr class="TableHeader">
+					            <td align="center" nowrap="nowrap">
+					                    序号
+					                </td>
+					                <td align="center" nowrap="nowrap">
+					                     姓名
+					                </td>
+					                <td align="center" nowrap="nowrap">
+					                   自查数量
+					                </td>	               
+					            </tr>
+		';
+		
+		$o_floor = '
+					        </tbody>
+					    </table><br/>
+							';		
+		return $o_head . $o_body . $o_floor;
+	}
 }
 ?>

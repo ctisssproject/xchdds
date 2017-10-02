@@ -103,6 +103,17 @@ function resizeLayout()
 			        		$s_url=$o_module->getPath();
 			        	}
 			        }
+			        $o_module=new Base_Module(30034);
+			        if ($o_user->ValidModule($o_module->getModuleId()))
+			        {
+			        	echo('<a href="'.RELATIVITY_PATH.$o_module->getPath().'" target="diary_body">
+                        		自查统计
+                        	</a>');
+			        	if ($s_url=='')
+			        	{
+			        		$s_url=$o_module->getPath();
+			        	}
+			        }
 			        ?>	                     
                     </div>
                     <div class="head no-top-border"><a href="javascript:;" class="header" target="diary_body">督查</a></div>  

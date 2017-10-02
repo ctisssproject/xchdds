@@ -1,1 +1,6 @@
-ALTER TABLE `jiaoliu_article` ADD `start_time` DATETIME NOT NULL COMMENT '到校时间' AFTER `feedback`, ADD `end_time` DATETIME NOT NULL COMMENT '离校时间' AFTER `start_time`;
+UPDATE `base_module` SET `name` = '业务统计' WHERE `base_module`.`module_id` = 30006 LIMIT 1;
+
+INSERT INTO `base_module` (`module_id`, `name`, `module`, `explain`, `icon_id`, `path`, `parent_module_id`, `mini_icon_id`, `wait_read_table`) VALUES ('30033', '工作量统计', 'OA_20_1_5', '', '1', 'sub/telephone/summary.php', '30001', '1', '');
+
+INSERT INTO `base_module` (`module_id`, `name`, `module`, `explain`, `icon_id`, `path`, `parent_module_id`, `mini_icon_id`, `wait_read_table`) VALUES ('30034', '自查统计', 'OA_20_5_04', '', '1', 'sub/gpdd_wenti/gpdd_zc_summary.php', '30020', '1', '');
+
