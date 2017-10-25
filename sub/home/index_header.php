@@ -158,6 +158,25 @@ function cut_str($string, $length) {
 					$s_sub_column='';
 					for($j=0;$j<$o_sub_column->getAllCount();$j++)
 					{
+						//如果是责任督学，那么添加“挂牌督导”，并手动将子菜单写成“责任督学”和“督学责任区”
+						if ($o_sub_column->getColumnId($j)==25)
+						{
+							$s_sub_column.='
+								<li>
+	                                <div class="sec_menu_div">
+                                    <h2>挂牌督导</h2>                                    
+									<h3 onclick="location=\'index_article_list.php?id=25\'">责任督学</h3>							
+									<h3 onclick="location=\'index_article_list.php?id=26\'">督学责任区</h3>								
+	                                </div>
+	                            </li>
+							';
+							continue;						
+						}
+						if ($o_sub_column->getColumnId($j)==26)
+						{
+							continue;					
+						}
+						//--------------------------------------------
 						//判断有没有三级栏目，如果有，那么构建三级栏目菜单，如果没有，那么本栏目按钮可以点击
 						$o_sub_sub_column=new Home_Column();
 						$o_sub_sub_column->PushWhere ( array ('&&', 'Delete', '=', 0 ) );
@@ -176,7 +195,7 @@ function cut_str($string, $length) {
 							$s_sub_sub_column='
 								<h3 onclick="location=\'index_article_list.php?id='.$o_sub_column->getColumnId($j).'\'">'.$o_sub_column->getName($j).'</h3>
 							';
-						}
+						}						
 						$s_sub_column.='
 							<li>
                                 <div class="sec_menu_div">

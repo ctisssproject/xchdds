@@ -1,4 +1,4 @@
-ï»¿.index_top{
+.index_top{
     width:1200px;
     height:430px;
     padding-top:40px;
@@ -13,7 +13,7 @@
     margin-top:50px;
     padding-bottom:20px;
 }
-/*é¦–é¡µ-æ–°é—»åˆ—è¡¨*/
+/*Ê×Ò³-ĞÂÎÅÁĞ±í*/
 .new_box{
     width:860px;
     float:left;
@@ -144,7 +144,7 @@
     margin:8px 6px 0px 0px;
     cursor:pointer;
 }
-/*é¦–é¡µ-é€šçŸ¥å…¬å‘Š*/
+/*Ê×Ò³-Í¨Öª¹«¸æ*/
 .inform_box{
     width:300px;
     height:430px;
@@ -405,7 +405,7 @@
     text-decoration:underline;
 }
 
-/*æ–‡ç« åˆ—è¡¨*/
+/*ÎÄÕÂÁĞ±í*/
 .list_page,
 .article_page{
     width:100%;
@@ -551,7 +551,7 @@
     margin-left:15px;
 }
 
-/*æ–‡ç« å†…å®¹*/
+/*ÎÄÕÂÄÚÈİ*/
 .article_page{
     box-sizing:border-box;
     padding:0px 40px 30px 40px;
@@ -583,7 +583,7 @@
 .article_page .article_content p,
 .article_page .article_content span,
 .article_page .article_content td{
-    font-family: å¾®è½¯é›…é»‘, Microsoft Yahei, Hiragino Sans GB, tahoma, arial, å®‹ä½“ !important;
+    font-family: Î¢ÈíÑÅºÚ, Microsoft Yahei, Hiragino Sans GB, tahoma, arial, ËÎÌå !important;
     line-height:150%;
 }
 .article_page .article_content .article_img{
@@ -711,7 +711,7 @@
     color:#3baf3e;
 } 
 
-/*æœç´¢ç»“æœé¡µé¢*/
+/*ËÑË÷½á¹ûÒ³Ãæ*/
 .search_body{
     width:100%;
     padding-top:60px;
@@ -908,7 +908,7 @@
 }
 
 
-/*æ–‡ç« åˆ—è¡¨*/
+/*ÎÄÕÂÁĞ±í*/
 .list_page .article_list ul{
     width:100%;
     float:left;
@@ -931,6 +931,9 @@
 }
 .list_page .article_list ul li .article_list_title .type_b,
 .list_page .article_list ul li .article_list_title .type_r,
+.list_page .article_list ul li .article_list_title .type_y,
+.list_page .article_list ul li .article_list_title .type_x,
+.list_page .article_list ul li .article_list_title .type_z,
 .list_page .article_list ul li .article_list_title .type_g{
     float:left;
     font-size:14px;
@@ -948,6 +951,15 @@
 }
 .list_page .article_list ul li .article_list_title .type_g{
     background-color:#81bba3;
+}
+.list_page .article_list ul li .article_list_title .type_y{
+    background-color:#FF9900;
+}
+.list_page .article_list ul li .article_list_title .type_x{
+    background-color:#9999FF;
+}
+.list_page .article_list ul li .article_list_title .type_z{
+    background-color:#006600;
 }
 .list_page .article_list ul li .article_list_title h2{
     float:left;

@@ -8,7 +8,7 @@ if (is_numeric ( $_GET ['page'] )) {
 }
 if (is_numeric ( $_GET ['id'] )) {
 	$n_columnid = $_GET ['id'];
-	if ($n_columnid == 19) {
+	if ($n_columnid == 19 || $n_columnid == 26) {
 		$n_columnid = $_GET ['id'];
 	} else {
 		echo ('<script>location=\'index.php\'</script>');
