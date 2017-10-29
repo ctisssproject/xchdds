@@ -39,7 +39,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 					                    <strong>下校随访</strong>
 					                </td>
 					                <td align="center" >
-					                  16次
+					                  38次
 					                </td>
 					            </tr>
 				             <tr class="TableLine1">
@@ -47,7 +47,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 					                    <strong>综合督导</strong>
 					                </td>
 					                <td align="center" >
-					                  9次
+					                  6次
 					                </td>
 					            </tr>
 				             <tr class="TableLine1">
@@ -55,7 +55,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 					                    <strong>专项检查</strong>
 					                </td>
 					                <td align="center" >
-					                  7次
+					                  5次
 					                </td>
 					            </tr>
 				             <tr class="TableLine1">
@@ -63,7 +63,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 					                    <strong>科室例会</strong>
 					                </td>
 					                <td align="center" >
-					                  34次
+					                  68次
 					                </td>
 					            </tr>
 				             <tr class="TableLine1">
@@ -71,7 +71,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 					                    <strong>讲座培训</strong>
 					                </td>
 					                <td align="center" >
-					                  10次
+					                  4次
 					                </td>
 					            </tr>
 				             <tr class="TableLine1">
@@ -87,7 +87,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 					                    <strong>案例分析</strong>
 					                </td>
 					                <td align="center" >
-					                  2篇
+					                  0篇
 					                </td>
 					            </tr>
 				             <tr class="TableLine1">
@@ -95,7 +95,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 					                    <strong>课题报告</strong>
 					                </td>
 					                <td align="center" >
-					                  2篇
+					                  0篇
 					                </td>
 					            </tr>
 					          

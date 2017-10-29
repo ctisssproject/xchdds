@@ -1,4 +1,4 @@
-Ôªøhtml,body,div,span,iframe,map,font,img,a img,samp,strong,hr,
+html,body,div,span,iframe,map,font,img,a img,samp,strong,hr,
 h1,h2,h3,h4,h5,h6,b,p,blockquote,a,address,code,dl,dt,dd,ol,
 ul,li,form,label,table,tr,td,th,input{padding:0;margin:0;border:0;font-weight:normal;font-size:16px;font-family: Microsoft Yahei, Arial, Helvetica, sans-serif; color:#000;}
 body{background: #f9f9f9;position:relative;min-width:1280px;}ul,li{list-style:none;}dl{}.f_l{float:left;}.f_r{float:right;}
@@ -18,7 +18,7 @@ a {
     cursor:pointer;
 }
 
-/*È°µÈù¢Â§¥ÈÉ®*/
+/*“≥√ÊÕ∑≤ø*/
 .head_box{
     width:100%;
     background-color:#fff;
@@ -69,7 +69,7 @@ a {
     height:164px;
 }
 
-/*ËèúÂçï*/
+/*≤Àµ•*/
 .menu_box{
     width:100%;
     min-width:1280px;
@@ -216,7 +216,7 @@ a {
     cursor:pointer;
 }
 
-/*È°µÈù¢Â∫ïÈÉ®*/
+/*“≥√Êµ◊≤ø*/
 .bottom_box{
     width:1280px;
     box-sizing:border-box;
@@ -231,7 +231,7 @@ a {
     border-bottom:1px solid #bcbcbc;
 }
 .bottom_box .link_box .link_div{
-    width:680px;
+    /*width:680px;*/
     float:left;
 }
 .bottom_box .link_box .link_div .link_btn{
@@ -265,7 +265,7 @@ a {
     -o-transform:rotate(180deg);
 }
 .bottom_box .link_box .link_div ul{
-    width:610px;
+    /*width:610px;*/
     height:30px;
     float:left;
     margin:15px 0px;
@@ -312,7 +312,7 @@ a {
 }
 .bottom_box .bottom_info{
     float:left;
-    padding:25px 180px 35px 180px;
+    padding:25px 110px 35px 110px;
 }
 .bottom_box .bottom_info .location_info{
     float:left;
@@ -332,7 +332,7 @@ a {
     text-align:left;
 }
 .bottom_box .bottom_info .web_info{
-    width:350px;
+    width:460px;
     height:24px;
     float:left;
     margin:20px 0px 0px 40px;

@@ -81,7 +81,7 @@ function ArticleAudit($n_id,$s_backurl) {
 		$O_Request->setFunction ( 'goLoginPage' );
 	} else {
 		$O_Request->setFunction ('goLocation');
-		$O_Request->PushParameter ('http://192.168.0.8/xcdxk/sub/home/article_audit.php');
+		$O_Request->PushParameter ('article_audit.php');
 	}
 	$O_Request->PushParameter ($o_operate->getResult ());
 	return $O_Request->getSendXml ();
