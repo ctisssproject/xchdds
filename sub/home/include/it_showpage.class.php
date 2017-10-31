@@ -1113,7 +1113,7 @@ class ShowPage extends It_Basic {
 		                   ' . $o_article->getArticleId ( $i ) . '
 		                </td>
 		                <td align="left">
-		                  <a href="index_article.php?articleid=' . $o_article->getArticleId ( $i ) . '" target="_blank" style="font-size:14px"><strong>' . $o_article->getTitle ( $i ) . '</strong></a>
+		                  <a href="index_article.php?id=' . $o_article->getArticleId ( $i ) . '" target="_blank" style="font-size:14px"><strong>' . $o_article->getTitle ( $i ) . '</strong></a>
 		                </td>		                
 		                <td align="center">
 		                   ' . $o_article->getDate ( $i ) . '
@@ -1214,7 +1214,7 @@ class ShowPage extends It_Basic {
 		                   ' . $o_article->getArticleId ( $i ) . '
 		                </td>
 		                <td align="left">
-		                  <a href="index_article.php?articleid=' . $o_article->getArticleId ( $i ) . '" target="_blank" style="font-size:14px"><strong>' . $o_article->getTitle ( $i ) . '</strong></a>
+		                  <a href="index_article.php?id=' . $o_article->getArticleId ( $i ) . '" target="_blank" style="font-size:14px"><strong>' . $o_article->getTitle ( $i ) . '</strong></a>
 		                </td>		                
 		                <td align="center">
 		                   ' . $o_article->getUploadDate ( $i ) . '
@@ -1351,7 +1351,7 @@ class ShowPage extends It_Basic {
 		                   ' . $o_article->getArticleId ( $i ) . '
 		                </td>
 		                <td align="left">
-		                  [<span class="green">' . $o_article->getName ( $i ) . '</span>] <a href="index_article.php?articleid=' . $o_article->getArticleId ( $i ) . '" target="_blank" style="font-size:14px"><strong>' . $o_article->getTitle ( $i ) . '</strong></a>
+		                  [<span class="green">' . $o_article->getName ( $i ) . '</span>] <a href="index_article.php?id=' . $o_article->getArticleId ( $i ) . '" target="_blank" style="font-size:14px"><strong>' . $o_article->getTitle ( $i ) . '</strong></a>
 		                </td>		                
 		                <td align="center">
 		                   ' . $o_article->getDate ( $i ) . '

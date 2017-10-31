@@ -442,7 +442,7 @@ class ShowPage extends It_Basic {
 	private function AilterFileName($s_text) {
 		$a_key = explode ( ".", $s_text );
 		if (count ( $a_key ) > 1) {
-			return $this->CutStr ( $a_key [0], 20 ) . '.' . $a_key [1];
+			return $this->CutStr ( $a_key [0], 20 ) . '.' . $a_key [count ( $a_key )-1];
 		} else {
 			return $this->CutStr ( $a_key [0], 20 );
 		}

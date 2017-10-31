@@ -107,9 +107,9 @@ $o_date = new DateTime ( 'Asia/Chongqing' );
 		                    </tr>');  
 	        	//先获取小学校总数列表
 	        	$n_sum=0;
-	        	$o_school=new SurveyDept();
+	        	$o_school=new Base_Dept();
 	        	$o_school->PushWhere ( array ('&&', 'Type', '=', $o_school_type->getId($z)) );
-	        	$o_school->PushWhere ( array ('&&', 'Id', '<>', 0) );
+	        	$o_school->PushWhere ( array ('&&', 'DeptId', '<>', 0) );
 	        	$n_count=$o_school->getAllCount();
 	        	$a_total_id=Array();
 	        	for($i=0;$i<$n_count;$i++)
@@ -117,19 +117,21 @@ $o_date = new DateTime ( 'Asia/Chongqing' );
 	        		$o_temp=new Telephone_Info();
 	        		$o_temp->PushWhere ( array ('&&', 'RecordDate', '>=', $_POST ['Vcl_Start']) );
 	        		$o_temp->PushWhere ( array ('&&', 'RecordDate', '<=', $_POST ['Vcl_End']) );
-	        		$o_temp->PushWhere ( array ('&&', 'SchoolId', '=',$o_school->getId($i)) );
+	        		$o_temp->PushWhere ( array ('&&', 'SchoolId', '=',$o_school->getDeptId($i)) );
 	        		$n_temp=$o_temp->getAllCount();
 	        		if ($n_temp>0)
 	        		{
 	        			//array_push($a_total_id,'123');
 	        			$a_total_id[$i]=$n_temp;
-	        		}        		
+	        		}  
+	        		//echo($o_school->getId($i));      		
 	        	}
 	        	//数组降序
 	        	arsort($a_total_id);
 	        	foreach($a_total_id as $x=>$x_value)
 	    		{
 	    			$n_sum=$n_sum+$x_value;
+	    			
 	   				echo('      <tr>
 			                        <td class="td1">
 			                            &nbsp;
