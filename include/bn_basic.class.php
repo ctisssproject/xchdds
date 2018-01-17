@@ -11,12 +11,35 @@ class Bn_Basic {
 	protected $S_UserName;
 	protected $N_RoleId;
 	protected $S_UserPhoto;
-protected function getPost($s_key) {
-		if ($_POST ['Ajax_' . $s_key]=='')
+	protected function getPost($s_key) {
+		if ($_GET[$s_key]=='')
 		{
-			return $_POST ['Vcl_' . $s_key];
+			$s_str=$this->FilterUserInput($_POST ['Vcl_' . $s_key]);
+			if ($s_key=='Name' ||$s_key=='Company' ||$s_key=='DeptJob' ||$s_key=='Phone' ||$s_key=='Email')
+			{
+				$s_str=str_replace('"', '', $s_str);
+				$s_str=str_replace(',', '', $s_str);
+				$s_str=str_replace(' ', '', $s_str);
+				//$s_str=$this->FilterEmoji($s_str);
+			}
+			return $s_str;
 		}
-		return $_POST ['Ajax_' . $s_key];
+		$s_str=$this->FilterUserInput($_GET[$s_key]);
+		if ($s_key=='Name' ||$s_key=='Company' ||$s_key=='DeptJob' ||$s_key=='Phone' ||$s_key=='Email')
+		{
+			$s_str=str_replace('"', '', $s_str);
+			$s_str=str_replace(',', '', $s_str);
+			$s_str=str_replace(' ', '', $s_str);
+			//$s_str=$this->FilterEmoji($s_str);
+		}
+		return $s_str;
+	}	
+	public function FilterUserInput($string) {
+		//过滤< > />
+		$string=str_replace('<', '', $string);
+		$string=str_replace('>', '', $string);
+		$string=str_replace('/>', '', $string);
+		return $string;
 	}
 	protected function setEncode($s_value)
 	{
