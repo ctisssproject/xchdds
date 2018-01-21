@@ -324,6 +324,104 @@ class Operate extends Bn_Basic {
 		);
 		echo (json_encode ( $a_general ));
 	}
+	public function ZbtxSchoolUploadAdd($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+				//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+			
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31002 )) {
+			if ($_FILES ['Vcl_File'] ['size'] > 0) {
+				mkdir ( RELATIVITY_PATH . 'userdata/zhdd', 0777 );
+				mkdir ( RELATIVITY_PATH . 'userdata/zhdd/zbtx', 0777 );
+				$allowpictype = array ('jpg', 'jpeg', 'pdf', 'png' );
+				$fileext = strtolower ( trim ( substr ( strrchr ( $_FILES ['Vcl_File'] ['name'], '.' ), 1 ) ) );
+				if (! in_array ( $fileext, $allowpictype )) {
+					$this->setReturn('parent.parent.parent.Dialog_Message("只能上传PDF 或 图片文件！");');
+				}
+				sleep(1);
+				$o_user_info=new Base_User_Info_View($n_uid);
+				$o_table=new Zhdd_Zbtx_Doc();
+				$o_table->setDeptId($o_user_info->getDeptId());
+				$o_table->setOwnerId($n_uid);
+				$o_table->setLevel3Id($this->getPost('Level3Id'));
+				$o_table->setNumber($this->getPost('Number'));
+				$o_table->setIsDelete(0);
+				$o_table->setCreateDate($this->GetDateNow());
+				$o_table->setFileName($this->getPost('FileName'));
+				$o_table->setExplain($this->getPost('Explain'));
+				$o_table->setFileType($fileext);
+				$o_table->Save();
+				$s_filename=$o_table->getId().'.'.$fileext;
+				$o_table->setPath ( 'userdata/zhdd/zbtx/' . $s_filename );
+				$o_table->Save();
+				copy ( $_FILES ['Vcl_File'] ['tmp_name'], RELATIVITY_PATH . 'userdata/zhdd/zbtx/' . $s_filename );
+				$this->ZbtxSchoolUploadDocSort($o_table->getDeptId(),$o_table->getNumber(),$o_table->getId(),$o_table->getLevel3Id());
+				$this->setReturn('parent.location=\''.$this->getPost('BackUrl').'&time='.time().'\';');
+			}else{
+				$this->setReturn('parent.parent.parent.Dialog_Message("请选择上传文件！");');
+			}		
+		}
+		$this->setReturn('parent.location=\''.$this->getPost('BackUrl').'?'.time().'\';');
+	}
+	public function ZbtxSchoolUploadDelete($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+				//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+			
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31002 )) {
+			$o_table=new Zhdd_Zbtx_Doc($this->getPost('id'));
+			$o_table->setIsDelete(1);
+			$o_table->Save();
+			$this->ZbtxProjectLevel2Sort($o_table->getDeptId(),1000,$o_table->getId(),$o_table->getLevel3Id());
+		}
+		$a_general = array (
+			'success' => 1,
+			'text' =>''
+		);
+		echo (json_encode ( $a_general ));
+	}
+	public function ZbtxSchoolUploadModify($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+				//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+			
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31002 )) {
+			$o_table=new Zhdd_Zbtx_Doc($this->getPost('Id'));
+			$o_table->setFileName($this->getPost('FileName'));
+			$o_table->setExplain($this->getPost('Explain'));
+			$o_table->setNumber($this->getPost('Number'));
+			$o_table->Save();
+			$this->ZbtxSchoolUploadDocSort($o_table->getDeptId(),$o_table->getNumber(),$o_table->getId(),$o_table->getLevel3Id());
+		}
+		$this->setReturn('parent.location=\''.$this->getPost('BackUrl').'&time='.time().'\';');
+	}
+	private function ZbtxSchoolUploadDocSort($n_dept_id, $n_number, $n_id, $n_level3_id) {
+		$o_all = new Zhdd_Zbtx_Doc ();
+		$o_all->PushWhere ( array ('&&', 'Id', '<>', $n_id ) );
+		$o_all->PushWhere ( array ('&&', 'DeptId', '=', $n_dept_id ) );
+		$o_all->PushWhere ( array ('&&', 'Level3Id', '=', $n_level3_id ) );
+		$o_all->PushWhere ( array ('&&', 'IsDelete', '=', 0 ) );
+		$o_all->PushOrder ( array ('Number', 'A' ) );
+		$n_count = $o_all->getAllCount ();
+		for($i = 0; $i < $n_count; $i ++) {
+			$o_focus = new Zhdd_Zbtx_Doc ( $o_all->getId ( $i ) );
+			if (($i + 1) >= $n_number) {
+				$o_focus->setNumber ( $i + 2 );
+			} else {
+				$o_focus->setNumber ( $i + 1 );
+			}
+			$o_focus->Save ();
+		}
+	}
 }
 
 ?>

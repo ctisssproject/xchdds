@@ -70,7 +70,7 @@ echo($s_project_id);
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 名称：</td>
 			<td class="TableData"><input id="Vcl_Name" name="Vcl_Name"
-				class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value=""/>
+				class="BigInput" style="width:300px;" size="16" maxlength="200" type="text" value=""/>
 				</td>
 		</tr>
 		<tr>
@@ -99,7 +99,7 @@ echo($s_project_id);
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 分值：</td>
 			<td class="TableData"><input id="Vcl_Score" name="Vcl_Score"
-				class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value="" onkeyup="value=value.replace(/[^0-9]/g,'')"/>
+				class="BigInput" style="width:300px;" size="16" maxlength="5" type="text" value="" onkeyup="value=value.replace(/[^0-9]/g,'')"/>
 				</td>
 		</tr>
 		<tr class="TableControl" align="center">

@@ -7,7 +7,8 @@ require_once 'include/db_table.class.php';
 $O_Session->ValidModuleForPage(MODULEID);
 function getList() 
 {
-		require_once 'include/db_table.class.php';
+		global $O_Session;
+		$o_user= new Base_User_Info_View($O_Session->getUid());		
 		$o_term = new Zhdd_Zbtx_Level1();
 		$o_term->PushWhere ( array ('&&', 'ProjectId', '=', $_GET['id']) );
 		$o_term->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
@@ -18,7 +19,7 @@ function getList()
 			$s_record_list .= '
 				             <tr class="TableLine1">
 					                <td align="center">
-					                    ' . $o_term->getName ( $i ) . '
+					                    <b>' . $o_term->getName ( $i ) . '</b>
 					                </td>
 					                <td align="center" >
 					                </td>
@@ -41,7 +42,7 @@ function getList()
 					                <td align="center">					                    
 					                </td>
 					                <td align="center" >
-					                	' . $o_level2->getName ( $j ) . '
+					                	<b>' . $o_level2->getName ( $j ) . '</b>
 					                </td>
 					                <td align="center" >
 					                </td>
@@ -63,17 +64,50 @@ function getList()
 						                </td>
 						                <td align="center" >						                	
 						                </td>
-						                <td align="center" >
+						                <td>
 						                	' . $o_level3->getName ( $k ) . '
 						                </td>
 						                <td align="center" >
 						                	' . $o_level3->getScore ( $k ) . '
 						                </td>
 						                <td align="center" >
-						                	<a href="javascript:;" onclick="location=\'zbtx_manage_task_upload_add.php?id='.$o_level3->getId ( $k ).'\'">上传资料</a>
+						                	<a href="javascript:;" onclick="location=\'zbtx_school_task_upload_add.php?id='.$o_level3->getId ( $k ).'\'">上传资料</a>
 						                </td>
 						            </tr>
 					';
+					$o_doc=new Zhdd_Zbtx_Doc();
+					$o_doc->PushWhere ( array ('&&', 'Level3Id', '=', $o_level3->getId ( $k )) );
+					$o_doc->PushWhere ( array ('&&', 'DeptId', '=', $o_user->getDeptId ()) );
+					$o_doc->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
+					$o_doc->PushOrder ( array ('Number', 'A' ) );
+					for($z=0;$z<$o_doc->getAllCount();$z++)
+					{
+						$s_explain='';
+						if ($o_doc->getExplain($z)!='')
+						{
+							$s_explain='<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#999999">[说明] '.$o_doc->getExplain($z).'</span>';
+						}
+						$s_record_list .= '
+						             <tr class="TableLine1">
+							                <td align="center">		
+							                		                    
+							                </td>
+							                <td align="center" >						                	
+							                </td>
+							                <td>
+							                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="'.RELATIVITY_PATH.$o_doc->getPath($z).'" target="_blank">' . $o_doc->getFileName($z) . '.'.$o_doc->getFileType($z).'</a>
+							                	'.$s_explain.'
+							                </td>
+							                <td align="center" >
+							                	
+							                </td>
+							                <td align="center" >
+							                	<a href="javascript:;" onclick="location=\'zbtx_school_task_upload_modify.php?id='.$o_doc->getId ( $z ).'\'">修改</a>&nbsp;&nbsp;
+					                			<a style="color:red" href="javascript:;" onclick="zbtx_school_task_upload_delete('.$o_doc->getId ( $z ).')">删除</a>&nbsp;&nbsp;
+							                </td>
+							            </tr>
+						';	
+					}					
 				}
 			}
 		}
@@ -100,7 +134,7 @@ function getList()
 					                <td style="min-width:150px;">
 					                   三级指标
 					                </td>
-					                <td style="min-width:150px;">
+					                <td style="width:80px;">
 					                   分值
 					                </td>
 					                <td align="center" style="min-width:100px;">

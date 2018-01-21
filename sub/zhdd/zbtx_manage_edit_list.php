@@ -18,7 +18,7 @@ function getList()
 			$s_record_list .= '
 				             <tr class="TableLine1">
 					                <td align="center">
-					                    ' . $o_term->getName ( $i ) . '
+					                    <b>' . $o_term->getName ( $i ) . '</b>
 					                </td>
 					                <td align="center" >
 					                </td>
@@ -43,7 +43,7 @@ function getList()
 					                <td align="center">					                    
 					                </td>
 					                <td align="center" >
-					                	' . $o_level2->getName ( $j ) . '
+					                	<b>' . $o_level2->getName ( $j ) . '</b>
 					                </td>
 					                <td align="center" >
 					                </td>
@@ -67,7 +67,7 @@ function getList()
 						                </td>
 						                <td align="center" >						                	
 						                </td>
-						                <td align="center" >
+						                <td>
 						                	' . $o_level3->getName ( $k ) . '
 						                </td>
 						                <td align="center" >
@@ -110,7 +110,7 @@ function getList()
 					                <td style="min-width:150px;">
 					                   分值
 					                </td>
-					                <td align="center" style="min-width:100px;">
+					                <td align="center" style="min-width:150px;">
 					                    操作
 					                </td>					                
 					            </tr>

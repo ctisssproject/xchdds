@@ -84,3 +84,21 @@ function zbtx_manage_level3_delete(id) {
         })
     })
 }
+function zbtx_school_task_upload_submit() {
+    if ($('#Vcl_FileName').val() == '') {
+        parent.parent.Dialog_Message('名称不能为空！！')
+        return;
+    }
+    document.getElementById('submit_form').submit();
+    parent.parent.Common_OpenLoading()
+}
+function zbtx_school_task_upload_delete(id) {
+	parent.parent.Dialog_Confirm('真的要删除这个文件吗？<br/>删除后不能恢复，请谨慎操作。',function(){
+    	parent.parent.Common_OpenLoading()
+    	var data = 'Ajax_FunName=ZbtxSchoolUploadDelete'; //后台方法
+        data = data + '&id=' + id;
+        $.getJSON("include/bn_submit.switch.php", data, function (json) {
+        	location.reload();
+        })
+    })
+}

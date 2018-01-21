@@ -5,11 +5,15 @@ $O_Session='';
 require_once RELATIVITY_PATH . 'include/it_include.inc.php';
 require_once 'include/db_table.class.php';
 $O_Session->ValidModuleForPage(MODULEID);
+
 function getList() 
 {
+		global $O_Session;
+		$o_user= new Base_User_Info_View($O_Session->getUid());
 		require_once 'include/db_table.class.php';
 		$o_term = new Zhdd_Zbtx_Project();
 		$o_term->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
+		$o_term->PushWhere ( array ('&&', 'Scope', 'Like', '%"'.$o_user->getTypeId().'"%') );
 		$o_term->PushWhere ( array ('&&', 'State', '>=', 1) );
 		$o_term->PushOrder ( array ('CreateDate', '' ) );
 		$n_count = $o_term->getAllCount ();
@@ -34,9 +38,9 @@ function getList()
 			}
 			//判断按钮
 			$a_button='<a href="javascript:;" onclick="location=\'zbtx_school_task_upload.php?id='.$o_term->getId ( $i ).'\'">上传资料</a>';
-			if($o_term->getState($i)==2)
+			if($o_term->getState($i)==2) 
 			{
-				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_project_show.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
+				//$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_project_show.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
 			}
 			$s_record_list .= '
 				             <tr class="TableLine1">
