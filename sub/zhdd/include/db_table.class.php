@@ -8,6 +8,7 @@ class Zhdd_Zbtx_Doc extends CRUD
     protected $DeptId;
     protected $OwnerId;
     protected $Level3Id;
+    protected $ResultId;
     protected $Number;
     protected $IsDelete;
     protected $CreateDate;
@@ -31,6 +32,7 @@ class Zhdd_Zbtx_Doc extends CRUD
                     'dept_id' => 'DeptId',
                     'owner_id' => 'OwnerId',
                     'level3_id' => 'Level3Id',
+        			'result_id' => 'ResultId',
                     'number' => 'Number',
                     'is_delete' => 'IsDelete',
                     'create_date' => 'CreateDate',
@@ -166,6 +168,8 @@ class Zhdd_Zbtx_Result extends CRUD
     protected $OwnerId;
     protected $DeptId;
     protected $ProjectId;
+    protected $State;
+    protected $Result;
 
     protected function DefineKey()
     {
@@ -182,7 +186,9 @@ class Zhdd_Zbtx_Result extends CRUD
                     'create_date' => 'CreateDate',
                     'owner_id' => 'OwnerId',
                     'dept_id' => 'DeptId',
-                    'project_id' => 'ProjectId'
+                    'project_id' => 'ProjectId',
+                    'state' => 'State',
+                    'result' => 'Result'
         ));
     }
 }

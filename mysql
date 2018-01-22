@@ -1,1 +1,13 @@
-INSERT INTO `base_module` (`module_id`, `name`, `module`, `explain`, `icon_id`, `path`, `parent_module_id`, `mini_icon_id`, `wait_read_table`) VALUES ('31002', '指标体系任务', 'OA_31_2_0', '', '1', 'sub/zhdd/zbtx_school_task.php', '31000', '1', '');
+ALTER TABLE `zhdd_zbtx_result` ADD `state` INT(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '0可以上传，1不可上传' AFTER `project_id`, ADD `result` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '评分结果' AFTER `state`;
+
+ALTER TABLE `zhdd_zbtx_project` CHANGE `release_date` `release_date` DATE NOT NULL COMMENT '发布日期';
+
+ALTER TABLE `zhdd_zbtx_project` CHANGE `create_date` `create_date` DATE NOT NULL COMMENT '建立日期';
+
+ALTER TABLE `zhdd_zbtx_result` CHANGE `create_date` `create_date` DATE NOT NULL COMMENT '建立日期';
+
+ALTER TABLE `zhdd_zbtx_doc` ADD `result_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0' COMMENT '结果编号' AFTER `level3_id`;
+
+
+--zhdd_zbtx_result_view--
+select `zhdd_zbtx_result`.`id` AS `id`,`zhdd_zbtx_result`.`create_date` AS `create_date`,`zhdd_zbtx_result`.`owner_id` AS `owner_id`,`base_user_info`.`name` AS `owner_name`,`zhdd_zbtx_result`.`dept_id` AS `dept_id`,`base_dept`.`name` AS `dept_name`,`zhdd_zbtx_result`.`project_id` AS `project_id`,`zhdd_zbtx_project`.`name` AS `project_name`,`zhdd_zbtx_project`.`state` AS `state`,`zhdd_zbtx_project`.`scope` AS `scope`,`zhdd_zbtx_result`.`state` AS `resutl_state`,`zhdd_zbtx_result`.`result` AS `result` from (((`zhdd_zbtx_result` join `base_dept` on((`zhdd_zbtx_result`.`dept_id` = `base_dept`.`dept_id`))) join `base_user_info` on((`zhdd_zbtx_result`.`owner_id` = `base_user_info`.`uid`))) join `zhdd_zbtx_project` on((`zhdd_zbtx_result`.`project_id` = `zhdd_zbtx_project`.`id`)))

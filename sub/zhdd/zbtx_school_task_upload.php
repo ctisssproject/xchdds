@@ -5,10 +5,28 @@ $O_Session='';
 require_once RELATIVITY_PATH . 'include/it_include.inc.php';
 require_once 'include/db_table.class.php';
 $O_Session->ValidModuleForPage(MODULEID);
+
 function getList() 
 {
 		global $O_Session;
-		$o_user= new Base_User_Info_View($O_Session->getUid());		
+		$o_user= new Base_User_Info_View($O_Session->getUid());	
+		//先检查是否已经新建任务，如果没有，新建任务
+		$o_result=new Zhdd_Zbtx_Result();
+		$o_result->PushWhere ( array ('&&', 'DeptId', '=', $o_user->getDeptId ()) );
+		$o_result->PushWhere ( array ('&&', 'ProjectId', '=', $_GET['id']) );
+		$o_result->PushOrder ( array ('CreateDate', 'D' ) );
+		if ($o_result->getAllCount()==0)
+		{
+			$o_project=new Zhdd_Zbtx_Project($_GET['id']);
+			$o_result=new Zhdd_Zbtx_Result();
+			$o_result->setCreateDate($o_project->getReleaseDate());
+			$o_result->setOwnerId($o_user->getUid());
+			$o_result->setDeptId($o_user->getDeptId());
+			$o_result->setProjectId($o_project->getId());
+			$o_result->Save();
+		}else{
+			$o_result=new Zhdd_Zbtx_Result($o_result->getId(0));
+		}	
 		$o_term = new Zhdd_Zbtx_Level1();
 		$o_term->PushWhere ( array ('&&', 'ProjectId', '=', $_GET['id']) );
 		$o_term->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
@@ -58,6 +76,14 @@ function getList()
 				$o_level3->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
 				$o_level3->PushOrder ( array ('Number', 'A' ) );
 				for($k = 0; $k < $o_level3->getAllCount (); $k ++) {
+					//判断按钮
+					$s_button='';
+					if ($o_result->getState()==0)
+					{
+						$s_button='
+							<a href="javascript:;" onclick="location=\'zbtx_school_task_upload_add.php?id='.$o_level3->getId ( $k ).'\'">上传资料</a>
+						';
+					}
 					$s_record_list .= '
 					             <tr class="TableLine1">
 						                <td align="center">					                    
@@ -71,21 +97,26 @@ function getList()
 						                	' . $o_level3->getScore ( $k ) . '
 						                </td>
 						                <td align="center" >
-						                	<a href="javascript:;" onclick="location=\'zbtx_school_task_upload_add.php?id='.$o_level3->getId ( $k ).'\'">上传资料</a>
+						                	'.$s_button.'
 						                </td>
 						            </tr>
 					';
 					$o_doc=new Zhdd_Zbtx_Doc();
 					$o_doc->PushWhere ( array ('&&', 'Level3Id', '=', $o_level3->getId ( $k )) );
+					$o_doc->PushWhere ( array ('&&', 'ResultId', '=', $o_result->getId ()) );
 					$o_doc->PushWhere ( array ('&&', 'DeptId', '=', $o_user->getDeptId ()) );
 					$o_doc->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
 					$o_doc->PushOrder ( array ('Number', 'A' ) );
 					for($z=0;$z<$o_doc->getAllCount();$z++)
 					{
-						$s_explain='';
-						if ($o_doc->getExplain($z)!='')
+						//判断按钮
+						$s_button='';
+						if ($o_result->getState()==0)
 						{
-							$s_explain='<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#999999">[说明] '.$o_doc->getExplain($z).'</span>';
+							$s_button='
+								<a href="javascript:;" onclick="location=\'zbtx_school_task_upload_modify.php?id='.$o_doc->getId ( $z ).'\'">修改</a>&nbsp;&nbsp;
+					            <a style="color:red" href="javascript:;" onclick="zbtx_school_task_upload_delete('.$o_doc->getId ( $z ).')">删除</a>&nbsp;&nbsp;
+							';
 						}
 						$s_record_list .= '
 						             <tr class="TableLine1">
@@ -95,15 +126,13 @@ function getList()
 							                <td align="center" >						                	
 							                </td>
 							                <td>
-							                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="'.RELATIVITY_PATH.$o_doc->getPath($z).'" target="_blank">' . $o_doc->getFileName($z) . '.'.$o_doc->getFileType($z).'</a>
-							                	'.$s_explain.'
+							                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="'.RELATIVITY_PATH.$o_doc->getPath($z).'" target="_blank">'.$o_doc->getExplain($z).'</a>
 							                </td>
 							                <td align="center" >
 							                	
 							                </td>
 							                <td align="center" >
-							                	<a href="javascript:;" onclick="location=\'zbtx_school_task_upload_modify.php?id='.$o_doc->getId ( $z ).'\'">修改</a>&nbsp;&nbsp;
-					                			<a style="color:red" href="javascript:;" onclick="zbtx_school_task_upload_delete('.$o_doc->getId ( $z ).')">删除</a>&nbsp;&nbsp;
+							                	'.$s_button.'
 							                </td>
 							            </tr>
 						';	

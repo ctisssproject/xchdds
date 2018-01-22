@@ -85,8 +85,8 @@ function zbtx_manage_level3_delete(id) {
     })
 }
 function zbtx_school_task_upload_submit() {
-    if ($('#Vcl_FileName').val() == '') {
-        parent.parent.Dialog_Message('名称不能为空！！')
+    if ($('#Vcl_Explain').val() == '') {
+        parent.parent.Dialog_Message('说明不能为空！！')
         return;
     }
     document.getElementById('submit_form').submit();

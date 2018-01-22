@@ -57,13 +57,7 @@ $o_user= new Base_User_Info_View($O_Session->getUid());
 			</select></td>
 		</tr>
 		<tr>
-			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 名称：</td>
-			<td class="TableData"><input id="Vcl_FileName" name="Vcl_FileName"
-				class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value=""/>
-				</td>
-		</tr>
-		<tr>
-			<td class="TableData" nowrap="nowrap" width="120">说明（30字以内）：</td>
+			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 说明（50字以内）：</td>
 			<td class="TableData"><input id="Vcl_Explain" name="Vcl_Explain"
 				class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value=""/>
 				</td>
@@ -86,7 +80,6 @@ $o_user= new Base_User_Info_View($O_Session->getUid());
 			if ($_GET['id']>0)
 			{
 				?>
-				$('#Vcl_FileName').val('<?php echo($o_doc->getFileName())?>');
 				$('#Vcl_Number').val('<?php echo($o_doc->getNumber())?>');
 				$('#Vcl_Explain').val('<?php echo($o_doc->getExplain())?>');
 				<?php

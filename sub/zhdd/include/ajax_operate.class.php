@@ -77,6 +77,7 @@ class Operate extends Bn_Basic {
 		$o_user = new Single_User ( $n_uid );
 		if ($o_user->ValidModule ( 31001 )) {
 			$o_table=new Zhdd_Zbtx_Project($this->getPost('id'));
+			$o_table->setReleaseDate($this->GetDate());
 			$o_table->setState(1);
 			$o_table->Save();
 		}
@@ -348,9 +349,10 @@ class Operate extends Bn_Basic {
 				$o_table->setOwnerId($n_uid);
 				$o_table->setLevel3Id($this->getPost('Level3Id'));
 				$o_table->setNumber($this->getPost('Number'));
+				$o_table->setResultId($this->getPost('ResultId'));
 				$o_table->setIsDelete(0);
 				$o_table->setCreateDate($this->GetDateNow());
-				$o_table->setFileName($this->getPost('FileName'));
+				$o_table->setFileName($_FILES ['Vcl_File'] ['name']);
 				$o_table->setExplain($this->getPost('Explain'));
 				$o_table->setFileType($fileext);
 				$o_table->Save();
@@ -358,7 +360,7 @@ class Operate extends Bn_Basic {
 				$o_table->setPath ( 'userdata/zhdd/zbtx/' . $s_filename );
 				$o_table->Save();
 				copy ( $_FILES ['Vcl_File'] ['tmp_name'], RELATIVITY_PATH . 'userdata/zhdd/zbtx/' . $s_filename );
-				$this->ZbtxSchoolUploadDocSort($o_table->getDeptId(),$o_table->getNumber(),$o_table->getId(),$o_table->getLevel3Id());
+				$this->ZbtxSchoolUploadDocSort($o_table->getDeptId(),$o_table->getNumber(),$o_table->getId(),$o_table->getLevel3Id(),$o_table->getResultId());
 				$this->setReturn('parent.location=\''.$this->getPost('BackUrl').'&time='.time().'\';');
 			}else{
 				$this->setReturn('parent.parent.parent.Dialog_Message("请选择上传文件！");');
@@ -378,7 +380,7 @@ class Operate extends Bn_Basic {
 			$o_table=new Zhdd_Zbtx_Doc($this->getPost('id'));
 			$o_table->setIsDelete(1);
 			$o_table->Save();
-			$this->ZbtxProjectLevel2Sort($o_table->getDeptId(),1000,$o_table->getId(),$o_table->getLevel3Id());
+			$this->ZbtxProjectLevel2Sort($o_table->getDeptId(),1000,$o_table->getId(),$o_table->getLevel3Id(),$o_table->getResultId());
 		}
 		$a_general = array (
 			'success' => 1,
@@ -400,14 +402,15 @@ class Operate extends Bn_Basic {
 			$o_table->setExplain($this->getPost('Explain'));
 			$o_table->setNumber($this->getPost('Number'));
 			$o_table->Save();
-			$this->ZbtxSchoolUploadDocSort($o_table->getDeptId(),$o_table->getNumber(),$o_table->getId(),$o_table->getLevel3Id());
+			$this->ZbtxSchoolUploadDocSort($o_table->getDeptId(),$o_table->getNumber(),$o_table->getId(),$o_table->getLevel3Id(),$o_table->getResultId());
 		}
 		$this->setReturn('parent.location=\''.$this->getPost('BackUrl').'&time='.time().'\';');
 	}
-	private function ZbtxSchoolUploadDocSort($n_dept_id, $n_number, $n_id, $n_level3_id) {
+	private function ZbtxSchoolUploadDocSort($n_dept_id, $n_number, $n_id, $n_level3_id,$n_result_id) {
 		$o_all = new Zhdd_Zbtx_Doc ();
 		$o_all->PushWhere ( array ('&&', 'Id', '<>', $n_id ) );
 		$o_all->PushWhere ( array ('&&', 'DeptId', '=', $n_dept_id ) );
+		$o_all->PushWhere ( array ('&&', 'ResultId', '=', $n_result_id ) );
 		$o_all->PushWhere ( array ('&&', 'Level3Id', '=', $n_level3_id ) );
 		$o_all->PushWhere ( array ('&&', 'IsDelete', '=', 0 ) );
 		$o_all->PushOrder ( array ('Number', 'A' ) );

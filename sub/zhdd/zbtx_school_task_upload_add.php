@@ -7,6 +7,11 @@ require_once 'include/db_table.class.php';
 $O_Session->ValidModuleForPage(MODULEID);
 $o_level3=new Zhdd_Zbtx_Level3_View($_GET['id']);
 $o_user= new Base_User_Info_View($O_Session->getUid());
+$o_result=new Zhdd_Zbtx_Result();
+$o_result->PushWhere ( array ('&&', 'DeptId', '=', $o_user->getDeptId ()) );
+$o_result->PushWhere ( array ('&&', 'ProjectId', '=', $o_level3->getProjectId ()) );
+$o_result->PushOrder ( array ('CreateDate', 'D' ) );
+$o_result->getAllCount()
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -27,6 +32,7 @@ $o_user= new Base_User_Info_View($O_Session->getUid());
 <input type="hidden" name="Vcl_Url" value="<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>"/>
 <input type="hidden" name="Vcl_BackUrl" value="<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>zbtx_school_task_upload.php?id=<?php echo($o_level3->getProjectId())?>"/>
 <input type="hidden" name="Vcl_Level3Id" value="<?php echo($_GET['id'])?>"/>
+<input type="hidden" name="Vcl_ResultId" value="<?php echo($o_result->getId(0))?>"/>
 <input type="hidden" name="Vcl_FunName" value="ZbtxSchoolUploadAdd"/>
 <table class="small" border="0" cellpadding="3" cellspacing="0"
 	style="margin-left:auto;margin-right:auto;min-width:600px;" align="center" style="margin-top: 10px">
@@ -45,6 +51,7 @@ $o_user= new Base_User_Info_View($O_Session->getUid());
 				<?php 
 				$o_table=new Zhdd_Zbtx_Doc();
 				$o_table->PushWhere ( array ('&&', 'Level3Id', '=', $_GET['id']) );
+				$o_table->PushWhere ( array ('&&', 'ResultId', '=', $o_result->getId(0)) );
 				$o_table->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
 				$o_table->PushWhere ( array ('&&', 'DeptId', '=', $o_user->getDeptId()) );
 				$o_table->PushOrder ( array ('Number', 'A' ) );
@@ -57,15 +64,9 @@ $o_user= new Base_User_Info_View($O_Session->getUid());
 			</select></td>
 		</tr>
 		<tr>
-			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 名称：</td>
-			<td class="TableData"><input id="Vcl_FileName" name="Vcl_FileName"
-				class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value=""/>
-				</td>
-		</tr>
-		<tr>
-			<td class="TableData" nowrap="nowrap" width="120">说明（30字以内）：</td>
+			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 说明（50字以内）：</td>
 			<td class="TableData"><input id="Vcl_Explain" name="Vcl_Explain"
-				class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value=""/>
+				class="BigInput" style="width:300px;" size="16" maxlength="50" type="text" value=""/>
 				</td>
 		</tr>
 		<tr>

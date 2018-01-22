@@ -15,15 +15,25 @@ function getList()
 		$o_term->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
 		$o_term->PushWhere ( array ('&&', 'Scope', 'Like', '%"'.$o_user->getTypeId().'"%') );
 		$o_term->PushWhere ( array ('&&', 'State', '>=', 1) );
-		$o_term->PushOrder ( array ('CreateDate', '' ) );
+		$o_term->PushOrder ( array ('ReleaseDate', 'D' ) );
 		$n_count = $o_term->getAllCount ();
 		for($i = 0; $i < $n_count; $i ++) {
 			//状态
-			$s_state='<span style="color:#339900">开放</span>';
-			if ($o_term->getState($i)==2)
+			$o_result=new Zhdd_Zbtx_Result();
+			$o_result->PushWhere ( array ('&&', 'DeptId', '=', $o_user->getDeptId()) );
+			$o_result->PushWhere ( array ('&&', 'ProjectId', '=', $o_term->getId($i)) );
+			$o_result->PushOrder ( array ('CreateDate', 'D' ) );
+			if ($o_result->getAllCount()>0)
 			{
-				$s_state='<span style="color:red">已关闭</span>';
-			}
+				if ($o_result->getState(0)==1)
+				{
+					$s_state='<span style="color:red">已关闭</span>';
+				}else{
+					$s_state='<span style="color:#339900">开放</span>';
+				}
+			}else{
+				$s_state='<span style="color:#339900">开放</span>';
+			}			
 			//构建范围
 			$s_scorp='';
 			$a_scorp=json_decode($o_term->getScope($i));
