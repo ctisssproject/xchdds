@@ -8,35 +8,23 @@ $O_Session->ValidModuleForPage(MODULEID);
 function getList() 
 {
 		require_once 'include/db_table.class.php';
-		$o_term = new Zhdd_Zbtx_Project();
-		$o_term->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
-		$o_term->PushOrder ( array ('State', 'A' ) );
-		$o_term->PushOrder ( array ('CreateDate', '' ) );
-		$n_count = $o_term->getAllCount ();
-		for($i = 0; $i < $n_count; $i ++) {
-			//状态
-			$s_state='<span style="color:#FF6600">未发布</span>';
-			if ($o_term->getState($i)==1)
+		$o_term = new Zhdd_Zbtx_Result_View();
+		$o_term->PushWhere ( array ('&&', 'ProjectId', '=', $_GET['id']) );
+		$o_term->PushOrder ( array ('DeptName', 'A' ) );
+		$o_term->PushOrder ( array ('CreateDate', 'D' ) );
+		$s_deptname='';
+		for($i = 0; $i < $o_term->getAllCount (); $i ++) {
+			if ($o_term->getDeptName(0)==$s_deptname)
 			{
-				$s_state='<span style="color:#339900">已发布</span>';
+				continue;
 			}
-			//构建范围
-			$s_scorp='';
-			$a_scorp=json_decode($o_term->getScope($i));
-			for($j=0;$j<count($a_scorp);$j++)
+			$s_deptname=$o_term->getDeptName($i);
+			$s_state='<span style="color:#FF6600">已关闭</span>';
+			$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school_detail.php?id='.$o_term->getId($i).'\'">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" style="color:#339900" onclick="zbtx_manage_list_school_open('.$o_term->getId ( $i ).')">开放</a>';
+			if ($o_term->getResultState($i)==0)
 			{
-				$o_type=new Base_School_Type($a_scorp[$j]);
-				$s_scorp.=$o_type->getName();
-				if (($j+1)<count($a_scorp))
-				{
-					$s_scorp.='、';
-				}
-			}
-			//判断按钮
-			$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_project_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="zbtx_manage_project_release('.$o_term->getId ( $i ).')">发布</a>&nbsp;&nbsp;<a style="color:red" href="javascript:;" onclick="zbtx_manage_project_delete('.$o_term->getId ( $i ).')">删除</a>';
-			if($o_term->getState($i)==1)
-			{
-				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
+				$s_state='<span style="color:#339900">开放</span>';
+				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school_detail.php?id='.$o_term->getId($i).'\'">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" style="color:red" onclick="zbtx_manage_list_school_close('.$o_term->getId ( $i ).')">关闭</a>';
 			}
 			$s_record_list .= '
 				             <tr class="TableLine1">
@@ -44,17 +32,11 @@ function getList()
 					                    ' . $o_term->getCreateDate ( $i ) . '
 					                </td>
 					                <td align="center" >
-					                    <strong>' . $o_term->getName ( $i ) . '</strong>
-					                </td>
-					                <td align="center" >
-					                   ' . $o_term->getExplain ( $i ) . '
-					                </td>
-					                <td align="center" >
-					                   ' . $s_scorp . '
-					                </td>
+					                    <strong>' . $o_term->getDeptName ( $i ) . '</strong>
+					                </td>	
 					                <td align="center" >
 					                   ' . $s_state . '
-					                </td>
+					                </td>				                
 					                <td align="center">
 					                    '.$a_button.'
 					                </td>
@@ -66,9 +48,8 @@ function getList()
 			        <tbody>
 			            <tr>
                 			<td class="title">
-			                    &nbsp;&nbsp;&nbsp;&nbsp;共<span class="big4">&nbsp;' . $n_count . '</span>&nbsp;个指标体系
-			                    &nbsp;&nbsp;&nbsp;&nbsp;<input value="添加" class="BigButtonB"
-				onclick="location=\'zbtx_manage_project_modify.php\'" type="button" />
+			                    <input value="返回" class="BigButtonB"
+				onclick="location=\'zbtx_manage_list.php\'" type="button" style="float:right"/>
 			                </td>
 			            </tr>
 			        </tbody>
@@ -80,17 +61,11 @@ function getList()
 					                    建立日期 <img src="../../images/arrow_down.gif" height="10" border="0" width="11" align="absmiddle"> 
 					                </td>
 					                <td style="min-width:200px;">
-					                  标题
-					                </td>
-					                <td style="max-width:150px;">
-					                   说明
-					                </td>
-					                <td style="max-width:150px;">
-					                   测评范围
+					                  学校名称
 					                </td>
 					                <td style="max-width:100px;">
 					                   状态
-					                </td>
+					                </td>					                
 					                <td align="center" style="min-width:100px;">
 					                    操作
 					                </td>

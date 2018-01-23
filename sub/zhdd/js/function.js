@@ -102,3 +102,23 @@ function zbtx_school_task_upload_delete(id) {
         })
     })
 }
+function zbtx_manage_list_school_close(id) {
+	parent.parent.Dialog_Confirm('真的要关闭上传吗？<br/>关闭后不能恢复，请谨慎操作。',function(){
+    	parent.parent.Common_OpenLoading()
+    	var data = 'Ajax_FunName=ZbtxManageSchoolListClose'; //后台方法
+        data = data + '&id=' + id;
+        $.getJSON("include/bn_submit.switch.php", data, function (json) {
+        	location.reload();
+        })
+    })
+}
+function zbtx_manage_list_school_open(id) {
+	parent.parent.Dialog_Confirm('真的要重新开放吗？<br/>开放后，学校将重新开始上传资料。',function(){
+    	parent.parent.Common_OpenLoading()
+    	var data = 'Ajax_FunName=ZbtxManageSchoolListOpen'; //后台方法
+        data = data + '&id=' + id;
+        $.getJSON("include/bn_submit.switch.php", data, function (json) {
+        	location.reload();
+        })
+    })
+}

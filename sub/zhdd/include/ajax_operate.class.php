@@ -425,6 +425,50 @@ class Operate extends Bn_Basic {
 			$o_focus->Save ();
 		}
 	}
+	public function ZbtxManageSchoolListClose($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+				//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+			
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31001 )) {
+			$o_table=new Zhdd_Zbtx_Result($this->getPost('id'));
+			$o_table->setState(1);
+			$o_table->Save();
+		}
+		$a_general = array (
+			'success' => 1,
+			'text' =>''
+		);
+		echo (json_encode ( $a_general ));
+	}
+	public function ZbtxManageSchoolListOpen($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+				//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+			
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31001 )) {
+			$o_table=new Zhdd_Zbtx_Result($this->getPost('id'));
+			$o_new = new Zhdd_Zbtx_Result();
+			$o_new->setCreateDate($this->GetDate());
+			$o_new->setOwnerId($o_table->getOwnerId());
+			$o_new->setDeptId($o_table->getDeptId());
+			$o_new->setProjectId($o_table->getProjectId());
+			$o_new->setState(0);
+			$o_new->setResult('');
+			$o_new->Save();
+		}
+		$a_general = array (
+			'success' => 1,
+			'text' =>''
+		);
+		echo (json_encode ( $a_general ));
+	}
 }
 
 ?>

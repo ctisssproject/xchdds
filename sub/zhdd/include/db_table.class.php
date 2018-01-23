@@ -286,6 +286,8 @@ class Zhdd_Zbtx_Result_View extends CRUD
     protected $ProjectName;
     protected $State;
     protected $Scope;
+    protected $ResultState;
+    protected $Result;
 
     protected function DefineKey()
     {
@@ -307,7 +309,9 @@ class Zhdd_Zbtx_Result_View extends CRUD
                     'project_id' => 'ProjectId',
                     'project_name' => 'ProjectName',
                     'state' => 'State',
-                    'scope' => 'Scope'
+                    'scope' => 'Scope',
+                    'result_state' => 'ResultState',
+                    'result' => 'Result'
         ));
     }
 }
