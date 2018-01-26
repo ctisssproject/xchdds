@@ -5,8 +5,39 @@ $O_Session='';
 require_once RELATIVITY_PATH . 'include/it_include.inc.php';
 require_once 'include/db_table.class.php';
 $O_Session->ValidModuleForPage(MODULEID);
+$o_user_role=new Base_User_Role($O_Session->getUid());
+function have_role($n_role_id)
+{
+	global $o_user_role;
+	if ($o_user_role->getRoleId()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId1()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId2()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId3()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId4()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId5()==$n_role_id)
+	{
+		return true;
+	}
+	return false;
+}
 function getList() 
 {
+		
 		require_once 'include/db_table.class.php';
 		$o_term = new Zhdd_Zbtx_Project();
 		$o_term->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
@@ -32,12 +63,36 @@ function getList()
 					$s_scorp.='、';
 				}
 			}
-			//判断按钮
-			$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_project_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="zbtx_manage_project_release('.$o_term->getId ( $i ).')">发布</a>&nbsp;&nbsp;<a style="color:red" href="javascript:;" onclick="zbtx_manage_project_delete('.$o_term->getId ( $i ).')">删除</a>';
-			if($o_term->getState($i)==1)
+			$a_button='';
+			$a_add_button='';
+			//根据权限 判断按钮显示，杜学科36，督学科管理员39，责任督学37
+			if (have_role(39))
 			{
-				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
+				$a_add_button='<input value="添加" class="BigButtonB" onclick="location=\'zbtx_manage_project_modify.php\'" type="button" />';
+				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_project_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="zbtx_manage_project_release('.$o_term->getId ( $i ).')">发布</a>&nbsp;&nbsp;<a style="color:red" href="javascript:;" onclick="zbtx_manage_project_delete('.$o_term->getId ( $i ).')">删除</a>';
+				if($o_term->getState($i)==1)
+				{
+					$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
+				}
+			}	
+			if (have_role(36))
+			{
+				$a_add_button='';
+				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_project_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="zbtx_manage_project_release('.$o_term->getId ( $i ).')">发布</a>';
+				if($o_term->getState($i)==1)
+				{
+					$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
+				}
 			}
+			if (have_role(37))
+			{
+				$a_add_button='';
+				$a_button='';
+				if($o_term->getState($i)==1)
+				{
+					$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
+				}
+			}			
 			$s_record_list .= '
 				             <tr class="TableLine1">
 					                <td align="center" style="font-size:14px">
@@ -67,8 +122,7 @@ function getList()
 			            <tr>
                 			<td class="title">
 			                    &nbsp;&nbsp;&nbsp;&nbsp;共<span class="big4">&nbsp;' . $n_count . '</span>&nbsp;个指标体系
-			                    &nbsp;&nbsp;&nbsp;&nbsp;<input value="添加" class="BigButtonB"
-				onclick="location=\'zbtx_manage_project_modify.php\'" type="button" />
+			                    &nbsp;&nbsp;&nbsp;&nbsp;'.$a_add_button.'
 			                </td>
 			            </tr>
 			        </tbody>

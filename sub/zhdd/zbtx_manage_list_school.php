@@ -5,6 +5,36 @@ $O_Session='';
 require_once RELATIVITY_PATH . 'include/it_include.inc.php';
 require_once 'include/db_table.class.php';
 $O_Session->ValidModuleForPage(MODULEID);
+$o_user_role=new Base_User_Role($O_Session->getUid());
+function have_role($n_role_id)
+{
+	global $o_user_role;
+	if ($o_user_role->getRoleId()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId1()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId2()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId3()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId4()==$n_role_id)
+	{
+		return true;
+	}
+	if ($o_user_role->getSecRoleId5()==$n_role_id)
+	{
+		return true;
+	}
+	return false;
+}
 function getList() 
 {
 		require_once 'include/db_table.class.php';
@@ -19,13 +49,24 @@ function getList()
 				continue;
 			}
 			$s_deptname=$o_term->getDeptName($i);
-			$s_state='<span style="color:#FF6600">已关闭</span>';
-			$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school_detail.php?id='.$o_term->getId($i).'\'">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" style="color:#339900" onclick="zbtx_manage_list_school_open('.$o_term->getId ( $i ).')">开放</a>';
-			if ($o_term->getResultState($i)==0)
+			//根据权限 判断按钮显示，杜学科36，督学科管理员39，责任督学37
+			if (have_role(36)||have_role(39))
 			{
-				$s_state='<span style="color:#339900">开放</span>';
-				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school_detail.php?id='.$o_term->getId($i).'\'">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" style="color:red" onclick="zbtx_manage_list_school_close('.$o_term->getId ( $i ).')">关闭</a>';
-			}
+				$s_state='<span style="color:#FF6600">已关闭</span>';
+				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school_detail.php?id='.$o_term->getId($i).'\'">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" style="color:#339900" onclick="zbtx_manage_list_school_open('.$o_term->getId ( $i ).')">开放</a>';
+				if ($o_term->getResultState($i)==0)
+				{
+					$s_state='<span style="color:#339900">开放</span>';
+					$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school_detail.php?id='.$o_term->getId($i).'\'">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" style="color:red" onclick="zbtx_manage_list_school_close('.$o_term->getId ( $i ).')">关闭</a>';
+				}
+			}else{
+				$s_state='<span style="color:#FF6600">已关闭</span>';
+				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school_detail.php?id='.$o_term->getId($i).'\'">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_list_school_excel.php?id='.$o_term->getId($i).'\'" target="_blank">导出Excel</a>';
+				if ($o_term->getResultState($i)==0)
+				{
+					$s_state='<span style="color:#339900">开放</span>';
+				}
+			}	
 			$s_record_list .= '
 				             <tr class="TableLine1">
 					                <td align="center" style="font-size:14px">
