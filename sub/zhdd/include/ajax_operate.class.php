@@ -469,6 +469,79 @@ class Operate extends Bn_Basic {
 		);
 		echo (json_encode ( $a_general ));
 	}
+	public function AppraiseAdd($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+				//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+			
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31003 )) {
+			$o_table=new Zhdd_Appraise();
+			$o_table->setTitle($this->getPost('Title'));
+			$o_table->setIsDeleted(0);
+			$o_table->setState(0);
+			$o_table->setType($this->getPost('Type'));
+			$o_table->setCreateDate($this->GetDateNow());
+			$o_table->setComment('');
+			$a_type=array();
+			$o_info=new Zhdd_Appraise_Info_Item();
+			$o_info->PushWhere ( array ('&&', 'Type', '=', $this->getPost('Type')) );
+			$o_info->PushOrder ( array ('Number', 'A' ) );
+			for($i=0;$i<$o_info->getAllCount();$i++)
+			{
+				array_push ( $a_type, rawurlencode($o_info->getName($i)));
+			}
+			$o_table->setInfo ( json_encode ( $a_type) );
+			$o_table->Save();
+		}
+		$this->setReturn('parent.location=\''.$this->getPost('BackUrl').'?'.time().'\';');
+	}
+	public function AppraiseModify($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+				//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+			
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31003 )) {
+			$o_table=new Zhdd_Appraise($this->getPost('Id'));
+			$o_table->setTitle($this->getPost('Title'));
+			$o_table->setType($this->getPost('Type'));
+			$o_table->setCreateDate($this->GetDateNow());
+			$a_type=array();
+			$o_info=new Zhdd_Appraise_Info_Item();
+			$o_info->PushWhere ( array ('&&', 'Type', '=', $this->getPost('Type')) );
+			$o_info->PushOrder ( array ('Number', 'A' ) );
+			for($i=0;$i<$o_info->getAllCount();$i++)
+			{
+				array_push ( $a_type, rawurlencode($o_info->getName($i)));
+			}
+			$o_table->setInfo ( json_encode ( $a_type) );
+			$o_table->Save();
+		}
+		$this->setReturn('parent.location=\''.$this->getPost('BackUrl').'?'.time().'\';');
+	}
+	public function AppraiseDelete($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+				//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}			
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31003 )) {
+			$o_table=new Zhdd_Appraise($this->getPost('id'));
+			$o_table->setIsDeleted(1);
+			$o_table->Save();
+		}
+		$a_general = array (
+			'success' => 1,
+			'text' =>''
+		);
+		echo (json_encode ( $a_general ));
+	}
 }
 
 ?>

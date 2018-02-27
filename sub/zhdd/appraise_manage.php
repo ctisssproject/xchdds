@@ -1,6 +1,6 @@
 <?php
 define ( 'RELATIVITY_PATH', '../../' );
-define ( 'MODULEID', 31001 );
+define ( 'MODULEID', 31003 );
 $O_Session='';
 require_once RELATIVITY_PATH . 'include/it_include.inc.php';
 require_once 'include/db_table.class.php';
@@ -39,11 +39,12 @@ function getList()
 {
 		
 		require_once 'include/db_table.class.php';
-		$o_term = new Zhdd_Zbtx_Project();
-		$o_term->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
+		$o_term = new Zhdd_Appraise();
+		$o_term->PushWhere ( array ('&&', 'IsDeleted', '=', 0) );
 		$o_term->PushOrder ( array ('State', 'A' ) );
 		$o_term->PushOrder ( array ('CreateDate', 'D' ) );
 		$n_count = $o_term->getAllCount ();
+		$a_add_button='<input value="添加" class="BigButtonB" onclick="location=\'appraise_manage_modify.php\'" type="button" />';
 		for($i = 0; $i < $n_count; $i ++) {
 			//状态
 			$s_state='<span style="color:#FF6600">未发布</span>';
@@ -63,12 +64,13 @@ function getList()
 					$s_scorp.='、';
 				}
 			}
-			$a_button='';
-			$a_add_button='';
+			$a_button='<a href="javascript:;" onclick="location=\'appraise_manage_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="zbtx_manage_project_release('.$o_term->getId ( $i ).')">发布</a>&nbsp;&nbsp;<a style="color:red" href="javascript:;" onclick="appraise_delete('.$o_term->getId ( $i ).')">删除</a>';
+			/*
+			$a_button='';			
 			//根据权限 判断按钮显示，杜学科36，督学科管理员39，责任督学37
 			if (have_role(39))
 			{
-				$a_add_button='<input value="添加" class="BigButtonB" onclick="location=\'zbtx_manage_project_modify.php\'" type="button" />';
+				//$a_add_button='<input value="添加" class="BigButtonB" onclick="location=\'zbtx_manage_project_modify.php\'" type="button" />';
 				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_project_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="zbtx_manage_project_release('.$o_term->getId ( $i ).')">发布</a>&nbsp;&nbsp;<a style="color:red" href="javascript:;" onclick="zbtx_manage_project_delete('.$o_term->getId ( $i ).')">删除</a>';
 				if($o_term->getState($i)==1)
 				{
@@ -77,7 +79,7 @@ function getList()
 			}	
 			if (have_role(36))
 			{
-				$a_add_button='';
+				//$a_add_button='';
 				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_project_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="zbtx_manage_project_release('.$o_term->getId ( $i ).')">发布</a>';
 				if($o_term->getState($i)==1)
 				{
@@ -86,26 +88,21 @@ function getList()
 			}
 			if (have_role(37))
 			{
-				$a_add_button='';
+				//$a_add_button='';
 				$a_button='';
 				if($o_term->getState($i)==1)
 				{
 					$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
 				}
-			}			
+			}	
+			*/		
 			$s_record_list .= '
 				             <tr class="TableLine1">
 					                <td align="center" style="font-size:14px">
 					                    ' . $o_term->getCreateDate ( $i ) . '
 					                </td>
 					                <td align="center" >
-					                    <strong>' . $o_term->getName ( $i ) . '</strong>
-					                </td>
-					                <td align="center" >
-					                   ' . $o_term->getExplain ( $i ) . '
-					                </td>
-					                <td align="center" >
-					                   ' . $s_scorp . '
+					                    <strong>' . $o_term->getTitle ( $i ) . '</strong>
 					                </td>
 					                <td align="center" >
 					                   ' . $s_state . '
@@ -121,7 +118,7 @@ function getList()
 			        <tbody>
 			            <tr>
                 			<td class="title">
-			                    &nbsp;&nbsp;&nbsp;&nbsp;共<span class="big4">&nbsp;' . $n_count . '</span>&nbsp;个指标体系
+			                    &nbsp;&nbsp;&nbsp;&nbsp;共<span class="big4">&nbsp;' . $n_count . '</span>&nbsp;个评价表
 			                    &nbsp;&nbsp;&nbsp;&nbsp;'.$a_add_button.'
 			                </td>
 			            </tr>
@@ -135,12 +132,6 @@ function getList()
 					                </td>
 					                <td style="min-width:200px;">
 					                  标题
-					                </td>
-					                <td style="max-width:150px;">
-					                   说明
-					                </td>
-					                <td style="max-width:150px;">
-					                   测评范围
 					                </td>
 					                <td style="max-width:100px;">
 					                   状态

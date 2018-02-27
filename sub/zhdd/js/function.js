@@ -122,3 +122,21 @@ function zbtx_manage_list_school_open(id) {
         })
     })
 }
+function appraise_manage_add_submit() {
+    if ($('#Vcl_Name').val() == '') {
+        parent.parent.Dialog_Message('标题不能为空！！')
+        return;
+    }
+    document.getElementById('submit_form').submit();
+    parent.parent.Common_OpenLoading()
+}
+function appraise_delete(id) {
+	parent.parent.Dialog_Confirm('真的要删除这个评价表吗？<br/>删除后不能恢复，请谨慎操作。',function(){
+    	parent.parent.Common_OpenLoading();
+    	var data = 'Ajax_FunName=AppraiseDelete'; //后台方法
+        data = data + '&id=' + id;
+        $.getJSON("include/bn_submit.switch.php", data, function (json) {
+        	location.reload();
+        });
+    })
+}
