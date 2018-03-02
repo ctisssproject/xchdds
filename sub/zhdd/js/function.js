@@ -140,3 +140,55 @@ function appraise_delete(id) {
         });
     })
 }
+function appraise_single_add() {
+
+    if ($('#Vcl_Content').val() == '') {
+        parent.parent.Dialog_Message('题目不能为空！！')
+        return;
+    }
+    if ($('#Vcl_Option_A').val() == '') {
+        parent.parent.Dialog_Message('选项不能为空！！')
+        return;
+    }
+    document.getElementById('submit_form').submit();
+    parent.parent.Common_OpenLoading()
+}
+function appraise_answer_add() {
+
+    if ($('#Vcl_Content').val() == '') {
+        parent.parent.Dialog_Message('题目不能为空！！')
+        return;
+    }
+    document.getElementById('submit_form').submit();
+    parent.parent.Common_OpenLoading()
+}
+function appraise_question_setnumber(id,number)
+{
+    parent.parent.Common_OpenLoading();
+    var data = 'Ajax_FunName=AppraiseQuestionSetNumber'; //后台方法
+    data = data + '&id=' + id;
+    data = data + '&number=' + number;
+    $.getJSON("include/bn_submit.switch.php", data, function (json) {
+      	location.reload();
+    });
+}
+function appraise_question_delete(id) {
+	parent.parent.Dialog_Confirm('真的要删除这道题吗？<br/>删除后不能恢复，请谨慎操作。',function(){
+    	parent.parent.Common_OpenLoading();
+    	var data = 'Ajax_FunName=AppraiseQuestionDelete'; //后台方法
+        data = data + '&id=' + id;
+        $.getJSON("include/bn_submit.switch.php", data, function (json) {
+        	location.reload();
+        });
+    })
+}
+function appraise_release(id) {
+	parent.parent.Dialog_Confirm('真的要发布这个评价表吗？<br/>发布后不能修改，请谨慎操作。',function(){
+    	parent.parent.Common_OpenLoading()
+    	var data = 'Ajax_FunName=AppraiseRelease'; //后台方法
+        data = data + '&id=' + id;
+        $.getJSON("include/bn_submit.switch.php", data, function (json) {
+        	location.reload();      	
+        })
+    })
+}

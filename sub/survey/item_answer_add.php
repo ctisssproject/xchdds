@@ -32,7 +32,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 	<tbody>
 		<tr>
 			<td><img src="../../images/notify_new.gif" align="absmiddle" /><span
-				class="big3"> 添加评分题</span></td>
+				class="big3"> 添加问答题</span></td>
 		</tr>
 	</tbody>
 </table>

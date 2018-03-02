@@ -42,7 +42,7 @@ function getList()
 		$o_term = new Zhdd_Zbtx_Project();
 		$o_term->PushWhere ( array ('&&', 'IsDelete', '=', 0) );
 		$o_term->PushOrder ( array ('State', 'A' ) );
-		$o_term->PushOrder ( array ('CreateDate', 'D' ) );
+		$o_term->PushOrder ( array ('CreateDate', '' ) );
 		$n_count = $o_term->getAllCount ();
 		for($i = 0; $i < $n_count; $i ++) {
 			//状态
@@ -74,8 +74,7 @@ function getList()
 				{
 					$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
 				}
-			}	
-			if (have_role(36))
+			}else if (have_role(36))
 			{
 				$a_add_button='';
 				$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_project_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="zbtx_manage_project_release('.$o_term->getId ( $i ).')">发布</a>';
@@ -83,8 +82,7 @@ function getList()
 				{
 					$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
 				}
-			}
-			if (have_role(37))
+			}else if (have_role(37))
 			{
 				$a_add_button='';
 				$a_button='';

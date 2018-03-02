@@ -20,7 +20,7 @@ class Bn_Basic {
 				$s_str=str_replace('"', '', $s_str);
 				$s_str=str_replace(',', '', $s_str);
 				$s_str=str_replace(' ', '', $s_str);
-				//$s_str=$this->FilterEmoji($s_str);
+				$s_str=$this->FilterEmoji($s_str);
 			}
 			return $s_str;
 		}
@@ -30,10 +30,17 @@ class Bn_Basic {
 			$s_str=str_replace('"', '', $s_str);
 			$s_str=str_replace(',', '', $s_str);
 			$s_str=str_replace(' ', '', $s_str);
-			//$s_str=$this->FilterEmoji($s_str);
+			$s_str=$this->FilterEmoji($s_str);
 		}
 		return $s_str;
-	}	
+	}
+	public function FilterEmoji($s_str)
+	{
+		$s_str = json_encode($s_str); //暴露出unicode
+		$s_str=preg_replace("#(\\\ud[0-9a-f]{3})|(\\\ue[0-9a-f]{3})#ie","",$s_str);
+		$s_str = json_decode($s_str);
+		return $s_str;
+	}
 	public function FilterUserInput($string) {
 		//过滤< > />
 		$string=str_replace('<', '', $string);

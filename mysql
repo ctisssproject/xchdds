@@ -138,3 +138,54 @@ VALUES (
 ), (
 '31004',  '评价结果',  'OA_31_3_0',  '',  '1',  'sub/zhdd/appraise_result.php',  '31000',  '1',  ''
 );
+
+
+CREATE TABLE `wechat_wx_user_info` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `photo` char(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '微信头像',
+  `nickname` char(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '昵称',
+  `sex` char(5) COLLATE utf8_unicode_ci DEFAULT '男',
+  `user_name` char(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `company` char(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '旅行社名称',
+  `dept_job` char(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '部门和职务',
+  `address` char(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '单位地址',
+  `openid` char(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` char(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` char(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `register_date` date DEFAULT '0000-00-00',
+  `del_flag` int(1) unsigned DEFAULT '0',
+  `block` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '黑名单',
+  `round` int(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否可以抽奖，1为可以',
+  `group_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '用户组编号',
+  `session_id` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '登录凭证',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1
+
+CREATE TABLE `wechat_base_user_wechat` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `uid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '用户编号',
+  `wechat_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '微信用户编号',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+
+----wechat_base_user_wechat_view
+select `wechat_base_user_wechat`.`id` AS `id`,`wechat_base_user_wechat`.`uid` AS `uid`,`base_user_info`.`name` AS `name`,`base_user`.`username` AS `username`,`base_user`.`state` AS `state`,`base_user`.`deleted` AS `deleted`,`wechat_base_user_wechat`.`wechat_id` AS `wechat_id`,`wechat_wx_user_info`.`nickname` AS `nickname`,`wechat_wx_user_info`.`sex` AS `sex`,`wechat_wx_user_info`.`openid` AS `open_id`,`wechat_wx_user_info`.`session_id` AS `session_id` from (((`base_user` join `base_user_info`) join `wechat_base_user_wechat` on(((`wechat_base_user_wechat`.`uid` = `base_user_info`.`uid`) and (`wechat_base_user_wechat`.`uid` = `base_user`.`uid`)))) join `wechat_wx_user_info` on((`wechat_base_user_wechat`.`wechat_id` = `wechat_wx_user_info`.`id`)));
+
+6214850208200822
+CREATE TABLE `wechat_wx_syscode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sys_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `create_date` int(11) DEFAULT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+-- 
+-- Dumping data for table `wechat_wx_syscode`
+-- 
+
+INSERT INTO `wechat_wx_syscode` (`id`, `sys_token`, `create_date`, `date`) VALUES 
+(1, '5_iRMzBYHcRDcqy0Mxp-93leMghSduN4dCPYa31InoVlSOnC2h92WUhZb263ULX64mljLGvYbh84Y_RylXDjh6vX5CXCMuSX5hK6fhvRKlVltQ0X01CSeguhiphdzfoZjU5LAk_JzeUSgksF3bPFFfAHAAQQ', 1514852939, '2016-07-22 00:00:00');
+
+

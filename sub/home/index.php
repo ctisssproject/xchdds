@@ -289,22 +289,10 @@ function get_week($date){
                 <div class="open_government">
                     <img class="government_title" alt="" src="images/government_img.jpg" />
                     <div class="government_btn_box">
-                        <div class="government_btn" onclick="location='index_article_list.php?id=<?php 
-                        	$o_table=new Home_Column(12);//组织机构
-                        	echo($o_table->getColumnId());
-                        ?>'"><?php echo($o_table->getName())?></div>
-                        <div class="government_btn" onclick="location='index_article_list.php?id=<?php 
-                        	$o_table=new Home_Column(13);//政策法规
-                        	echo($o_table->getColumnId());
-                        ?>'"><?php echo($o_table->getName())?></div>
-                        <div class="government_btn" onclick="location='index_article_list.php?id=<?php 
-                        	$o_table=new Home_Column(14);//督导文件
-                        	echo($o_table->getColumnId());
-                        ?>'"><?php echo($o_table->getName())?></div>
-                        <div class="government_btn" onclick="location='index_article_list.php?id=<?php 
-                        	$o_table=new Home_Column(15);//督评报告
-                        	echo($o_table->getColumnId());
-                        ?>'"><?php echo($o_table->getName())?></div>
+                        <div class="government_btn" onclick="location='http://dudao.xchjw.gov.cn/sub/survey/'">督导问卷调查</div>
+                        <div class="government_btn" style="border:0px;">&nbsp;</div>
+                        <div class="government_btn" style="border:0px;">&nbsp;</div>
+                        <div class="government_btn" style="border:0px;">&nbsp;</div>
                     </div>
                     <div class="qr_code_box">
                         <img alt="" src="images/QR_code.jpg" />

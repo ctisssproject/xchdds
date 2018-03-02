@@ -64,7 +64,11 @@ function getList()
 					$s_scorp.='、';
 				}
 			}
-			$a_button='<a href="javascript:;" onclick="location=\'appraise_manage_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'zbtx_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="zbtx_manage_project_release('.$o_term->getId ( $i ).')">发布</a>&nbsp;&nbsp;<a style="color:red" href="javascript:;" onclick="appraise_delete('.$o_term->getId ( $i ).')">删除</a>';
+			$a_button='<a href="javascript:;" onclick="location=\'appraise_manage_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'appraise_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="appraise_release('.$o_term->getId ( $i ).')">发布</a>&nbsp;&nbsp;<a style="color:red" href="javascript:;" onclick="appraise_delete('.$o_term->getId ( $i ).')">删除</a>';
+			if($o_term->getState($i)==1)
+			{
+				$a_button='<a href="javascript:;" onclick="location=\'appraise_manage_view_list.php?id='.$o_term->getId ( $i ).'\'">查看</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'appraise_manage_make_qrcode.php?id='.$o_term->getId ( $i ).'\'">制作二维码</a>';
+			}
 			/*
 			$a_button='';			
 			//根据权限 判断按钮显示，杜学科36，督学科管理员39，责任督学37
