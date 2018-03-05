@@ -5,10 +5,12 @@ $O_Session='';
 require_once RELATIVITY_PATH . 'include/it_include.inc.php';
 require_once 'include/db_table.class.php';
 $O_Session->ValidModuleForPage(MODULEID);
-function getList($id) 
+$o_answer= new Zhdd_Appraise_Answers_View($_GET['id']);
+function getList() 
 {
+		global $o_answer;
 		$o_term = new Zhdd_Appraise_Questions ();
-		$o_term->PushWhere ( array ('&&', 'AppraiseId', '=', $id ) );
+		$o_term->PushWhere ( array ('&&', 'AppraiseId', '=', $o_answer->getAppraiseId() ) );
 		$o_term->PushOrder ( array ('Number', 'A' ) );
 		$n_count = $o_term->getAllCount ();
 		for($i = 0; $i < $n_count; $i ++) {
@@ -60,12 +62,41 @@ function getList($id)
 			$o_temp->PushOrder ( array ('Number', 'A' ) );
 			$n_count_temp = $o_temp->getAllCount ();
 			$s_temp='';
-			for($j = 0; $j < $n_count_temp; $j ++) {
-				$s_temp.=$o_temp->getNumber($j).'.'.$o_temp->getOption($j).'<br/>';
-			}
-			if ($n_count_temp==0)
+			if ($o_term->getType ( $i )==1)
 			{
-				continue;
+				$s_flag='';
+				eval('$s_value=$o_answer->getAnswer'.$o_term->getNumber($i).'();');//获取用户答案
+				$s_value=str_replace('"', '', $s_value);//去掉多余的双引号
+				for($j = 0; $j < $n_count_temp; $j ++) {
+					$s_temp.=$o_temp->getNumber($j).'.'.$o_temp->getOption($j);
+					if ($o_temp->getId($j)==$s_value)
+					{
+						$s_temp.='&nbsp;&nbsp;<img src="'.RELATIVITY_PATH.'images/correct.gif"/> ';
+					}	
+					$s_temp.='<br/>';			
+				}
+			}
+			if ($o_term->getType ( $i )==2)
+			{
+				$s_flag='';
+				eval('$s_value=$o_answer->getAnswer'.$o_term->getNumber($i).'();');//获取用户答案
+				$s_value=str_replace('"', '', $s_value);//去掉多余的双引号
+				$a_value=json_decode($s_value);
+				for($j = 0; $j < $n_count_temp; $j ++) {
+					$s_temp.=$o_temp->getNumber($j).'.'.$o_temp->getOption($j);
+					if (in_array($o_temp->getId($j),$a_value))
+					{
+						$s_temp.='&nbsp;&nbsp;<img src="'.RELATIVITY_PATH.'images/correct.gif"/> ';
+					}	
+					$s_temp.='<br/>';			
+				}
+			}
+			if ($o_term->getType ( $i )==4)
+			{
+				$s_flag='';
+				eval('$s_value=$o_answer->getAnswer'.$o_term->getNumber($i).'();');//获取用户答案
+				$s_value=str_replace('"', '', $s_value);//去掉多余的双引号
+				$s_temp=rawurldecode($s_value);//去掉多余的双引号
 			}
 			$s_record_list .= '
 				             <tr class="TableLine1">
@@ -81,8 +112,18 @@ function getList($id)
 					            </tr>
 			';
 		}
+		//构建基本信息
+		$a_vcl=json_decode($o_answer->getAppraiseInfo());
+		$a_vcl2=json_decode($o_answer->getInfo());
+		$s_info='';
+		$s_info.='<b>学校名称：</b>'.$o_answer->getSchoolName().'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+		for($i=0;$i<count($a_vcl);$i++)
+		{
+			$s_info.='<b>'.rawurldecode($a_vcl[$i]).'：</b>'.rawurldecode($a_vcl2[$i]).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+		}
+		$s_info.='<b>评价人：</b>'.$o_answer->getOwnerName();
 		$s_html = '
-			    
+			    <div style="font-size:14px;padding-top:5px;padding-bottom:5px;">&nbsp;&nbsp;'.$s_info.'</div>
 			    <table class="TableList" width="100%">
 			        <thead class="TableHeader">
 					            <tr>
@@ -134,10 +175,10 @@ function getList($id)
 			        </tbody>
 			    </table>
 			    <div style="padding-top:0px;padding-bottom:5px;">
-			    <input value="返回" class="BigButtonA" onclick="location='<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>appraise_manage.php'" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    <input value="返回" class="BigButtonA" onclick="location='<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>appraise_manage_result_list.php?id=<?php echo($o_answer->getAppraiseId())?>'" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</div>
 <?php
-echo (getList($_GET['id']));
+echo (getList());
 ?>
 <script type="text/javascript" language="javascript">
 	S_Root='../../';
