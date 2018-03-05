@@ -723,4 +723,40 @@ class Base_Cmcc extends CRUD
    }
 }
 //1111111111111111111111111111111111111111111111
+class Base_Setup extends CRUD
+{
+   protected $Id;
+   protected $Version;
+   protected $UpdateUrl;
+   protected $SystemName;
+   protected $Footer;
+   protected $HomeUrl;
+   protected $Logo;
+   protected $XcyeCollectKey;
+   protected $XcyeCollectLicense;
+   protected $XcyeCollectUrl;
+
+   protected function DefineKey()
+   {
+      return 'id';
+   }
+   protected function DefineTableName()
+   {
+      return 'wechat_base_setup';
+   }
+   protected function DefineRelationMap()
+   {
+      return(array('id' => 'Id',
+      'version' => 'Version',
+      'logo' => 'Logo',
+      'update_url' => 'UpdateUrl',
+      'system_name' => 'SystemName',
+      'footer' => 'Footer',
+      'xcye_collect_key' => 'XcyeCollectKey',
+      'xcye_collect_license' => 'XcyeCollectLicense',
+      'xcye_collect_url' => 'XcyeCollectUrl',
+      'home_url' => 'HomeUrl'
+                   ));
+   }
+}
 ?>

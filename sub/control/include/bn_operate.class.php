@@ -96,6 +96,60 @@ class Operate extends Bn_Basic {
 			}
 		}
 	}
+	public function WechatUnbinding($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+			$this->setReturn('parent.goto_login()');
+		}
+		sleep(1);
+		$o_user = new Single_User ( $n_uid );
+		if (!$o_user->ValidModule ( 93 ))return; //如果没有权限，不返回任何值
+		$o_table=new Base_User_Wechat();
+        $o_table->PushWhere ( array ('&&', 'Uid', '=', $n_uid) );
+        if($o_table->getAllCount()>0)
+        {
+        	$o_table=new Base_User_Wechat($o_table->getId(0));
+        	/*
+        	require_once RELATIVITY_PATH . 'sub/wechat/include/db_table.class.php';
+        	$o_wechat_user=new WX_User_Info($o_table->getWechatId());
+        	$o_wechat_user->setGroupId(0);
+        	$o_wechat_user->Save();
+        	
+        	//应该这里讲用户公众号的标签移除
+        	require_once RELATIVITY_PATH . 'sub/wechat/include/userGroup.class.php';
+			$o_group = new userGroup();
+			$o_group->updateGroup($o_wechat_user->getOpenId(),0);*/
+        	$o_table->Deletion();
+        }
+        $a_result = array ();
+		echo(json_encode ($a_result));
+	}
+	public function WechatGetBindingStatus($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+			$this->setReturn('parent.goto_login()');
+		}
+		sleep(1);
+		$o_user = new Single_User ( $n_uid );
+		if (!$o_user->ValidModule ( 93 ))return; //如果没有权限，不返回任何值
+		$o_table=new Base_User_Wechat();
+        $o_table->PushWhere ( array ('&&', 'Uid', '=', $n_uid) );
+        if($o_table->getAllCount()>0)
+        {
+        	require_once RELATIVITY_PATH . 'sub/wechat/include/db_table.class.php';
+        	$o_table=new WX_User_Info($o_table->getWechatId(0));
+        	$a_result = array (
+        				'flag'=>1,
+        				'name'=>$o_table->getNickname(),
+        				'photo'=>$o_table->getPhoto()
+        	);
+        }else{
+        	$a_result = array (
+        		'flag'=>0
+        	);
+        }        
+		echo(json_encode ($a_result));
+	}
 }
 
 ?>

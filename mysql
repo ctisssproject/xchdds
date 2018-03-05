@@ -122,7 +122,7 @@ CREATE TABLE `zhdd_appraise_questions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='问卷调查题目' AUTO_INCREMENT=1 ;
 
 
-INSERT INTO  `xchdds`.`base_module` (
+INSERT INTO  `base_module` (
 `module_id` ,
 `name` ,
 `module` ,
@@ -159,7 +159,7 @@ CREATE TABLE `wechat_wx_user_info` (
   `group_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '用户组编号',
   `session_id` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '登录凭证',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `wechat_base_user_wechat` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
@@ -172,7 +172,6 @@ CREATE TABLE `wechat_base_user_wechat` (
 ----wechat_base_user_wechat_view
 select `wechat_base_user_wechat`.`id` AS `id`,`wechat_base_user_wechat`.`uid` AS `uid`,`base_user_info`.`name` AS `name`,`base_user`.`username` AS `username`,`base_user`.`state` AS `state`,`base_user`.`deleted` AS `deleted`,`wechat_base_user_wechat`.`wechat_id` AS `wechat_id`,`wechat_wx_user_info`.`nickname` AS `nickname`,`wechat_wx_user_info`.`sex` AS `sex`,`wechat_wx_user_info`.`openid` AS `open_id`,`wechat_wx_user_info`.`session_id` AS `session_id` from (((`base_user` join `base_user_info`) join `wechat_base_user_wechat` on(((`wechat_base_user_wechat`.`uid` = `base_user_info`.`uid`) and (`wechat_base_user_wechat`.`uid` = `base_user`.`uid`)))) join `wechat_wx_user_info` on((`wechat_base_user_wechat`.`wechat_id` = `wechat_wx_user_info`.`id`)));
 
-6214850208200822
 CREATE TABLE `wechat_wx_syscode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sys_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -185,7 +184,61 @@ CREATE TABLE `wechat_wx_syscode` (
 -- Dumping data for table `wechat_wx_syscode`
 -- 
 
-INSERT INTO `wechat_wx_syscode` (`id`, `sys_token`, `create_date`, `date`) VALUES 
-(1, '5_iRMzBYHcRDcqy0Mxp-93leMghSduN4dCPYa31InoVlSOnC2h92WUhZb263ULX64mljLGvYbh84Y_RylXDjh6vX5CXCMuSX5hK6fhvRKlVltQ0X01CSeguhiphdzfoZjU5LAk_JzeUSgksF3bPFFfAHAAQQ', 1514852939, '2016-07-22 00:00:00');
+CREATE TABLE `wechat_wx_setup` (
+  `key` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '主键',
+  `value` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '值',
+  `explain` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '备注',
+  PRIMARY KEY (`key`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- 
+-- Dumping data for table `wechat_wx_setup`
+-- 
+
+INSERT INTO `wechat_wx_setup` (`key`, `value`, `explain`) VALUES 
+('TOKEN', 'xchdds', '微信回调接口的网站token'),
+('APPID', 'wxf38509d7749bb56d', '公众号开发ID'),
+('APPSECRET', 'e3f45a21284916d2e9c848759552b997', '公众号开发接口密钥'),
+('MSGTMP_08', '4-JOAnmh2z2-FHeGOuwCPlHGgRJte8UrU9LHz5yPAEo', '账号绑定成功通知');
+
+INSERT INTO `base_module` (`module_id`, `name`, `module`, `explain`, `icon_id`, `path`, `parent_module_id`, `mini_icon_id`, `wait_read_table`) VALUES ('93', '微信绑定', 'OA_11_3_0', '', '1', 'sub/control/binding_wechat.php', '90', '1', '');
+
+
+CREATE TABLE `wechat_base_setup` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `version` char(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '版本',
+  `update_date` datetime NOT NULL COMMENT '升级日期',
+  `logo` char(255) COLLATE utf8_unicode_ci NOT NULL,
+  `update_url` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '升级路径',
+  `system_name` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '系统名称',
+  `footer` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '页脚',
+  `home_url` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '网址',
+  `cup_number` int(3) unsigned NOT NULL COMMENT '钻石酒杯编号',
+  `xcye_collect_key` char(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '',
+  `xcye_collect_license` char(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '',
+  `xcye_collect_url` char(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+-- 
+-- 导出表中的数据 `wechat_base_setup`
+-- 
+
+INSERT INTO `wechat_base_setup` (`id`, `version`, `update_date`, `logo`, `update_url`, `system_name`, `footer`, `home_url`, `cup_number`, `xcye_collect_key`, `xcye_collect_license`, `xcye_collect_url`) VALUES 
+(1, '1.0.0', '0000-00-00 00:00:00', 'userdata/logo/logo.png', 'http://xchmsxx.xchjw.cn/', '马连道幼儿园 幼儿管理平台', 'Copyright ©2017 北京市西城区马连道幼儿园 版权所有', 'http://wx.mldyey.com/', 0, 'www.bjsql.com', 'MNJIHKI6525489', 'http://yeygl.xchjw.cn/sub/webservice/');
+
+
+--------------以上已更新至生产环境
+
+/xchdds_online/include/bn_basic.class.php
+/xchdds_online/sub/control
+/xchdds_online/include/phpqrcode.php
+/xchdds_online/include/db_table.class.php
+
+
+
+
+
+
 
 

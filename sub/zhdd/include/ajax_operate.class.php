@@ -767,6 +767,40 @@ class Operate extends Bn_Basic {
 		);
 		echo (json_encode ( $a_general ));
 	}
+	public function AppraiseMakeQrcode($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+				//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+			
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31003 )) {
+			//想验证学校名称是否正确。
+			$o_school=new Base_Dept();
+			$o_school->PushWhere ( array ('&&', 'Name', '=', $_POST ['Vcl_SchoolName']) );
+			$o_school->PushWhere ( array ('&&', 'ParentId', '=',1) );
+			$n_count = $o_school->getAllCount ();
+			if($n_count==0)
+			{
+				$this->setReturn('parent.parent.parent.Dialog_Message("[ 来源学校 ] 输入有误！<br/>必须从提示中选择！");');
+			}
+			$o_table=new Zhdd_Appraise($this->getPost('Id'));
+			//?id=11&school_id=141&info_0=%E5%88%9D%E4%B8%80%E7%8F%AD&info_1=%E8%AF%AD%E6%96%87&info_2=2014-12-12&info_3=%E4%BD%9C%E6%96%87&info_4=%E6%9D%8E%E5%B0%8F%E7%92%90
+			$s_rul='id='.$this->getPost('Id');
+			$s_rul.='&school_id='.$o_school->getDeptId(0);
+			
+			$a_vcl=json_decode($o_table->getInfo());
+			for($i=0;$i<count($a_vcl);$i++)
+			{
+				$s_rul.='&info_'.$i.'='.rawurlencode($this->getPost ( 'Info_'.$i ));
+			}
+			
+		}
+		$this->setReturn('parent.window.open(\''.$this->getPost('Url').'appraise_manage_make_qrcode_show.php?'.$s_rul.'\',\'_blank\');
+		parent.location=\''.$this->getPost('BackUrl').'\';
+		');
+	}
 }
 
 ?>

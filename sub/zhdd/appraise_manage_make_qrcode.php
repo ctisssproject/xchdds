@@ -5,6 +5,7 @@ $O_Session='';
 require_once RELATIVITY_PATH . 'include/it_include.inc.php';
 require_once 'include/db_table.class.php';
 $O_Session->ValidModuleForPage(MODULEID);
+$o_survey=new Zhdd_Appraise($_GET['id']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,6 +18,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 	<script type="text/javascript" src="<?php echo (RELATIVITY_PATH)?>js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo (RELATIVITY_PATH)?>js/common.fun.js"></script>
 	<script type="text/javascript" src="<?php echo (RELATIVITY_PATH)?>js/ajax_post.class.js"></script>
+	<script type="text/javascript" src="../../js/ajax.class.js"></script>
 	<script type="text/javascript" src="../../js/dialog.fun.js"></script>
 	<script type="text/javascript" src="js/function.js"></script>
 </head>
@@ -25,7 +27,7 @@ $O_Session->ValidModuleForPage(MODULEID);
 <input type="hidden" name="Vcl_Url" value="<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>"/>
 <input type="hidden" name="Vcl_BackUrl" value="<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>appraise_manage.php"/>
 <input type="hidden" name="Vcl_Id" value="<?php echo($_GET['id'])?>"/>
-<input type="hidden" name="Vcl_FunName" value=""/>
+<input type="hidden" name="Vcl_FunName" value="AppraiseMakeQrcode"/>
 <table class="small" border="0" cellpadding="3" cellspacing="0"
 	style="margin-left:auto;margin-right:auto;min-width:450px;" align="center" style="margin-top: 10px">
 	<tbody>
@@ -35,20 +37,33 @@ $O_Session->ValidModuleForPage(MODULEID);
 		</tr>
 	</tbody>
 </table>
-<table class="TableBlock_Editor" align="center" style="margin-left:auto;margin-right:auto;max-width:400px;margin-top:10px">
+<table class="TableBlock_Editor" align="center" style="margin-left:auto;margin-right:auto;max-width:600px;margin-top:10px">
 	<tbody>
 		<tr>
-			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 标题：</td>
-			<td class="TableData"><input id="Vcl_Title" name="Vcl_Title"
-				class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value=""/>
-				</td>
+			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 学校名称：</td>
+			<td class="TableData">
+				<ul class="alt" id="alt1">
+				</ul><input id="Vcl_SchoolName" style="width:200px;"
+				name="Vcl_SchoolName" size="80" maxlength="100" class="BigInput"
+				value="" type="text" onkeyup="altGet('AltGetSchool','alt1',this)" onblur="altClose()"/>
+				 <span class="red" style="color:red">必须从提示中选择</span> 
+			</td>
 		</tr>
-		<tr>
-			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 标题：</td>
-			<td class="TableData"><input id="Vcl_Title" name="Vcl_Title"
-				class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value=""/>
-				</td>
-		</tr>
+		<?php 
+		$a_vcl=json_decode($o_survey->getInfo());
+	    for($i=0;$i<count($a_vcl);$i++)
+	    {
+	    	?>
+	    	<tr>
+				<td class="TableData" nowrap="nowrap" width="120"><?php echo(rawurldecode($a_vcl[$i]))?>：</td>
+				<td class="TableData"><input name="Vcl_Info_<?php echo($i)?>"
+					class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value=""/>
+					</td>
+			</tr>
+	    	<?php
+	    }
+		?>
+		
 		<tr class="TableControl" align="center">
 			<td colspan="2" nowrap="nowrap" height="40"><input value="提交" class="BigButtonA"
 				onclick="appraise_manage_add_submit()" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;

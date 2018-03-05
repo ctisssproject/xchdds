@@ -168,3 +168,35 @@ span.close_on
 	padding-top:5px;
 	padding-bottom:5px;
 	}
+.alt
+{
+	}
+.alt
+{
+	margin-left:0px;
+	position:absolute;
+	margin-top:20px;
+	border: 1px solid #C0BBB4;
+	border-top: 0px solid #C0BBB4;
+	width:210px;
+	background-color:White;
+	display:none;
+	}
+.alt li
+{
+	padding:0px;
+	margin:0px;
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-left:4px;
+	color:#333333;
+	font-size:12px;
+	cursor:pointer;
+	display:inline-block; 
+	width:206px;
+	}
+.alt li:hover
+{
+	background-color:#3366FF;
+	color:#ffffff;
+	}

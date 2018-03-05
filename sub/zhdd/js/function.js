@@ -192,3 +192,40 @@ function appraise_release(id) {
         })
     })
 }
+function altSet(obj)
+{
+    obj.parentNode.parentNode.getElementsByTagName('input')[0].value=obj.innerHTML
+    $('.alt').hide()
+    //altClose(obj.parentNode.parentNode.getElementsByTagName('input')[0])
+}
+function altClose()
+{
+	setTimeout("$('.alt').hide()",500)    
+}
+function altGet(fun,id,obj)
+{
+	//window.alert();
+    if (obj.value=='')
+    {
+        document.getElementById(id).style.display='none'
+        return
+    }
+    var o_ajax_request=new AjaxRequest();
+    o_ajax_request.setFunction (fun);
+    o_ajax_request.setPage('../../sub/telephone/include/it_ajax.svr.php');
+    o_ajax_request.PushParameter(id);
+    o_ajax_request.PushParameter(obj.value);
+    o_ajax_request.SendRequest()     
+}
+function altGetCallback(id,html)
+{
+
+    if (html=='')
+    {
+        document.getElementById(id).innerHTML=html
+        document.getElementById(id).style.display='none'
+        return
+    }
+    document.getElementById(id).innerHTML=html
+    document.getElementById(id).style.display='block'
+}

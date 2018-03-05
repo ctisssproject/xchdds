@@ -11,6 +11,18 @@ class Bn_Basic {
 	protected $S_UserName;
 	protected $N_RoleId;
 	protected $S_UserPhoto;
+	protected function ImageCompress($s_from,$s_to,$n_percent)
+	{
+		require_once RELATIVITY_PATH . 'include/imageCompress.class.php';
+		$o_image=new ImgCompress($s_from,$n_percent);
+		$o_image->compressImg($s_to);
+	}
+	public function getWechatSetup($s_key)
+	{
+		require_once RELATIVITY_PATH . 'sub/wechat/include/db_table.class.php';
+		$o_setup=new Wechat_Wx_Setup($s_key);
+		return $o_setup->getValue();		
+	}
 	protected function getPost($s_key) {
 		if ($_GET[$s_key]=='')
 		{
