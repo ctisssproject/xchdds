@@ -95,7 +95,7 @@ class ShowPage extends It_Basic {
 		for($i = 0; $i < $n_count; $i ++) {
 			$s_button = '<a href="appraise_manage_result_list_view.php?id=' . $o_article->getId ( $i ) . '">查看</a>';	
 			$a_date=explode(' ', $o_article->getDate ( $i ));
-			$a_vcl=json_decode($o_article->getInfo(0));
+			$a_vcl=json_decode($o_article->getInfo($i));
 			$s_title='';
 			for($j=0;$j<count($a_vcl);$j++)
 			{

@@ -24,7 +24,7 @@ class Bn_Basic {
 		return $o_setup->getValue();		
 	}
 	protected function getPost($s_key) {
-		if ($_GET[$s_key]=='')
+		if ($_GET[$s_key]=='' && $_POST ['Ajax_' . $s_key]=='')
 		{
 			$s_str=$this->FilterUserInput($_POST ['Vcl_' . $s_key]);
 			if ($s_key=='Name' ||$s_key=='Company' ||$s_key=='DeptJob' ||$s_key=='Phone' ||$s_key=='Email')
@@ -36,15 +36,20 @@ class Bn_Basic {
 			}
 			return $s_str;
 		}
-		$s_str=$this->FilterUserInput($_GET[$s_key]);
-		if ($s_key=='Name' ||$s_key=='Company' ||$s_key=='DeptJob' ||$s_key=='Phone' ||$s_key=='Email')
+		if ($_POST ['Ajax_' . $s_key]=='')
 		{
-			$s_str=str_replace('"', '', $s_str);
-			$s_str=str_replace(',', '', $s_str);
-			$s_str=str_replace(' ', '', $s_str);
-			$s_str=$this->FilterEmoji($s_str);
+			$s_str=$this->FilterUserInput($_GET[$s_key]);
+			if ($s_key=='Name' ||$s_key=='Company' ||$s_key=='DeptJob' ||$s_key=='Phone' ||$s_key=='Email')
+			{
+				$s_str=str_replace('"', '', $s_str);
+				$s_str=str_replace(',', '', $s_str);
+				$s_str=str_replace(' ', '', $s_str);
+				$s_str=$this->FilterEmoji($s_str);
+			}
+			return $s_str;
 		}
-		return $s_str;
+		return $this->FilterUserInput($_POST ['Ajax_' . $s_key]);
+		
 	}
 	public function FilterEmoji($s_str)
 	{
