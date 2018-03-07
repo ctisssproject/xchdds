@@ -44,6 +44,11 @@ class Operate extends Bn_Basic {
 				$o_record->setSchoolId($o_school->getDeptId(0)); 
 			}		
 			$o_record->setUid($n_uid);
+			if ($o_school->getDeptId(0)==0 &&$_POST ['Vcl_SendType']=='2')
+			{
+				$this->Result = '学校名称为新生，不能转责任督学！';
+				return false;
+			}
 			//是否是转责任督学
 			if($_POST ['Vcl_SendType']=='2')
 			{
