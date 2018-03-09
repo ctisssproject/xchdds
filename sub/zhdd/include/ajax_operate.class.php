@@ -801,6 +801,34 @@ class Operate extends Bn_Basic {
 		parent.location=\''.$this->getPost('BackUrl').'\';
 		');
 	}
+	public function AppraiseMakeQrcodeBatch($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+			//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+		
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31003 )) {
+			if ($_FILES ['Vcl_File'] ['size'] > 0) {
+				mkdir ( RELATIVITY_PATH . 'userdata/zhdd/', 0777 );
+				mkdir ( RELATIVITY_PATH . 'userdata/zhdd/appraise/', 0777 );
+				mkdir ( RELATIVITY_PATH . 'userdata/zhdd/appraise/input/', 0777 );
+				$allowpictype = array ('xlsx');
+				$fileext = strtolower ( trim ( substr ( strrchr ( $_FILES ['Vcl_File'] ['name'], '.' ), 1 ) ) );
+				if (! in_array ( $fileext, $allowpictype )) {
+					$this->setReturn('parent.parent.parent.Dialog_Message("上传文件类型为.xlsx！");');
+				}				
+				$filePath= RELATIVITY_PATH . 'userdata/zhdd/appraise/input/'.$this->getPost('Id').'.' . $fileext;
+				copy ( $_FILES ['Vcl_File'] ['tmp_name'],$filePath);				
+				$this->setReturn('parent.window.open(\''.$this->getPost('Url').'appraise_manage_make_qrcode_batch_pdf.php?id='.$this->getPost('Id').'\',\'_blank\');
+				parent.location=\''.$this->getPost('BackUrl').'\';
+				');
+			}else{
+				$this->setReturn('parent.parent.parent.Dialog_Message("请选择上传的模版文件！");');
+			}			
+		}		
+	}
 }
 
 ?>

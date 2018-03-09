@@ -67,7 +67,7 @@ function getList()
 			$a_button='<a href="javascript:;" onclick="location=\'appraise_manage_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'appraise_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="appraise_release('.$o_term->getId ( $i ).')">发布</a>&nbsp;&nbsp;<a style="color:red" href="javascript:;" onclick="appraise_delete('.$o_term->getId ( $i ).')">删除</a>';
 			if($o_term->getState($i)==1)
 			{
-				$a_button='<a href="javascript:;" onclick="location=\'appraise_manage_view_list.php?id='.$o_term->getId ( $i ).'\'">查看</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'appraise_manage_make_qrcode.php?id='.$o_term->getId ( $i ).'\'">制作二维码</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'appraise_manage_result_list.php?id='.$o_term->getId ( $i ).'\'">评价结果</a>';
+				$a_button='<a href="javascript:;" onclick="location=\'appraise_manage_view_list.php?id='.$o_term->getId ( $i ).'\'">查看原题</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'appraise_manage_make_qrcode.php?id='.$o_term->getId ( $i ).'\'">单独二维码</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'appraise_manage_make_qrcode_batch.php?id='.$o_term->getId ( $i ).'\'">批量二维码</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'appraise_manage_result_list.php?id='.$o_term->getId ( $i ).'\'">评价结果</a>';
 			}
 			/*
 			$a_button='';			

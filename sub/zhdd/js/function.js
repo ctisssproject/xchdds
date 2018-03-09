@@ -229,3 +229,7 @@ function altGetCallback(id,html)
     document.getElementById(id).innerHTML=html
     document.getElementById(id).style.display='block'
 }
+function appraise_manage_make_qrcode_batch_submit() {
+    document.getElementById('submit_form').submit();
+    parent.parent.Common_OpenLoading();
+}
