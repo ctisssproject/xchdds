@@ -14,14 +14,17 @@ class ShowPage extends It_Basic {
 	} 
 	
 	public function getAppraiseResultList($n_page) {
-		$this->S_FileName = 'appraise_manage_result_list.php?owner='.$_GET['owner'];
+		$this->S_FileName = 'appraise_manage_result_list.php?id='.$_GET['id'].'&owner='.$_GET['owner'];
 		$this->N_Page = $n_page;
 		$o_article = new Zhdd_Appraise_Answers_View (); 
 		if ($_GET['owner']!='')
 		{
 			$o_article->PushWhere ( array ('&&', 'SchoolName', 'like','%'.$_GET['owner'].'%') );
+			$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
 			$o_article->PushWhere ( array ('||', 'OwnerName', 'like','%'.$_GET['owner'].'%') );
+			$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
 		}
+		$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
 		$o_article->PushOrder ( array ('Date', 'D' ) );
 		$o_article->setStartLine ( ($this->N_Page - 1) * $this->N_PageSize );
 		$o_article->setCountLine ( $this->N_PageSize );
@@ -60,7 +63,7 @@ class ShowPage extends It_Basic {
 					                    <input class="BigInput" id="Vcl_Owner" style="height: 20px;width:200px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['owner'].'" placeholder="学校名称/评价人">
 					                    <input class="BigButtonA" onclick="search()" type="button" value="搜索">
 					                    &nbsp;&nbsp;
-					                    <input class="BigButtonB" onclick="location=\'appraise_manage_result_list.php\'" type="button" value="全部显示">
+					                    <input class="BigButtonB" onclick="location=\'appraise_manage_result_list.php?id='.$_GET['id'].'\'" type="button" value="全部显示">
 					                </td>
 					                 <td class="small1" align="right" valign="bottom" style="width:330px">
 										' . $s_pagebutton . '

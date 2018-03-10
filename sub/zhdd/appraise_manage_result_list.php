@@ -46,7 +46,7 @@ echo ($o_scroll->getAppraiseResultList ($o_page));
 				 parent.parent.Dialog_Message('请输入搜索条件 ！');
 				 return;
 			}
-			location='appraise_manage_result_list.php?owner='+$('#Vcl_Owner').val();
+			location='appraise_manage_result_list.php?id='+<?php echo($_GET['id'])?>+'&owner='+$('#Vcl_Owner').val();
 		}
 	S_Root='../../';
 	parent.parent.parent.Common_CloseDialog();

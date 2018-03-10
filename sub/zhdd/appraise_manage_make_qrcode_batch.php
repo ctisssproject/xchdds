@@ -49,7 +49,7 @@ $o_survey=new Zhdd_Appraise($_GET['id']);
 			<td colspan="2" nowrap="nowrap" height="40"><input value="提交" class="BigButtonA"
 				onclick="appraise_manage_make_qrcode_batch_submit()" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;
 				<input value="下载模版" class="BigButtonB"
-				onclick="appraise_manage_add_submit()" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;
+				onclick="window.open('appraise_manage_make_qrcode_batch_template.php?id=<?php echo($_GET['id'])?>','_blank')" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;
 				<input value="返回" class="BigButtonA" onclick="location='<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>appraise_manage.php'" type="button" />
 			</td>
 		</tr>

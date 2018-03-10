@@ -52,18 +52,6 @@ function getList()
 			{
 				$s_state='<span style="color:#339900">已发布</span>';
 			}
-			//构建范围
-			$s_scorp='';
-			$a_scorp=json_decode($o_term->getScope($i));
-			for($j=0;$j<count($a_scorp);$j++)
-			{
-				$o_type=new Base_School_Type($a_scorp[$j]);
-				$s_scorp.=$o_type->getName();
-				if (($j+1)<count($a_scorp))
-				{
-					$s_scorp.='、';
-				}
-			}
 			$a_button='<a href="javascript:;" onclick="location=\'appraise_manage_modify.php?id='.$o_term->getId ( $i ).'\'">修改</a>&nbsp;&nbsp;<a href="javascript:;" onclick="location=\'appraise_manage_edit_list.php?id='.$o_term->getId ( $i ).'\'">编辑内容</a>&nbsp;&nbsp;<a href="javascript:;" onclick="appraise_release('.$o_term->getId ( $i ).')">发布</a>&nbsp;&nbsp;<a style="color:red" href="javascript:;" onclick="appraise_delete('.$o_term->getId ( $i ).')">删除</a>';
 			if($o_term->getState($i)==1)
 			{

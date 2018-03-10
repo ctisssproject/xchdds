@@ -820,7 +820,32 @@ class Operate extends Bn_Basic {
 					$this->setReturn('parent.parent.parent.Dialog_Message("上传文件类型为.xlsx！");');
 				}				
 				$filePath= RELATIVITY_PATH . 'userdata/zhdd/appraise/input/'.$this->getPost('Id').'.' . $fileext;
-				copy ( $_FILES ['Vcl_File'] ['tmp_name'],$filePath);				
+				copy ( $_FILES ['Vcl_File'] ['tmp_name'],$filePath);
+				/*
+				//获取上传的excel文件，验证学校名称是否合法
+				require_once RELATIVITY_PATH . 'include/PHPExcel.php';
+				$PHPReader = new PHPExcel_Reader_Excel2007 ();
+				if (! $PHPReader->canRead ( $filePath )) {
+					$PHPReader = new PHPExcel_Reader_Excel2007 ();
+					if (! $PHPReader->canRead ( $filePath )) {
+						$this->setReturn ( 'parent.parent.parent.Dialog_Error("dialog_error(\'对不起，上传失败，请与管理员联系！[001]\')");' );
+						return;
+					}
+				}
+				$PHPExcel = $PHPReader->load ( $filePath );
+				$currentSheet = $PHPExcel->getSheet ( 0 );
+				$allColumn = $currentSheet->getHighestColumn ();
+				$allRow = $currentSheet->getHighestRow ();
+				$s_shoolname=$currentSheet->getCell ('B2')->getValue ();
+				//想验证学校名称是否正确。
+				$o_school=new Base_Dept();
+				$o_school->PushWhere ( array ('&&', 'Name', '=',$s_shoolname) );
+				$o_school->PushWhere ( array ('&&', 'ParentId', '=',1) );
+				$n_count = $o_school->getAllCount ();
+				if($n_count==0)
+				{
+					$this->setReturn('parent.parent.parent.Dialog_Message("学校名称填写错误！");');
+				}*/
 				$this->setReturn('parent.window.open(\''.$this->getPost('Url').'appraise_manage_make_qrcode_batch_pdf.php?id='.$this->getPost('Id').'\',\'_blank\');
 				parent.location=\''.$this->getPost('BackUrl').'\';
 				');
