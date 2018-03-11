@@ -846,8 +846,9 @@ class Operate extends Bn_Basic {
 				{
 					$this->setReturn('parent.parent.parent.Dialog_Message("学校名称填写错误！");');
 				}*/
-				$this->setReturn('parent.window.open(\''.$this->getPost('Url').'appraise_manage_make_qrcode_batch_pdf.php?id='.$this->getPost('Id').'\',\'_blank\');
-				parent.location=\''.$this->getPost('BackUrl').'\';
+				$this->setReturn('parent.parent.parent.Common_CloseDialog();
+				parent.location=\''.$this->getPost('Url').'appraise_manage_make_qrcode_batch_pdf.php?id='.$this->getPost('Id').'\';				
+				//parent.location=\''.$this->getPost('BackUrl').'\';
 				');
 			}else{
 				$this->setReturn('parent.parent.parent.Dialog_Message("请选择上传的模版文件！");');

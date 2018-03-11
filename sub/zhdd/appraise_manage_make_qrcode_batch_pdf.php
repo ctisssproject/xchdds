@@ -151,6 +151,6 @@ function filter($str)
 		echo($str);
 	}
 }
-$mpdf->Output(iconv ( 'UTF-8', 'gbk','新入园儿童登记表().pdf'),'I');
+$mpdf->Output(iconv ( 'UTF-8', 'gbk',$o_table->getTitle().'.pdf'),'I');
 exit;
 ?>
