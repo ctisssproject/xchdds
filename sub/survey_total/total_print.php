@@ -94,7 +94,7 @@ if($_GET['type']>0)
 					$n_sum=$n_sum+$o_answer->getSum(0);
 				}
 			}
-			$s_item.=$o_answer->getId(0).'&nbsp;&nbsp;'.$o_option->getNumber($j).'.&nbsp;&nbsp;'.$o_option->getContent($j).'<br/>';
+			$s_item.='&nbsp;&nbsp;'.$o_option->getNumber($j).'.&nbsp;&nbsp;'.$o_option->getContent($j).'<br/>';
 		}
 		for($j=0;$j<$n_count2;$j++)
 		{
