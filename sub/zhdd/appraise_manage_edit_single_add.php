@@ -61,6 +61,16 @@ $O_Session->ValidModuleForPage(MODULEID);
 				<div style="margin-top:10px">H：<input id="Vcl_Option_H" name="Vcl_Option_H" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
 				<div style="margin-top:10px">I： <input id="Vcl_Option_I" name="Vcl_Option_I" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
 				<div style="margin-top:10px">J： <input id="Vcl_Option_J" name="Vcl_Option_J" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">K： <input id="Vcl_Option_K" name="Vcl_Option_K" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">L： <input id="Vcl_Option_L" name="Vcl_Option_L" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">M： <input id="Vcl_Option_M" name="Vcl_Option_M" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">N： <input id="Vcl_Option_N" name="Vcl_Option_N" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">O： <input id="Vcl_Option_O" name="Vcl_Option_O" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">P： <input id="Vcl_Option_P" name="Vcl_Option_P" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">Q： <input id="Vcl_Option_Q" name="Vcl_Option_Q" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">R： <input id="Vcl_Option_R" name="Vcl_Option_R" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">S： <input id="Vcl_Option_S" name="Vcl_Option_S" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
+				<div style="margin-top:10px">T： <input id="Vcl_Option_T" name="Vcl_Option_T" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>
 				<div style="margin-top:10px"><span class="gray">注：请按照顺序填写选项，如果中间有空行，系统将自动舍弃之后的内容。</span></div>
 
 			</td>

@@ -54,7 +54,7 @@ $o_table=new Zhdd_Appraise_Questions($_GET['id']);
 			<td class="TableData" nowrap="nowrap" width="120">选项：</td>
 			<td class="TableData">				
 			<?php
-				$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J' );
+				$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J','K','L','M','N','O','P','Q','R','S','T' );
 				$o_temp = new Zhdd_Appraise_Options ();
 				$o_temp->PushWhere ( array ('&&', 'QuestionId', '=', $o_table->getId () ) );
 				$o_temp->PushOrder ( array ('Number', 'A' ) );

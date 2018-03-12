@@ -560,7 +560,7 @@ class Operate extends Bn_Basic {
 			$o_table->setNumber($n_count+1);
 			$o_table->setType(1);
 			$o_table->Save();
-			$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J' );
+			$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J','K','L','M','N','O','P','Q','R','S','T' );
 			for($i = 0; $i < count ( $a_option ); $i ++) {
 				if ($_POST ['Vcl_Option_' . $a_option [$i]] == '') {
 					break;
@@ -586,7 +586,7 @@ class Operate extends Bn_Basic {
 			$o_table=new Zhdd_Appraise_Questions($this->getPost('Id'));
 			$o_table->setQuestion($this->getPost('Content'));
 			$o_table->Save();
-			$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J' );
+			$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J','K','L','M','N','O','P','Q','R','S','T' );
 			$n_option = new Zhdd_Appraise_Options ();
 			//$n_option->DeleteOption($o_table->getItemId ());
 			//$n_option='';
@@ -697,7 +697,7 @@ class Operate extends Bn_Basic {
 			$o_table->setNumber($n_count+1);
 			$o_table->setType(2);
 			$o_table->Save();
-			$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J' );
+			$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J','K','L','M','N','O','P','Q','R','S','T' );
 			for($i = 0; $i < count ( $a_option ); $i ++) {
 				if ($_POST ['Vcl_Option_' . $a_option [$i]] == '') {
 					break;
