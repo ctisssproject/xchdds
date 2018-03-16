@@ -3,5 +3,6 @@ select `zhdd_appraise_answers`.`id` AS `id`,`zhdd_appraise_answers`.`appraise_id
 DELETE FROM `base_module` WHERE `base_module`.`module_id` = 31004 LIMIT 1;
 
 --------以上已更新到生产环境
+ALTER TABLE `zhdd_appraise` ADD `is_auto` INT(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否套用公式' AFTER `is_deleted`;
 
   

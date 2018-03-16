@@ -485,6 +485,7 @@ class Operate extends Bn_Basic {
 			$o_table->setType($this->getPost('Type'));
 			$o_table->setCreateDate($this->GetDateNow());
 			$o_table->setComment('');
+			$o_table->setIsAuto($this->getPost('IsAuto'));
 			$a_type=array();
 			$o_info=new Zhdd_Appraise_Info_Item();
 			$o_info->PushWhere ( array ('&&', 'Type', '=', $this->getPost('Type')) );
@@ -520,6 +521,7 @@ class Operate extends Bn_Basic {
 				array_push ( $a_type, rawurlencode($o_info->getName($i)));
 			}
 			$o_table->setInfo ( json_encode ( $a_type) );
+			$o_table->setIsAuto($this->getPost('IsAuto'));
 			$o_table->Save();
 		}
 		$this->setReturn('parent.location=\''.$this->getPost('BackUrl').'?'.time().'\';');

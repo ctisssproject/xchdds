@@ -327,6 +327,7 @@ class Zhdd_Appraise extends CRUD
     protected $EndDate;
     protected $Comment;
     protected $IsDeleted;
+    protected $IsAuto;
 
     protected function DefineKey()
     {
@@ -348,6 +349,7 @@ class Zhdd_Appraise extends CRUD
                     'release_date' => 'ReleaseDate',
                     'end_date' => 'EndDate',
         			'is_deleted' => 'IsDeleted',
+        			'is_auto' => 'IsAuto',
                     'comment' => 'Comment'
         ));
     }

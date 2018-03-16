@@ -58,13 +58,13 @@ $O_Session->ValidModuleForPage(MODULEID);
 <table class="TableBlock_Editor" align="center" style="margin-left:auto;margin-right:auto;max-width:400px;margin-top:10px">
 	<tbody>
 		<tr>
-			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 标题：</td>
+			<td class="TableData" nowrap="nowrap" width="160"><span style="color:red">*</span> 标题：</td>
 			<td class="TableData"><input id="Vcl_Title" name="Vcl_Title"
 				class="BigInput" style="width:300px;" size="16" maxlength="30" type="text" value=""/>
 				</td>
 		</tr>
 		<tr>
-			<td class="TableData" nowrap="nowrap" width="120">类型：</td>
+			<td class="TableData" nowrap="nowrap">类型：</td>
 			<td class="TableData"><select name="Vcl_Type" id="Vcl_Type" class="BigSelect">
 				<?php 
 				$o_item=new Zhdd_Appraise_Info_Item();
@@ -84,7 +84,14 @@ $O_Session->ValidModuleForPage(MODULEID);
 				}					
 				?>
 			</select></td>
-		</tr>	
+		</tr>
+		<tr>
+			<td class="TableData" nowrap="nowrap">是否自动推荐综合评价等级：</td>
+			<td class="TableData"><select name="Vcl_IsAuto" id="Vcl_IsAuto" class="BigSelect">
+				<option value="0">否</option>
+				<option value="1">是</option>
+			</select></td>
+		</tr>
 		
 		<tr class="TableControl" align="center">
 			<td colspan="2" nowrap="nowrap" height="40"><input value="提交" class="BigButtonA"
@@ -106,7 +113,8 @@ $O_Session->ValidModuleForPage(MODULEID);
 	{
 		?>
 		$('#Vcl_Title').val('<?php echo($o_table->getTitle())?>');
-		$('#Vcl_Type').val('<?php echo($o_table->getType())?>');		
+		$('#Vcl_Type').val('<?php echo($o_table->getType())?>');
+		$('#Vcl_IsAuto').val('<?php echo($o_table->getIsAuto())?>');		
 	<?php
 	}
 	?>
