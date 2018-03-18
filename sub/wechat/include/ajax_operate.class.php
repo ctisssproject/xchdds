@@ -23,6 +23,7 @@ class Operate extends Bn_Basic {
 		}else{
 			$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，操作错误，请与管理员联系！错误代码：[1001]\');' );
 		}
+		$a_single_answer=array();
 		require_once RELATIVITY_PATH . 'sub/zhdd/include/db_table.class.php';
 		$o_survey=new Zhdd_Appraise($this->getPost ( 'Id' ));		
 		if($o_survey->getState()!='1')
@@ -46,7 +47,7 @@ class Operate extends Bn_Basic {
 	    		$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\''.rawurldecode($a_vcl[$i]).'不能为空！\');' );
 	    	}
 	    	array_push($a_info, rawurlencode($this->getPost ( 'Info_'.$i )));
-	    }
+	    }    
 		//开始记录核验选项
 	    $o_question=new Zhdd_Appraise_Questions();
 	    $o_question->PushWhere ( array ('&&', 'AppraiseId', '=',$o_survey->getId()) ); 
@@ -62,6 +63,8 @@ class Operate extends Bn_Basic {
 	    			$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'“第'.$o_question->getNumber($i).'题”未作答！\');' );
 	    		}
 	    		array_push($a_question_result,$this->getPost('Question_'.$o_question->getId($i)));
+	    		$o_temp=new Zhdd_Appraise_Options($this->getPost('Question_'.$o_question->getId($i)));
+	    		array_push($a_single_answer,$o_temp->getNumber());//保存所有单选题档案
 	    	}elseif ($o_question->getType($i)==2){
 	    		//多选
 	    		$a_temp=array();
@@ -91,6 +94,50 @@ class Operate extends Bn_Basic {
 	    		array_push($a_question_result,'');
 	    	}
 	    }
+	    
+	    //自动提示综合评价
+	    if($this->getPost('IsAuto')=='1')
+	    {
+	    	$s_auto_value=array_pop($a_single_answer);//删除数组中最后一个元素,并保存
+	    	$a_total=array_count_values($a_single_answer);//统计ABCD各出现几次
+	    	//先看答案里是否有D，如果有D，那么综合评定只能是C,D
+	    	if (in_array('D', $a_single_answer))
+	    	{
+	    		if ($s_auto_value!='C' && $s_auto_value!='D')
+	    		{
+	    			$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'系统建议综合评价<br/><b>C、D</b>\');' );
+	    		}
+	    	}
+	    	//是否有C
+	    	if (in_array('C', $a_single_answer))
+	    	{
+	    		//C出现大于5次
+	    		if($a_total['C']>=5)
+	    		{
+	    			if ($s_auto_value!='C' && $s_auto_value!='D')
+	    			{
+	    				$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'系统建议综合评价<br/><b>C、D</b>\');' );
+	    			}
+	    		}else{
+	    			if ($s_auto_value!='C' && $s_auto_value!='D'  && $s_auto_value!='B')
+	    			{
+	    				$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'系统建议综合评价<br/><b>B、C、D</b>\');' );
+	    			}
+	    		}
+	    	}
+	    	//是否有B
+	    	if (in_array('B', $a_single_answer))
+	    	{
+	    		//C出现大于5次
+	    		if($a_total['B']>=5)
+	    		{
+	    			if ($s_auto_value!='C' && $s_auto_value!='D'  && $s_auto_value!='B')
+	    			{
+	    				$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'系统建议综合评价<br/><b>C、D</b>\');' );
+	    			}
+	    		}
+	    	}
+	    }	    
 		//开始保存至答案。
 		$o_answer=new Zhdd_Appraise_Answers();
 		$o_answer->setAppraiseId($o_survey->getId());

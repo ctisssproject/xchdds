@@ -82,6 +82,7 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 		<input type="hidden" id="Vcl_FunName" name="Vcl_FunName" value="AppraiseAnswer"/>
 		<input type="hidden" name="Vcl_Id" value="<?php echo($_GET['id'])?>"/>
 		<input type="hidden" name="Vcl_SchoolId" value="<?php echo($_GET['school_id'])?>"/>
+		<input type="hidden" name="Vcl_IsAuto" id="Vcl_IsAuto" value="<?php echo($o_survey->getIsAuto())?>"/>
 		<div class="page__hd" style="padding:15px;padding-bottom:0px;">
 	        <h1 class="page__title" style="font-size:28px;padding:0px;text-align:center"><?php echo($o_survey->getTitle())?></h1>
 	    </div>
@@ -210,12 +211,16 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 	    	<a id="next" class="weui-btn weui-btn_primary" onclick="survey_answer_submit()">提交问卷</a>
 	    </div>
 	</form>
-<script type="text/javascript" src="js/function.js"></script>
 <script>
 	function survey_answer_submit()
 	{
 		Common_OpenLoading();
 		document.getElementById("submit_form").submit();	
+	}
+	function message_is_auto(str)
+	{
+		Dialog_Message(str);
+		document.getElementById("Vcl_IsAuto").value="0";
 	}
 </script>
 <?php
