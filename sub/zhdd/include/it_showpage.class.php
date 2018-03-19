@@ -109,7 +109,7 @@ class ShowPage extends It_Basic {
 			$o_body .= '
 		            <tr class="TableLine1">
 		            	<td align="center">
-		                   ' . $a_date[0] . '
+		                   ' . $o_article->getDate ( $i ) . '
 		                </td>
 		                <td align="center">
 		                   <b>' . $o_article->getSchoolName ( $i ) . '</b>

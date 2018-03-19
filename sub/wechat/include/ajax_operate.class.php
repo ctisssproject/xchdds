@@ -29,13 +29,13 @@ class Operate extends Bn_Basic {
 		if($o_survey->getState()!='1')
 		{
 			//非法访问
-			$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，操作错误，请与管理员联系！错误代码：[1001]\');' );
+			$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，操作错误，请与管理员联系！错误代码：[1002]\');' );
 		}
 		$o_stu=new Base_User_Wechat_View();
 		$o_stu->PushWhere ( array ('&&', 'WechatId', '=',$n_uid) ); 
 		if ($o_stu->getAllCount()==0)
 		{
-			$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，操作错误，请与管理员联系！错误代码：[1002]\');' );
+			$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，操作错误，请与管理员联系！错误代码：[1003]\');' );
 		}
 		//开始检查基础信息是否填写
 		$a_vcl=json_decode($o_survey->getInfo());
@@ -105,8 +105,9 @@ class Operate extends Bn_Basic {
 	    	{
 	    		if ($s_auto_value!='C' && $s_auto_value!='D')
 	    		{
-	    			$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'系统建议综合评价<br/><b>C、D</b>\');' );
+	    			$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'因选择过<b> D</b><br/>系统建议综合评价 <b>C、D</b><br/>真的要继续提交吗？\');' );	    			
 	    		}
+	    		$s_suggest='因选择过 D，系统建议综合评价 C、D';
 	    	}
 	    	//是否有C
 	    	if (in_array('C', $a_single_answer))
@@ -116,13 +117,15 @@ class Operate extends Bn_Basic {
 	    		{
 	    			if ($s_auto_value!='C' && $s_auto_value!='D')
 	    			{
-	    				$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'系统建议综合评价<br/><b>C、D</b>\');' );
+	    				$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'因选择5个及以上<b> C</b><br/>系统建议综合评价 <b>C、D</b><br/>真的要继续提交吗？\');' );
 	    			}
+	    			$s_suggest='因选择5个及以上 C，系统建议综合评价 C、D';
 	    		}else{
 	    			if ($s_auto_value!='C' && $s_auto_value!='D'  && $s_auto_value!='B')
 	    			{
-	    				$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'系统建议综合评价<br/><b>B、C、D</b>\');' );
+	    				$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'因选择5个以下<b> C</b><br/>系统建议综合评价 <b>B、C、D</b><br/>真的要继续提交吗？\');' );
 	    			}
+	    			$s_suggest='因选择5个以下 C，系统建议综合评价 B、C、D';
 	    		}
 	    	}
 	    	//是否有B
@@ -133,18 +136,26 @@ class Operate extends Bn_Basic {
 	    		{
 	    			if ($s_auto_value!='C' && $s_auto_value!='D'  && $s_auto_value!='B')
 	    			{
-	    				$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'系统建议综合评价<br/><b>C、D</b>\');' );
+	    				$this->setReturn ( 'parent.Common_CloseDialog();parent.message_is_auto(\'因选择5个及以上<b> B</b><br/>系统建议综合评价 <b>B、C、D</b><br/>真的要继续提交吗？\');' );
 	    			}
+	    			$s_suggest='因选择5个及以上 B，系统建议综合评价 B、C、D';
 	    		}
 	    	}
 	    }	    
 		//开始保存至答案。
-		$o_answer=new Zhdd_Appraise_Answers();
+	    if ($this->getPost ( 'AnswerId' )>0)
+	    {
+	    	$o_answer=new Zhdd_Appraise_Answers($this->getPost ( 'AnswerId' ));
+	    }else{
+	    	$o_answer=new Zhdd_Appraise_Answers();
+	    }
 		$o_answer->setAppraiseId($o_survey->getId());
 		$o_answer->setSchoolId($this->getPost ( 'SchoolId' ));
+		$o_answer->setParameter($this->getPost ( 'Parameter' ));
 		$o_answer->setUid($o_stu->getUid(0));
 		$o_answer->setInfo(json_encode($a_info));
 		$o_answer->setDate($this->GetDateNow());
+		$o_answer->setSuggest($s_suggest);
 		//根据循环结果，保存答案
 		$n_column=1;
 		for($i=0;$i<count($a_question_result);$i++)

@@ -362,6 +362,8 @@ class Zhdd_Appraise_Answers extends CRUD
     protected $Info;
     protected $SchoolId;
     protected $Date;
+    protected $Parameter;
+    protected $Suggest;
     protected $Answer1;
     protected $Answer2;
     protected $Answer3;
@@ -429,6 +431,8 @@ class Zhdd_Appraise_Answers extends CRUD
                     'uid' => 'Uid',
                     'info' => 'Info',
                     'school_id' => 'SchoolId',
+        			'parameter' => 'Parameter',
+        			'suggest' => 'Suggest',
                     'date' => 'Date',
                     'answer_1' => 'Answer1',
                     'answer_2' => 'Answer2',

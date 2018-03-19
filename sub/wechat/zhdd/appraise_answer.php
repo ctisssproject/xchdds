@@ -33,6 +33,13 @@ if($o_survey->getState()!='1')
 	echo "<script>location.href='access_failed.php'</script>"; 
 	exit(0);
 }
+//查看这个督学是否已经评价过该项目
+$o_answer=new Zhdd_Appraise_Answers();
+$o_answer->PushWhere ( array ('&&', 'Uid', '=',$o_temp->getUid(0)) ); 
+$o_answer->PushWhere ( array ('&&', 'Parameter', '=',$_SERVER['QUERY_STRING']) ); 
+$o_answer->getAllCount();
+
+
 
 //http://10.189.240.42/xchdds/sub/wechat/zhdd/appraise_answer.php?id=11&school_id=141&info_0=%E5%88%9D%E4%B8%80%E7%8F%AD&info_1=%E8%AF%AD%E6%96%87&info_2=2014-12-12&info_3=%E4%BD%9C%E6%96%87&info_4=%E6%9D%8E%E5%B0%8F%E7%92%90
 //echo('http://10.189.240.42/xchdds/sub/wechat/zhdd/appraise_answer.php?id=11&school_id=141&info_0='.rawurlencode('初一班').'&info_0='.rawurlencode('语文').'&info_0='.rawurlencode('2014-12-12').'&info_0='.rawurlencode('作文').'&info_0='.rawurlencode('李小璐'));
@@ -80,8 +87,15 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 		<input type="hidden" name="Vcl_Url" value="<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>"/>
 		<input type="hidden" name="Vcl_BackUrl" value="<?php echo($_SERVER['HTTP_REFERER'])?>"/>
 		<input type="hidden" id="Vcl_FunName" name="Vcl_FunName" value="AppraiseAnswer"/>
-		<input type="hidden" name="Vcl_Id" value="<?php echo($_GET['id'])?>"/>
+		<input type="hidden" name="Vcl_Parameter" value="<?php echo($_SERVER['QUERY_STRING'])?>"/>
 		<input type="hidden" name="Vcl_SchoolId" value="<?php echo($_GET['school_id'])?>"/>
+		<input type="hidden" name="Vcl_Id" value="<?php echo($_GET['id'])?>"/>
+		<input type="hidden" name="Vcl_AnswerId" value="<?php 
+		if ($o_answer->getAllCount()>0)
+		{
+			echo($o_answer->getId(0));
+		}
+		?>"/>
 		<input type="hidden" name="Vcl_IsAuto" id="Vcl_IsAuto" value="<?php echo($o_survey->getIsAuto())?>"/>
 		<div class="page__hd" style="padding:15px;padding-bottom:0px;">
 	        <h1 class="page__title" style="font-size:28px;padding:0px;text-align:center"><?php echo($o_survey->getTitle())?></h1>
@@ -137,18 +151,29 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 	    		echo('
 		    	<div class="weui-cells weui-cells_radio">
 		    	');
+	    		$s_answer='';
+	    		if ($o_answer->getAllCount())
+	    		{
+	    			eval('$s_answer=$o_answer->getAnswer'.$o_question->getNumber($i).'(0);');//获取用户答案
+	    			$s_answer=str_replace('"', '', $s_answer);//去掉多余的双引号
+	    		}
 	    		$o_option=new Zhdd_Appraise_Options();
 	    		$o_option->PushWhere ( array ('&&', 'QuestionId', '=',$o_question->getId($i)) ); 
 	    		$o_option->PushOrder ( array ('Number','A') ); 
 	    		for($j=0;$j<$o_option->getAllCount();$j++)
 	    		{
+	    			$s_checked='';
+	    			if ($s_answer==$o_option->getId($j))
+	    			{
+	    				$s_checked=' checked="checked"';
+	    			}
 	    			echo('
 				    	<label class="weui-cell weui-check__label" for="Vcl_Option_'.$o_option->getId($j).'">
 			                <div class="weui-cell__bd">
 			                    <p>&nbsp;&nbsp;&nbsp;&nbsp;'.$o_option->getNumber($j).'. '.$o_option->getOption($j).'</p>
 			                </div>
 			                <div class="weui-cell__ft">
-			                    <input value="'.$o_option->getId($j).'" type="radio" class="weui-check" name="Vcl_Question_'.$o_question->getId($i).'" id="Vcl_Option_'.$o_option->getId($j).'">
+			                    <input value="'.$o_option->getId($j).'" type="radio" class="weui-check"'.$s_checked.' name="Vcl_Question_'.$o_question->getId($i).'" id="Vcl_Option_'.$o_option->getId($j).'">
 			                    <span class="weui-icon-checked"></span>
 			                </div>
 			            </label>
@@ -165,18 +190,30 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 	    		echo('
 		    	<div class="weui-cells weui-cells_checkbox">
 		    	');
+	    		$s_answer='';
+	    		if ($o_answer->getAllCount())
+	    		{
+	    			eval('$s_answer=$o_answer->getAnswer'.$o_question->getNumber($i).'(0);');//获取用户答案
+	    			$s_answer=str_replace('"', '', $s_answer);//去掉多余的双引号
+	    			$s_answer=json_decode($s_answer);
+	    		}
 	    		$o_option=new Zhdd_Appraise_Options();
 	    		$o_option->PushWhere ( array ('&&', 'QuestionId', '=',$o_question->getId($i)) ); 
 	    		$o_option->PushOrder ( array ('Number','A') ); 
 	    		for($j=0;$j<$o_option->getAllCount();$j++)
 	    		{
+	    			$s_checked='';
+	    			if (in_array($o_option->getId($j),$s_answer))
+	    			{
+	    				$s_checked=' checked="checked"';
+	    			}
 	    			echo('
 		    			<label class="weui-cell weui-check__label" for="Vcl_Option_'.$o_option->getId($j).'">			                
 			                <div class="weui-cell__bd">
 			                    <p>&nbsp;&nbsp;&nbsp;&nbsp;'.$o_option->getNumber($j).'. '.$o_option->getOption($j).'</p>
 			                </div>
 			                <div class="weui-cell__hd">
-			                    <input type="checkbox" class="weui-check" name="Vcl_Option_'.$o_option->getId($j).'" id="Vcl_Option_'.$o_option->getId($j).'">
+			                    <input type="checkbox" class="weui-check"'.$s_checked.' name="Vcl_Option_'.$o_option->getId($j).'" id="Vcl_Option_'.$o_option->getId($j).'">
 			                    <i class="weui-icon-checked"></i>
 			                </div>
 			            </label>
@@ -186,13 +223,19 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 		    	</div>
 		    	');
 	    	}else if ($o_question->getType($i)==4){
+	    		$s_answer='';
+	    		if ($o_answer->getAllCount())
+	    		{
+	    			eval('$s_answer=$o_answer->getAnswer'.$o_question->getNumber($i).'(0);');//获取用户答案
+	    			$s_answer=str_replace('"', '', $s_answer);//去掉多余的双引号
+	    		}
 	    		//简答
 	    		echo('
 	    		<div class="weui-cells__title">'.$n_number.'. '.$o_question->getQuestion($i).' （简述）</div>
 	    		<div class="weui-cells weui-cells_form">
 		            <div class="weui-cell">
 		                <div class="weui-cell__bd">
-		                    <textarea class="weui-textarea" placeholder="必填" rows="3" name="Vcl_Question_'.$o_question->getId($i).'"></textarea>
+		                    <textarea class="weui-textarea" placeholder="必填" rows="3" name="Vcl_Question_'.$o_question->getId($i).'">'.$s_answer.'</textarea>
 		                </div>
 		            </div>
 		        </div>				
@@ -219,8 +262,13 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 	}
 	function message_is_auto(str)
 	{
-		Dialog_Message(str);
+		Dialog_Confirm(str,function(){message_is_auto_yes()});		
+	}
+	function message_is_auto_yes()
+	{
 		document.getElementById("Vcl_IsAuto").value="0";
+		Common_OpenLoading();
+		document.getElementById("submit_form").submit();			
 	}
 </script>
 <?php
