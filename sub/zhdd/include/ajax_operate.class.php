@@ -335,6 +335,10 @@ class Operate extends Bn_Basic {
 		$o_user = new Single_User ( $n_uid );
 		if ($o_user->ValidModule ( 31002 )) {
 			if ($_FILES ['Vcl_File'] ['size'] > 0) {
+				if ($_FILES ['Vcl_File'] ['size']>(1024*1024*2))
+				{
+					$this->setReturn('parent.parent.parent.Dialog_Message("上传文件尺寸不能超过 2M！");');
+				}
 				mkdir ( RELATIVITY_PATH . 'userdata/zhdd', 0777 );
 				mkdir ( RELATIVITY_PATH . 'userdata/zhdd/zbtx', 0777 );
 				$allowpictype = array ('jpg', 'jpeg', 'pdf', 'png' );
