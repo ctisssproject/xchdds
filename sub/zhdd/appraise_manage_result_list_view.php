@@ -112,6 +112,23 @@ function getList()
 					            </tr>
 			';
 		}
+		//如果包含自动计算，那么显示系统推荐
+		if($o_answer->getIsAuto()==1)
+		{
+			$s_record_list .= '
+				             <tr class="TableLine1">
+				             		<td align="center" style="font-size:14px">
+					
+					                </td>
+					                <td align="center" >
+					
+					                </td>
+					                <td style="font-size:14px;">
+					                    <strong>'.$o_answer->getSuggest().'</strong>
+					                </td>
+					            </tr>
+			';			
+		}
 		//构建基本信息
 		$a_vcl=json_decode($o_answer->getAppraiseInfo());
 		$a_vcl2=json_decode($o_answer->getInfo());
