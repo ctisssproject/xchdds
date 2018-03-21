@@ -127,6 +127,88 @@ class ShowPage extends It_Basic {
 		}
 		return $o_head . $o_body . $o_floor;
 	}
-	
+	public function getAppraiseTotalList($n_page) {
+		$this->S_FileName = 'appraise_manage_total_list.php?id='.$_GET['id'].'&owner='.$_GET['owner'];
+		$this->N_Page = $n_page;
+		$o_article = new Zhdd_Appraise_Answers_View ();
+		if ($_GET['owner']!='')
+		{
+			$o_article->PushWhere ( array ('&&', 'SchoolName', 'like','%'.$_GET['owner'].'%') );
+			$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
+		}
+		$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
+		//按学校名称后，按年度排序
+		$o_article->PushOrder ( array ('SchoolName', 'A' ) );	
+		$o_article->PushOrder ( array ('Date', 'D' ) );	
+		$n_count = $o_article->getAllCount ();
+		////////////////////////////////////
+		$o_body = '';
+		$o_floor = '';
+		
+		$o_head .= '    <table class="small" align="center" border="0" cellpadding="0" cellspacing="0" width="98%" style="margin-top:5px;margin-left:1%;margin-right:1%;">
+					        <tbody>
+					        	<tr>
+					                <td class="small1" align="left"  valign="bottom" nowrap="nowrap">
+					                <input value="返回" class="BigButtonA" onclick="location=\''.str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']).'appraise_manage.php\'" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					                    <input class="BigInput" id="Vcl_Owner" style="height: 20px;width:200px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['owner'].'" placeholder="学校名称">
+					                    <input class="BigButtonA" onclick="search()" type="button" value="搜索">
+					                    &nbsp;&nbsp;
+					                    <input class="BigButtonB" onclick="location=\'appraise_manage_total_list.php?id='.$_GET['id'].'\'" type="button" value="全部显示">
+					                </td>
+					                 <td class="small1" align="right" valign="bottom" style="width:330px">
+										
+			                		</td>
+					            </tr>
+					        </tbody>
+					    </table>
+					    <table class="TableList" align="center" width="98%" style="margin-top:5px;margin-left:1%;margin-right:1%;">
+					        <tbody>
+					            <tr class="TableHeader">
+					            <td align="center" nowrap="nowrap" width="160px">
+					                                        年度 
+					                </td>
+					                <td align="center" nowrap="nowrap">
+					                                         学校名称<img src="../../images/arrow_down.gif" border="0" height="10" width="11" align="absmiddle">
+					                </td>
+					                <td align="center" nowrap="nowrap" width="160px">
+					           	操作
+					                </td>
+					            </tr>
+		';
+		
+		$o_floor = '
+					        </tbody>
+					    </table><br/>
+							';
+		$o_admin=new Single_User($this->O_SingleUser->getUid());
+		$s_school_name='';
+		$s_year='';
+		for($i = 0; $i < $n_count; $i ++) {		
+			$a_date=explode(' ', $o_article->getDate ( $i ));
+			$a_date=explode('-', $a_date[0]);
+			if ($o_article->getSchoolName ( $i )==$s_school_name && $a_date[0]==$s_year)
+			{
+				continue;
+			}			
+			$s_school_name=$o_article->getSchoolName ( $i );
+			$s_year=$a_date[0];
+			$s_button = '<a href="appraise_manage_total_list_pdf.php?school_id=' . $o_article->getSchoolId ( $i ) . '&year='.$s_year.'&appraise_id='.$o_article->getAppraiseId($i).'">查看统计结果（PDF）</a>';	
+			$o_body .= '
+		            <tr class="TableLine1">
+		            	<td align="center">
+		                   <b>' . $a_date[0] . '</b>
+		                </td>
+		                <td align="center">
+		                   <b>' . $o_article->getSchoolName ( $i ) . '</b>
+		                </td>
+		                <td align="center">
+		                  ' . $s_button . '
+		                </td>		                  		
+		            </tr>
+			';
+		}
+		return $o_head . $o_body . $o_floor;
 	}
+	
+}
 ?>
