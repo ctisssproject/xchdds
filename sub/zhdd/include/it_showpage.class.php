@@ -138,8 +138,7 @@ class ShowPage extends It_Basic {
 		}
 		$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
 		//按学校名称后，按年度排序
-		$o_article->PushOrder ( array ('SchoolName', 'A' ) );	
-		$o_article->PushOrder ( array ('Date', 'D' ) );	
+		$o_article->PushOrder ( array ('Date', 'D' ) );			
 		$n_count = $o_article->getAllCount ();
 		////////////////////////////////////
 		$o_body = '';
@@ -165,10 +164,10 @@ class ShowPage extends It_Basic {
 					        <tbody>
 					            <tr class="TableHeader">
 					            <td align="center" nowrap="nowrap" width="160px">
-					                                        年度 
+					                                        年度<img src="../../images/arrow_down.gif" border="0" height="10" width="11" align="absmiddle"> 
 					                </td>
 					                <td align="center" nowrap="nowrap">
-					                                         学校名称<img src="../../images/arrow_down.gif" border="0" height="10" width="11" align="absmiddle">
+					                                         学校名称
 					                </td>
 					                <td align="center" nowrap="nowrap" width="160px">
 					           	操作
