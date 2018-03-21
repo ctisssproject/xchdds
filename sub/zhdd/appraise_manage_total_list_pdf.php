@@ -77,10 +77,6 @@ ob_start();
 									'.$o_option->getNumber($j).'. '.$o_option->getOption($j).'<br/>
 									'.$n_people.'人 ('.$n_rate.'%)
 									</h3>
-<h3>
-									'.$o_option->getNumber($j).'. '.$o_option->getOption($j).'<br/>
-									'.$n_people.'人 ('.$n_rate.'%)
-									</h3>
 									');
 								}
 							}
