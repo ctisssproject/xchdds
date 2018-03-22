@@ -20,10 +20,10 @@ ob_start();
 							<h4>
 							答题人数：<?php 
 							$o_answer=new Zhdd_Appraise_Answers_View();
-							$o_survey->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['appraise_id']) );
-							$o_survey->PushWhere ( array ('&&', 'SchoolId', '=',$_GET['school_id']) );
-							$o_survey->PushWhere ( array ('&&', 'Date', '>=',$_GET['year'].'-01-01 00:00:00') );
-							$o_survey->PushWhere ( array ('&&', 'Date', '<=',$_GET['year'].'-12-31 24:59:59') );
+							$o_answer->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['appraise_id']) );
+							$o_answer->PushWhere ( array ('&&', 'SchoolId', '=',$_GET['school_id']) );
+							$o_answer->PushWhere ( array ('&&', 'Date', '>=',$_GET['year'].'-01-01 00:00:00') );
+							$o_answer->PushWhere ( array ('&&', 'Date', '<=',$_GET['year'].'-12-31 24:59:59') );
 							$n_answer_sum=$o_answer->getAllCount();
 							echo($o_answer->getAllCount());
 							?> 人&nbsp;&nbsp;&nbsp;&nbsp;学校名称：<?php echo($o_dept->getName())?>&nbsp;&nbsp;&nbsp;&nbsp;年度：<?php echo($_GET['year'])?>
