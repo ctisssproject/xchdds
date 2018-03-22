@@ -235,7 +235,7 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 	    		<div class="weui-cells weui-cells_form">
 		            <div class="weui-cell">
 		                <div class="weui-cell__bd">
-		                    <textarea class="weui-textarea" placeholder="必填" rows="3" name="Vcl_Question_'.$o_question->getId($i).'">'.$s_answer.'</textarea>
+		                    <textarea class="weui-textarea" placeholder="必填" rows="3" name="Vcl_Question_'.$o_question->getId($i).'">'.rawurldecode($s_answer).'</textarea>
 		                </div>
 		            </div>
 		        </div>				
