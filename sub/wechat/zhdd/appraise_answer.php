@@ -33,6 +33,13 @@ if($o_survey->getState()!='1')
 	echo "<script>location.href='access_failed.php'</script>"; 
 	exit(0);
 }
+if((int)$_GET['school_id']>0)
+{
+
+}else{
+	echo "<script>location.href='loading_failed.php'</script>";
+	exit(0);
+}
 //查看这个督学是否已经评价过该项目
 $o_answer=new Zhdd_Appraise_Answers();
 $o_answer->PushWhere ( array ('&&', 'Uid', '=',$o_temp->getUid(0)) ); 
