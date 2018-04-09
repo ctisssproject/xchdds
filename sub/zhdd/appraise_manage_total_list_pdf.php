@@ -95,6 +95,10 @@ ob_start();
 									{
 										eval('$s_value=$o_answer->getAnswer'.$o_question->getNumber($i).'($j);');//获取用户答案
 										$s_value=str_replace('"', '', $s_value);//去掉多余的双引号
+										if ($s_value=='无')
+										{
+											continue;
+										}
 										echo('
 									<h3>
 									答：'.rawurldecode($s_value).'
