@@ -74,7 +74,7 @@ ob_start();
 									$n_rate=round(($n_people/$n_answer_sum)*1000)/10;//结果*1000取整再除以10
 									echo('
 									<h3>
-									'.$o_option->getNumber($j).'. '.$o_option->getOption($j).'<br/>
+									'.$o_option->getNumber($j).'. '.$o_option->getOption($j).'&nbsp;&nbsp;&nbsp;&nbsp;
 									'.$n_people.'人 ('.$n_rate.'%)
 									</h3>
 									');

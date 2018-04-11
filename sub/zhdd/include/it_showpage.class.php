@@ -14,7 +14,7 @@ class ShowPage extends It_Basic {
 	} 
 	
 	public function getAppraiseResultList($n_page) {
-		$this->S_FileName = 'appraise_manage_result_list.php?id='.$_GET['id'].'&owner='.$_GET['owner'];
+		$this->S_FileName = 'appraise_manage_result_list.php?id='.$_GET['id'].'&owner='.$_GET['owner'].'&';
 		$this->N_Page = $n_page;
 		$o_article = new Zhdd_Appraise_Answers_View (); 
 		if ($_GET['owner']!='')
