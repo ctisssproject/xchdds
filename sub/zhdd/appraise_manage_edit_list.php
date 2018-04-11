@@ -12,6 +12,11 @@ function getList($id)
 		$o_term->PushOrder ( array ('Number', 'A' ) );
 		$n_count = $o_term->getAllCount ();
 		for($i = 0; $i < $n_count; $i ++) {
+			$s_must='';
+			if ($o_term->getIsMust($i)==1)
+			{
+				$s_must='<span style="color:red">*</span> ';
+			}
 			if ($o_term->getType ( $i )==1)
 			{
 				$s_type="单选题";
@@ -45,7 +50,7 @@ function getList($id)
 			$s_record_list .= '
 				             <tr class="TableLine1">
 				             		<td align="center" style="font-size:14px">
-					                    ' . $o_term->getNumber ( $i )  . '
+					                    ' .$s_must.$o_term->getNumber ( $i )  . '
 					                </td>
 					                <td align="center" >
 					                    ' . $s_type . '

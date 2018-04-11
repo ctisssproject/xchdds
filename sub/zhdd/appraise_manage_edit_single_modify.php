@@ -51,6 +51,21 @@ $o_table=new Zhdd_Appraise_Questions($_GET['id']);
 				</td>
 		</tr>
 		<tr>
+			<td class="TableData" nowrap="nowrap" width="120">是否必答：</td>
+			<td class="TableData">
+				<select name="Vcl_IsMust" id="Vcl_IsMust" class="BigSelect">
+					<option value="1" selected="selected">必答</option>
+					<option value="0">选答</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="TableData" nowrap="nowrap" width="120">选项：</td>
+			<td class="TableData"><input id="Vcl_Content" name="Vcl_Content"
+				class="BigInput" value="<?php echo($o_table->getQuestion())?>" style="width:600px;" size="16" maxlength="255" type="text"/>
+				</td>
+		</tr>
+		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">选项：</td>
 			<td class="TableData">				
 			<?php
@@ -96,6 +111,7 @@ $o_table=new Zhdd_Appraise_Questions($_GET['id']);
 <script type="text/javascript" language="javascript">
 	S_Root='../../';
 	parent.parent.parent.Common_CloseDialog();
+	$('#Vcl_IsMust').val('<?php echo($o_table->getIsMust())?>');
     </script>
 </body>
 </html>

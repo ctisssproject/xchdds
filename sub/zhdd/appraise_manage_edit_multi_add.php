@@ -42,12 +42,21 @@ $O_Session->ValidModuleForPage(MODULEID);
 		<tr>
 			<td class="TableData" colspan="2" nowrap="nowrap"
 				style="font-size: 14px; height:45px;background-color:#EEF9FF" align="center"><strong>基本信息</strong></td>
-		</tr>
+		</tr>		
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">题目：</td>
 			<td class="TableData"><input id="Vcl_Content" name="Vcl_Content"
 				class="BigInput" maxlength="255" style="width:600px" size="16" type="text"/>
 				</td>
+		</tr>
+		<tr>
+			<td class="TableData" nowrap="nowrap" width="120">是否必答：</td>
+			<td class="TableData">
+				<select name="Vcl_IsMust" id="Vcl_IsMust" class="BigSelect">
+					<option value="1" selected="selected">必答</option>
+					<option value="0">选答</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">选项：</td>

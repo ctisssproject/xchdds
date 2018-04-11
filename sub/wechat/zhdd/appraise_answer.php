@@ -148,11 +148,17 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 	    $o_question->PushOrder ( array ('Number','A') );   
 	    for($i=0;$i<$o_question->getAllCount();$i++)
 	    {
+	    	//是否我必答题
+	    	$s_must='';
+	    	if ($o_question->getIsMust($i)==1)
+	    	{
+	    		$s_must='<span style="color:red">*</span> ';
+	    	}
 	    	//选项
 	    	if ($o_question->getType($i)==1)
 	    	{
 	    		echo('
-		    	<div class="weui-cells__title">'.$n_number.'. '.$o_question->getQuestion($i).' （单选）</div>
+		    	<div class="weui-cells__title">'.$s_must.$n_number.'. '.$o_question->getQuestion($i).' （单选）</div>
 		    	');
 	    		//单选
 	    		echo('
@@ -191,7 +197,7 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 		    	');
 	    	}else if ($o_question->getType($i)==2){
 	    		echo('
-		    	<div class="weui-cells__title">'.$n_number.'. '.$o_question->getQuestion($i).' （多选）</div>
+		    	<div class="weui-cells__title">'.$s_must.$n_number.'. '.$o_question->getQuestion($i).' （多选）</div>
 		    	');
 	    		//多选
 	    		echo('
@@ -238,11 +244,11 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 	    		}
 	    		//简答
 	    		echo('
-	    		<div class="weui-cells__title">'.$n_number.'. '.$o_question->getQuestion($i).' （简述）</div>
+	    		<div class="weui-cells__title">'.$s_must.$n_number.'. '.$o_question->getQuestion($i).' （简述）</div>
 	    		<div class="weui-cells weui-cells_form">
 		            <div class="weui-cell">
 		                <div class="weui-cell__bd">
-		                    <textarea class="weui-textarea" placeholder="必填" rows="3" name="Vcl_Question_'.$o_question->getId($i).'">'.rawurldecode($s_answer).'</textarea>
+		                    <textarea class="weui-textarea" placeholder="" rows="3" name="Vcl_Question_'.$o_question->getId($i).'">'.rawurldecode($s_answer).'</textarea>
 		                </div>
 		            </div>
 		        </div>				

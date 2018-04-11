@@ -558,6 +558,7 @@ class Operate extends Bn_Basic {
 		if ($o_user->ValidModule ( 31003 )) {
 			$o_table=new Zhdd_Appraise_Questions();
 			$o_table->setQuestion($this->getPost('Content'));
+			$o_table->setIsMust($this->getPost('IsMust'));
 			$o_table->setAppraiseId($this->getPost('Id'));
 			$o_term = new Zhdd_Appraise_Questions ();
 			$o_term->PushWhere ( array ('&&', 'AppraiseId', '=', $this->getPost('Id') ) );
@@ -591,6 +592,7 @@ class Operate extends Bn_Basic {
 		if ($o_user->ValidModule ( 31003 )) {
 			$o_table=new Zhdd_Appraise_Questions($this->getPost('Id'));
 			$o_table->setQuestion($this->getPost('Content'));
+			$o_table->setIsMust($this->getPost('IsMust'));
 			$o_table->Save();
 			$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J','K','L','M','N','O','P','Q','R','S','T' );
 			$n_option = new Zhdd_Appraise_Options ();
@@ -695,6 +697,7 @@ class Operate extends Bn_Basic {
 		if ($o_user->ValidModule ( 31003 )) {
 			$o_table=new Zhdd_Appraise_Questions();
 			$o_table->setQuestion($this->getPost('Content'));
+			$o_table->setIsMust($this->getPost('IsMust'));
 			$o_table->setAppraiseId($this->getPost('Id'));
 			$o_term = new Zhdd_Appraise_Questions ();
 			$o_term->PushWhere ( array ('&&', 'AppraiseId', '=', $this->getPost('Id') ) );
@@ -729,6 +732,7 @@ class Operate extends Bn_Basic {
 			$o_table=new Zhdd_Appraise_Questions();
 			$o_table->setQuestion($this->getPost('Content'));
 			$o_table->setAppraiseId($this->getPost('Id'));
+			$o_table->setIsMust($this->getPost('IsMust'));
 			$o_term = new Zhdd_Appraise_Questions ();
 			$o_term->PushWhere ( array ('&&', 'AppraiseId', '=', $this->getPost('Id') ) );
 			$o_term->PushOrder ( array ('Number', 'A' ) );
@@ -748,7 +752,8 @@ class Operate extends Bn_Basic {
 		$o_user = new Single_User ( $n_uid );
 		if ($o_user->ValidModule ( 31003 )) {
 			$o_table=new Zhdd_Appraise_Questions($this->getPost('Id'));
-			$o_table->setQuestion($this->getPost('Content'));			
+			$o_table->setQuestion($this->getPost('Content'));	
+			$o_table->setIsMust($this->getPost('IsMust'));
 			$o_table->Save();			
 		}
 		$this->setReturn('parent.location=\''.$this->getPost('BackUrl').'\';');

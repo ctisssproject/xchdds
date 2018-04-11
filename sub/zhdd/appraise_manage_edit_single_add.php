@@ -50,6 +50,15 @@ $O_Session->ValidModuleForPage(MODULEID);
 				</td>
 		</tr>
 		<tr>
+			<td class="TableData" nowrap="nowrap" width="120">是否必答：</td>
+			<td class="TableData">
+				<select name="Vcl_IsMust" id="Vcl_IsMust" class="BigSelect">
+					<option value="1" selected="selected">必答</option>
+					<option value="0">选答</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">选项：</td>
 			<td class="TableData"><div>A：<input id="Vcl_Option_A" name="Vcl_Option_A" value="" class="BigInput" maxlength="255" style="width:600px" type="text" /></div>
 				<div style="margin-top:10px">B：<input id="Vcl_Option_B" name="Vcl_Option_B" class="BigInput" value="" maxlength="255" style="width:600px" type="text" /></div>

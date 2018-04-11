@@ -544,6 +544,7 @@ class Zhdd_Appraise_Questions extends CRUD
     protected $Question;
     protected $Type;
     protected $Number;
+    protected $IsMust;
 
     protected function DefineKey()
     {
@@ -560,6 +561,7 @@ class Zhdd_Appraise_Questions extends CRUD
                     'appraise_id' => 'AppraiseId',
                     'question' => 'Question',
                     'type' => 'Type',
+        			'is_must' => 'IsMust',
                     'number' => 'Number'
         ));
     }
