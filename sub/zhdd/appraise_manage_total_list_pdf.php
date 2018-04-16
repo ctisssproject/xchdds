@@ -58,7 +58,7 @@ ob_start();
 								');
 							$o_option=new Zhdd_Appraise_Options();
 							$o_option->PushWhere ( array ('&&', 'QuestionId', '=',$o_question->getId ( $i )) );
-							$o_option->PushOrder ( array ('Id','A') );
+							$o_option->PushOrder ( array ('Number','A') );
 							if($o_question->getType ( $i )==1 ||$o_question->getType ( $i )==2)
 							{
 								//如果是单选题
