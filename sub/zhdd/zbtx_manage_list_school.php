@@ -44,7 +44,7 @@ function getList()
 		$o_term->PushOrder ( array ('CreateDate', 'D' ) );
 		$s_deptname='';
 		for($i = 0; $i < $o_term->getAllCount (); $i ++) {
-			if ($o_term->getDeptName(0)==$s_deptname)
+			if ($o_term->getDeptName($i)==$s_deptname)
 			{
 				continue;
 			}
