@@ -192,7 +192,7 @@ function getList()
 			        </tbody>
 			    </table>
 			    <div style="padding-top:0px;padding-bottom:5px;">
-			    <input value="返回" class="BigButtonA" onclick="location='<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>appraise_manage_result_list.php?id=<?php echo($o_answer->getAppraiseId())?>'" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    <input value="返回" class="BigButtonA" onclick="history.go(-1)" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</div>
 <?php
 echo (getList());

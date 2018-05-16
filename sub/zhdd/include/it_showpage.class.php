@@ -42,10 +42,14 @@ class ShowPage extends It_Basic {
 		////////////////////////////////////
 		$o_body = '';
 		$o_floor = '';
+		$n_last_question=0;
 		//构建标题
 		if ($n_count>0)
 		{
 			$a_vcl=json_decode($o_article->getAppraiseInfo(0));
+			$o_questions=new Zhdd_Appraise_Questions($o_article->getAppraiseId(0));
+			$o_questions->PushWhere ( array ('&&', 'AppraiseId', '=',$o_article->getAppraiseId(0)) );
+			$n_last_question=$o_questions->getAllCount();
 		}
 		$s_title='';
 		for($i=0;$i<count($a_vcl);$i++)
@@ -81,8 +85,11 @@ class ShowPage extends It_Basic {
 					                     学校名称
 					                </td>	
 					                '.$s_title.'				                
-					                <td align="center" nowrap="nowrap" width="250px">
+					                <td align="center" nowrap="nowrap" width="150px">
 					           	评价人     
+					                </td>
+									<td align="center" nowrap="nowrap" width="80px">
+					           	综合评价    
 					                </td>
 					                <td align="center" nowrap="nowrap" width="120px">
 					           	操作    
@@ -96,6 +103,7 @@ class ShowPage extends It_Basic {
 							';
 		$o_admin=new Single_User($this->O_SingleUser->getUid());
 		for($i = 0; $i < $n_count; $i ++) {
+			//获取
 			$s_button = '<a href="appraise_manage_result_list_view.php?id=' . $o_article->getId ( $i ) . '">查看</a>';	
 			$a_date=explode(' ', $o_article->getDate ( $i ));
 			$a_vcl=json_decode($o_article->getInfo($i));
@@ -106,6 +114,10 @@ class ShowPage extends It_Basic {
 						   		'.rawurldecode($a_vcl[$j]).'
 						   </td>';
 			}
+			$s_last_anwser='';
+			eval('$s_last_anwser=$o_article->getAnswer'.$n_last_question.'($i);');
+			$s_last_anwser=str_replace('"', '', $s_last_anwser);//去掉多余的双引号
+			$o_option=new Zhdd_Appraise_Options($s_last_anwser);
 			$o_body .= '
 		            <tr class="TableLine1">
 		            	<td align="center">
@@ -117,6 +129,9 @@ class ShowPage extends It_Basic {
 		                '.$s_title.'	                
 		                <td align="center">
 		                  ' . $o_article->getOwnerName ( $i ) . '
+		                </td>
+ 						<td align="center">
+		                  '.$o_option->getNumber().'
 		                </td>	
 		                <td align="center">
 		                  ' . $s_button . '
