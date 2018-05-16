@@ -16,7 +16,7 @@ $b_login=false;
 $n_uid=0;
 $S_Session_Id= $_COOKIE ['SESSIONID'];
 if (isset ( $_COOKIE ['SESSIONID'] )) {//检查是否保存了Session
-	setcookie ( 'SESSIONID', '6c682e03d0b630e1f563f32b0f357a4e',0 ,'/','',false,true);
+	//setcookie ( 'SESSIONID', '6c682e03d0b630e1f563f32b0f357a4e',0 ,'/','',false,true);
 	$S_Session_Id= $_COOKIE ['SESSIONID'];
 	$o_user = new WX_User_Info ();
 	$o_user->PushWhere ( array ('&&', 'SessionId', '=',$S_Session_Id) );	if ($o_user->getAllCount () > 0) {
@@ -47,7 +47,7 @@ if ($b_login == false) //如果登陆信息，验证用户是否已经注册
 	if ($a_user_info['subscribe']!=1)
 	{
 		//说明没有关注微信,退出
-		echo "<script>location.href='".RELATIVITY_PATH."'sub/wechat/subscription.php'</script>"; 
+		echo "<script>location.href='".RELATIVITY_PATH."sub/wechat/subscription.php'</script>"; 
 		exit(0);
 	}
 	//	
