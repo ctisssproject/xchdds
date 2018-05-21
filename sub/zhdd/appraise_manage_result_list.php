@@ -41,12 +41,7 @@ echo ($o_scroll->getAppraiseResultList ($o_page));
 	<script type="text/javascript" language="javascript">
 		function search()
 		{
-			if($('#Vcl_Owner').val()=='')
-			{
-				 parent.parent.Dialog_Message('请输入搜索条件 ！');
-				 return;
-			}
-			location='appraise_manage_result_list.php?id='+<?php echo($_GET['id'])?>+'&owner='+$('#Vcl_Owner').val();
+			location='appraise_manage_result_list.php?id='+<?php echo($_GET['id'])?>+'&owner='+$('#Vcl_Owner').val()+'&schoolname='+$('#Vcl_SchoolName').val()+'&year='+$('#Vcl_Year').val();
 		}
 	S_Root='../../';
 	parent.parent.parent.Common_CloseDialog();

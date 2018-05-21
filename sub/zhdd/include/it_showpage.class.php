@@ -14,14 +14,23 @@ class ShowPage extends It_Basic {
 	} 
 	
 	public function getAppraiseResultList($n_page) {
-		$this->S_FileName = 'appraise_manage_result_list.php?id='.$_GET['id'].'&owner='.$_GET['owner'].'&';
+		$this->S_FileName = 'appraise_manage_result_list.php?id='.$_GET['id'].'&owner='.$_GET['owner'].'&schoolname='.$_GET['schoolname'].'&year='.$_GET['year'].'&';
 		$this->N_Page = $n_page;
 		$o_article = new Zhdd_Appraise_Answers_View (); 
 		if ($_GET['owner']!='')
 		{
-			$o_article->PushWhere ( array ('&&', 'SchoolName', 'like','%'.$_GET['owner'].'%') );
+			$o_article->PushWhere ( array ('&&', 'OwnerName', 'like','%'.$_GET['owner'].'%') );
 			$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
-			$o_article->PushWhere ( array ('||', 'OwnerName', 'like','%'.$_GET['owner'].'%') );
+		}
+		if ($_GET['year']!='')
+		{
+			$o_article->PushWhere ( array ('&&', 'Date', '>=',$_GET['year'].'-01-01') );
+			$o_article->PushWhere ( array ('&&', 'Date', '<=',$_GET['year'].'-12-31') );
+			$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
+		}
+		if ($_GET['schoolname']!='')
+		{
+			$o_article->PushWhere ( array ('&&', 'SchoolName', 'like','%'.$_GET['schoolname'].'%') );
 			$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
 		}
 		$o_article->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) );
@@ -64,10 +73,24 @@ class ShowPage extends It_Basic {
 					                <td class="small1" align="left"  valign="bottom" nowrap="nowrap">
 					                <input value="返回" class="BigButtonA" onclick="location=\''.str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']).'appraise_manage.php\'" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					                    共<span class="big4">&nbsp;' . $n_allcount . '</span>&nbsp;个评价&nbsp;&nbsp;&nbsp;&nbsp;
-					                    <input class="BigInput" id="Vcl_Owner" style="height: 20px;width:200px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['owner'].'" placeholder="学校名称/评价人">
+					                    <select id="Vcl_Year" class="BigSelect">
+											<option value="">年份</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+										</select>
+										<script>
+											$("#Vcl_Year").val("'.$_GET['year'].'");
+										</script>
+										<input class="BigInput" id="Vcl_SchoolName" style="height: 20px;width:100px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['schoolname'].'" placeholder="学校名称人">
+										<input class="BigInput" id="Vcl_Owner" style="height: 20px;width:60px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['owner'].'" placeholder="评价人">
 					                    <input class="BigButtonA" onclick="search()" type="button" value="搜索">
 					                    &nbsp;&nbsp;
 					                    <input class="BigButtonB" onclick="location=\'appraise_manage_result_list.php?id='.$_GET['id'].'\'" type="button" value="全部显示">
+										&nbsp;&nbsp;
+										<input class="BigButtonC" onclick="location=\'appraise_manage_result_list_output.php?id='.$_GET['id'].'&owner='.$_GET['owner'].'&schoolname='.$_GET['schoolname'].'&year='.$_GET['year'].'\'" type="button" value="导出当前记录">
 					                </td>
 					                 <td class="small1" align="right" valign="bottom" style="width:330px">
 										' . $s_pagebutton . '
