@@ -30,6 +30,10 @@ setcookie ( 'VALIDCODE', '', 0 );
 <script type="text/javascript" src="js/dialog.fun.js"></script>
 <script type="text/javascript" src="js/common.fun.js"></script>
 <script type="text/javascript" src="js/ajax.class.js"></script>
+<script type="text/javascript" src="js/jsbn.js"></script>
+    <script type="text/javascript" src="js/prng4.js"></script>
+    <script type="text/javascript" src="js/rng.js"></script>
+    <script type="text/javascript" src="js/rsa.js"></script>
 </head>
 <body scroll="auto" style="background-color: white">
 
@@ -39,14 +43,14 @@ setcookie ( 'VALIDCODE', '', 0 );
 <div id="logo">
 <div id="form">
 <div class="left">
-<div class="user"><input class="text" name="Vcl_UserName" maxlength="20"
+<div class="user"><input class="text" name="Vcl_UserName" id="Vcl_UserName" maxlength="20"
 	onmouseover="this.focus()" onfocus="this.select()" value="" type="text" /></div>
-<div class="pwd"><input class="text" name="Vcl_Password"
+<div class="pwd"><input class="text" name="Vcl_Password" id="Vcl_Password"
 	onmouseover="this.focus()" onfocus="this.select()" value=""
 	type="password" /></div>
 </div>
 <div class="right"><input class="submit" title="登录" value=""
-	type="submit" /></div>
+	type="button" onclick="cmdEncrypt()"/></div>
 </div>
 <div class="msg">
 <div></div>
@@ -61,6 +65,19 @@ setcookie ( 'VALIDCODE', '', 0 );
 <div id="master_box"
 	style="position: absolute; z-index: 2000; left: 0px; top: -500px;"></div>
 <script type="text/javascript" language="javascript">
+			function cmdEncrypt() {
+				if (document.getElementById('Vcl_Password').value!='' && document.getElementById('Vcl_Password').value!='')
+				{
+					var passwd = document.getElementById('Vcl_Password').value;
+				    var rsa = new RSAKey();
+				    var modulus = "DB1EA572B55F5D9C8ADF092F5DCC3559CFEA8CE8BB54E3A71DA9B1AFBD7D17CF80ADB224FE4EA5379BC782F41C137748D8F1B5A36AD62A127EF5E87EFB25C209A66BCEE9925CE09631BF2271E81123E93438646625080FF04F4F2CF532B077E3E390486DF40E7586F0AE522C873F33170222F46BDB6084F55DE6B7031E55DBE7";
+					var exponent = "10001";
+				    rsa.setPublic(modulus, exponent);
+				    var res = rsa.encrypt(passwd);
+				    document.getElementById('Vcl_Password').value=res
+				    document.getElementById('dialog_form').submit();
+				}
+			}
 			checkIE();
             S_Root='';
             function autoLogin(username,password,module)
