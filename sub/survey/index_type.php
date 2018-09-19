@@ -33,7 +33,7 @@ if (isset($_GET['id'])&& $_GET['id']>0)
 			setcookie ('TYPE',$o_temp->getId(0),0);
 			setcookie ('CODE',$_code->getCode(0),0);
 		}else{
-			echo ('<script>window.alert("您输入的身份编号有误，请重新输入！！");location=\'index.php\'</script>');
+			echo ('<script>window.alert("您输入的身份编号有误或已被使用，请重新输入！！");location=\'index.php\'</script>');
 			exit(0);
 		}
 	}else{
