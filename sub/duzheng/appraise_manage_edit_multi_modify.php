@@ -1,11 +1,11 @@
 <?php
 define ( 'RELATIVITY_PATH', '../../' );
-define ( 'MODULEID', 31003 );
+define ( 'MODULEID', 33001 );
 $O_Session='';
 require_once RELATIVITY_PATH . 'include/it_include.inc.php';
 require_once 'include/db_table.class.php';
 $O_Session->ValidModuleForPage(MODULEID);
-$o_table=new Zhdd_Appraise_Questions($_GET['id']);
+$o_table=new Dz_Appraise_Questions($_GET['id']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,7 +33,7 @@ $o_table=new Zhdd_Appraise_Questions($_GET['id']);
 	<tbody>
 		<tr>
 			<td><img src="../../images/edit.gif" align="absmiddle" /><span
-				class="big3"> 修改单选题</span></td>
+				class="big3"> 修改多选题</span></td>
 		</tr>
 	</tbody>
 </table>
@@ -43,7 +43,7 @@ $o_table=new Zhdd_Appraise_Questions($_GET['id']);
 		<tr>
 			<td class="TableData" colspan="2" nowrap="nowrap"
 				style="font-size: 14px; height:45px;background-color:#EEF9FF" align="center"><strong>基本信息</strong></td>
-		</tr>
+		</tr>		
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120">题目：</td>
 			<td class="TableData"><input id="Vcl_Content" name="Vcl_Content"
@@ -64,7 +64,7 @@ $o_table=new Zhdd_Appraise_Questions($_GET['id']);
 			<td class="TableData">				
 			<?php
 				$a_option = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J','K','L','M','N','O','P','Q','R','S','T' );
-				$o_temp = new Zhdd_Appraise_Options ();
+				$o_temp = new Dz_Appraise_Options ();
 				$o_temp->PushWhere ( array ('&&', 'QuestionId', '=', $o_table->getId () ) );
 				$o_temp->PushOrder ( array ('Number', 'A' ) );
 				$n_count=$o_temp->getAllCount();

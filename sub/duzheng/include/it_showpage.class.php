@@ -16,7 +16,7 @@ class ShowPage extends It_Basic {
 	public function getAppraiseResultList($n_page) {
 		$this->S_FileName = 'appraise_manage_result_list.php?id='.$_GET['id'].'&owner='.$_GET['owner'].'&schoolname='.$_GET['schoolname'].'&year='.$_GET['year'].'&';
 		$this->N_Page = $n_page;
-		$o_article = new Zhdd_Appraise_Answers_View (); 
+		$o_article = new Dz_Appraise_Answers_View (); 
 		if ($_GET['owner']!='')
 		{
 			$o_article->PushWhere ( array ('&&', 'OwnerName', 'like','%'.$_GET['owner'].'%') );
@@ -56,7 +56,7 @@ class ShowPage extends It_Basic {
 		if ($n_count>0)
 		{
 			$a_vcl=json_decode($o_article->getAppraiseInfo(0));
-			$o_questions=new Zhdd_Appraise_Questions($o_article->getAppraiseId(0));
+			$o_questions=new Dz_Appraise_Questions($o_article->getAppraiseId(0));
 			$o_questions->PushWhere ( array ('&&', 'AppraiseId', '=',$o_article->getAppraiseId(0)) );
 			$n_last_question=$o_questions->getAllCount();
 		}
@@ -85,7 +85,7 @@ class ShowPage extends It_Basic {
 											$("#Vcl_Year").val("'.$_GET['year'].'");
 										</script>
 										<input class="BigInput" id="Vcl_SchoolName" style="height: 20px;width:100px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['schoolname'].'" placeholder="学校名称">
-										<input class="BigInput" id="Vcl_Owner" style="height: 20px;width:60px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['owner'].'" placeholder="评价人">
+										<input style="display:none" class="BigInput" id="Vcl_Owner" style="height: 20px;width:60px; font-size: 14px;" type="text" size="80" maxlength="50" value="'.$_GET['owner'].'" placeholder="评价人">
 					                    <input class="BigButtonA" onclick="search()" type="button" value="搜索">
 					                    &nbsp;&nbsp;
 					                    <input class="BigButtonB" onclick="location=\'appraise_manage_result_list.php?id='.$_GET['id'].'\'" type="button" value="全部显示">
@@ -108,9 +108,6 @@ class ShowPage extends It_Basic {
 					                     学校名称
 					                </td>	
 					                '.$s_title.'				                
-					                <td align="center" nowrap="nowrap" width="150px">
-					           	评价人     
-					                </td>
 									<td align="center" nowrap="nowrap" width="80px">
 					           	综合评价    
 					                </td>
@@ -140,7 +137,7 @@ class ShowPage extends It_Basic {
 			$s_last_anwser='';
 			eval('$s_last_anwser=$o_article->getAnswer'.$n_last_question.'($i);');
 			$s_last_anwser=str_replace('"', '', $s_last_anwser);//去掉多余的双引号
-			$o_option=new Zhdd_Appraise_Options($s_last_anwser);
+			$o_option=new Dz_Appraise_Options($s_last_anwser);
 			$o_body .= '
 		            <tr class="TableLine1">
 		            	<td align="center">
@@ -150,9 +147,6 @@ class ShowPage extends It_Basic {
 		                   <b>' . $o_article->getSchoolName ( $i ) . '</b>
 		                </td>	
 		                '.$s_title.'	                
-		                <td align="center">
-		                  ' . $o_article->getOwnerName ( $i ) . '
-		                </td>
  						<td align="center">
 		                  '.$o_option->getNumber().'
 		                </td>	
@@ -168,7 +162,7 @@ class ShowPage extends It_Basic {
 	public function getAppraiseTotalList($n_page) {
 		$this->S_FileName = 'appraise_manage_total_list.php?id='.$_GET['id'].'&owner='.$_GET['owner'];
 		$this->N_Page = $n_page;
-		$o_article = new Zhdd_Appraise_Answers_View ();
+		$o_article = new Dz_Appraise_Answers_View ();
 		if ($_GET['owner']!='')
 		{
 			$o_article->PushWhere ( array ('&&', 'SchoolName', 'like','%'.$_GET['owner'].'%') );
