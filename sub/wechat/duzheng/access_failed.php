@@ -1,6 +1,6 @@
 <?php
 $RELATIVITY_PATH='../../../';
-require_once '../include/it_include.inc.php';
+require_once 'include/it_include.inc.php';
 $s_title='权限不足';
 require_once '../header.php';
 ?>

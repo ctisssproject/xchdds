@@ -21,7 +21,7 @@ class Operate extends Bn_Basic {
 		{
 			
 		}else{
-			$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，操作错误，请与管理员联系！错误代码：[1001]\');' );
+			//$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，操作错误，请与管理员联系！错误代码：[1001]\');' );
 		}
 		$a_single_answer=array();
 		require_once RELATIVITY_PATH . 'sub/duzheng/include/db_table.class.php';

@@ -1,6 +1,6 @@
 <?php
 $RELATIVITY_PATH='../../../';
-require_once '../include/it_include.inc.php';
+require_once 'include/it_include.inc.php';
 $s_title='问卷调查';
 require_once '../header.php';
 require_once RELATIVITY_PATH . 'sub/survey/include/db_table.class.php';

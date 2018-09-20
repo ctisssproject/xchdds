@@ -1,6 +1,6 @@
 <?php
 $RELATIVITY_PATH='../../../';
-require_once '../include/it_include.inc.php';
+require_once 'include/it_include.inc.php';
 $s_title='数据加载失败';
 require_once '../header.php';
 ?>

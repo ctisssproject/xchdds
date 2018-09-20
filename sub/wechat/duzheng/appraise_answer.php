@@ -1,19 +1,11 @@
 <?php
 $RELATIVITY_PATH='../../../';
-require_once '../include/it_include.inc.php';
+require_once 'include/it_include.inc.php';
 $s_title='综合督导-评价';
 require_once '../header.php';
 require_once RELATIVITY_PATH . 'sub/duzheng/include/db_table.class.php';
 require_once RELATIVITY_PATH . 'include/bn_basic.class.php';  
 $o_bn_basic=new Bn_Basic();
-//想判断教师权限，是否为绑定用户
-$o_temp=new Base_User_Wechat_View();
-$o_temp->PushWhere ( array ('&&', 'WechatId', '=',$o_wx_user->getId()) ); 
-if ($o_temp->getAllCount()==0)
-{
-	//echo "<script>location.href='access_failed.php'</script>"; 
-	//exit(0);
-}
 $o_survey=new Dz_Appraise($_GET['id']);
 /*
 //判断用户是否已经做过此问卷
