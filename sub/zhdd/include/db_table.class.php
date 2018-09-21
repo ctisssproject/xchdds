@@ -713,4 +713,51 @@ class Zhdd_Appraise_Answers_View extends CRUD
 		));
 	}
 }
+class Zhdd_Appraise_Input extends CRUD
+{
+	protected $Id;
+	protected $SurveyId;
+	protected $SchoolId;
+	protected $SchoolName;
+	protected $Type;
+	protected $Key1;
+	protected $Key2;
+	protected $Key3;
+	protected $Key4;
+	protected $Key5;
+	protected $Key6;
+	protected $Key7;
+	protected $Key8;
+	protected $Key9;
+	protected $Key10;
+	
+	protected function DefineKey()
+	{
+		return 'id';
+	}
+	protected function DefineTableName()
+	{
+		return 'zhdd_appraise_input';
+	}
+	protected function DefineRelationMap()
+	{
+		return(array(
+				'id' => 'Id',
+				'survey_id' => 'SurveyId',
+				'school_id' => 'SchoolId',
+				'school_name' => 'SchoolName',
+				'type' => 'Type',
+				'key1' => 'Key1',
+				'key2' => 'Key2',
+				'key3' => 'Key3',
+				'key4' => 'Key4',
+				'key5' => 'Key5',
+				'key6' => 'Key6',
+				'key7' => 'Key7',
+				'key8' => 'Key8',
+				'key9' => 'Key9',
+				'key10' => 'Key10'
+		));
+	}
+}
 ?>

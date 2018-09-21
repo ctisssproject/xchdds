@@ -1,5 +1,5 @@
 <?php
-error_reporting ( 0 );
+//error_reporting ( 0 );
 require_once 'db_table.class.php';
 require_once RELATIVITY_PATH . 'include/db_table.class.php';
 require_once RELATIVITY_PATH . 'include/db_view.class.php';
@@ -865,6 +865,135 @@ class Operate extends Bn_Basic {
 				$this->setReturn('parent.parent.parent.Dialog_Message("请选择上传的模版文件！");');
 			}			
 		}		
+	}
+	public function AppraiseMakeInput($n_uid)
+	{
+		if (! ($n_uid > 0)) {
+			//直接退出系统
+			$this->setReturn('parent.goLoginPage()');
+		}
+		
+		$o_user = new Single_User ( $n_uid );
+		if ($o_user->ValidModule ( 31003 )) {
+			if ($_FILES ['Vcl_File'] ['size'] > 0) {
+				mkdir ( RELATIVITY_PATH . 'userdata/zhdd/', 0777 );
+				mkdir ( RELATIVITY_PATH . 'userdata/zhdd/appraise/', 0777 );
+				mkdir ( RELATIVITY_PATH . 'userdata/zhdd/appraise/input/', 0777 );
+				$allowpictype = array ('xlsx');
+				$fileext = strtolower ( trim ( substr ( strrchr ( $_FILES ['Vcl_File'] ['name'], '.' ), 1 ) ) );
+				if (! in_array ( $fileext, $allowpictype )) {
+					$this->setReturn('parent.parent.parent.Dialog_Message("上传文件类型为.xlsx！");');
+				}
+				$filePath= RELATIVITY_PATH . 'userdata/zhdd/appraise/input/'.$this->getPost('Id').'.' . $fileext;
+				copy ( $_FILES ['Vcl_File'] ['tmp_name'],$filePath);
+				
+				//获取上传的excel文件，验证学校名称是否合法
+				require_once RELATIVITY_PATH . 'include/PHPExcel.php';
+				$PHPReader = new PHPExcel_Reader_Excel2007 ();
+				if (! $PHPReader->canRead ( $filePath )) {
+					$PHPReader = new PHPExcel_Reader_Excel2007 ();
+					if (! $PHPReader->canRead ( $filePath )) {
+						exit(0);
+					}
+				}
+				$PHPExcel = $PHPReader->load ( $filePath );
+				$currentSheet = $PHPExcel->getSheet ( 0 );
+				$allColumn = $currentSheet->getHighestColumn ();
+				$allRow = $currentSheet->getHighestRow ();
+				$n_count=1;
+				//验证导入信息的列
+				$o_survey=new Zhdd_Appraise($this->getPost('Id'));
+				$a_vcl=json_decode($o_survey->getInfo());
+				if (('序号'!=$currentSheet->getCell ($this->get_column_number((1),1))->getValue ())||('学校名称'!=$currentSheet->getCell ($this->get_column_number((2),1))->getValue ()))
+				{
+					$this->setReturn ( 'parent.parent.parent.Dialog_Error("上传失败，上传文件与模版不符！");' );
+				}
+				for($i=0;$i<count($a_vcl);$i++)
+				{
+					if (rawurldecode($a_vcl[$i])!=$currentSheet->getCell ($this->get_column_number(($i+3),1))->getValue ())
+					{
+						$this->setReturn ( 'parent.parent.parent.Dialog_Error("上传失败，上传文件与模版不符！");' );
+						break;
+					}
+				}			
+				//删除所有记录
+				$o_input=new Zhdd_Appraise_Input();
+				$o_input->PushWhere ( array ('&&', 'SurveyId', '=',$this->getPost('Id')) );
+				$o_input->DeletionWhere();				
+				for($currentRow = 2; $currentRow <= $allRow; $currentRow ++) {
+					$o_school=new Base_Dept();
+					$o_school->PushWhere ( array ('&&', 'Name', '=',$currentSheet->getCell ($this->get_column_number(2,$currentRow))->getValue ()) );
+					$o_school->PushWhere ( array ('&&', 'ParentId', '=',1) );
+					$o_school->getAllCount ();
+					$s_rul='';
+					$s_text='';
+					//echo(excelTime($currentSheet->getCell (get_column_number(3,2))->getValue ()-1));
+					//echo($currentSheet->getCell (get_column_number(3,2))->getValue ());
+					if ($o_school->getAllCount ()==0)
+					{
+						$this->setReturn ( 'parent.parent.parent.Dialog_Error("第'.$currentRow.'行，学校名称有误！");' );
+					}else{
+						//构建信息和二维码参数
+						$o_input=new Zhdd_Appraise_Input();
+						$o_input->setSurveyId($this->getPost('Id'));
+						$o_input->setSchoolId($o_school->getDeptId(0));
+						$o_input->setSchoolName($o_school->getName(0));
+						$o_input->setType($o_survey->getType());
+						for($i=0;$i<count($a_vcl);$i++)
+						{
+							eval('$o_input->setKey'.($i+1).'($this->excelTime($currentSheet->getCell($this->get_column_number(($i+3),$currentRow))->getValue ()));');
+						}
+						$o_input->Save();
+					}
+				}
+				$this->setReturn('parent.parent.parent.Dialog_Success("操作成功！",function(){parent.location.reload()});');
+			}else{
+				$this->setReturn('parent.parent.parent.Dialog_Message("请选择上传的模版文件！");');
+			}
+		}
+	}
+	private function excelTime($date, $time = false) {
+		if ((int)$date>25568)
+		{
+			$date=$date-1;
+			if(function_exists('GregorianToJD')){
+				if (is_numeric( $date )) {
+					$jd = GregorianToJD( 1, 1, 1970 );
+					$gregorian = JDToGregorian( $jd + intval ( $date ) - 25569 );
+					$date = explode( '/', $gregorian );
+					$date_str = str_pad( $date [2], 4, '0', STR_PAD_LEFT )
+					."-". str_pad( $date [0], 2, '0', STR_PAD_LEFT )
+					."-". str_pad( $date [1], 2, '0', STR_PAD_LEFT )
+					. ($time ? " 00:00:00" : '');
+					return $date_str;
+				}
+			}else{
+				$date=$date>25568?$date+1:25569;
+				/*There was a bug if Converting date before 1-1-1970 (tstamp 0)*/
+				$ofs=(70 * 365 + 17+2) * 86400;
+				$date = date("Y-m-d",($date * 86400) - $ofs).($time ? " 00:00:00" : '');
+			}
+			return $date;
+		}else{
+			return $date;
+		}
+	}
+	private function get_column_number($column,$row)
+	{
+		$a_number=array('','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+		//先除以24，然后取整
+		//echo(floor($column/24));
+		if ($column>26)
+		{
+			if ($column%26==0)
+			{
+				return $a_number[floor($column/26)-1].$a_number[26].$row;
+			}else{
+				return $a_number[floor($column/26)].$a_number[$column%26].$row;
+			}
+		}else{
+			return $a_number[$column].$row;
+		}
 	}
 }
 
