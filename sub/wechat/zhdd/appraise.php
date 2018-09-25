@@ -17,7 +17,7 @@ for ($i=0;$i<$o_input->getAllCount();$i++)
 {
 	array_push($a_type, $o_input->getType($i));
 	array_push($a_schoolName, $o_input->getSchoolName($i));
-	array_push($a_subject, $o_input->getKey2($i));
+	array_push($a_subject, $o_input->getKey3($i));
 }
 $a_type=array_values(array_unique($a_type));
 $a_schoolName=array_values(array_unique($a_schoolName));

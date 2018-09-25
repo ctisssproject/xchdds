@@ -29,7 +29,7 @@ $o_survey=new Zhdd_Appraise($_GET['id']);
 <input type="hidden" name="Vcl_Id" value="<?php echo($_GET['id'])?>"/>
 <input type="hidden" name="Vcl_FunName" value="AppraiseMakeInput"/>
 <table class="small" border="0" cellpadding="3" cellspacing="0"
-	style="margin-left:auto;margin-right:auto;min-width:450px;" align="center" style="margin-top: 10px">
+	style="margin-left:auto;margin-right:auto;min-width:600px;" align="center" style="margin-top: 10px">
 	<tbody>
 		<tr>
 			<td><img src="../../images/edit.gif" align="absmiddle" /><span
@@ -37,7 +37,7 @@ $o_survey=new Zhdd_Appraise($_GET['id']);
 		</tr>
 	</tbody>
 </table>
-<table class="TableBlock_Editor" align="center" style="margin-left:auto;margin-right:auto;max-width:600px;margin-top:10px">
+<table class="TableBlock_Editor" align="center" style="margin-left:auto;margin-right:auto;min-width:600px;margin-top:10px">
 	<tbody>
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 上传模版：</td>
@@ -49,6 +49,8 @@ $o_survey=new Zhdd_Appraise($_GET['id']);
 		<tr class="TableControl" align="center">
 			<td colspan="2" nowrap="nowrap" height="40"><input value="提交" class="BigButtonA"
 				onclick="appraise_manage_make_qrcode_batch_submit()" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;
+				<input value="下载二维码" class="BigButtonC"
+				onclick="window.open('images/appraise_qrcode.jpg','_blank')" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;
 				<input value="下载模版" class="BigButtonB"
 				onclick="window.open('appraise_manage_make_qrcode_batch_template.php?id=<?php echo($_GET['id'])?>','_blank')" type="button" />&nbsp;&nbsp;&nbsp;&nbsp;
 				<input value="返回" class="BigButtonA" onclick="location='<?php echo(str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']))?>appraise_manage.php'" type="button" />
