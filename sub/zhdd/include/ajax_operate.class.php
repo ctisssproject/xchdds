@@ -916,10 +916,17 @@ class Operate extends Bn_Basic {
 						break;
 					}
 				}			
-				//删除所有记录
-				$o_input=new Zhdd_Appraise_Input();
-				$o_input->PushWhere ( array ('&&', 'SurveyId', '=',$this->getPost('Id')) );
-				$o_input->DeletionWhere();				
+				//删除所有这个学校的记录
+				$o_school=new Base_Dept();
+				$o_school->PushWhere ( array ('&&', 'Name', '=',$currentSheet->getCell ($this->get_column_number(2,2))->getValue ()) );
+				$o_school->PushWhere ( array ('&&', 'ParentId', '=',1) );
+				if ($o_school->getAllCount ()>0)
+				{
+				    $o_input=new Zhdd_Appraise_Input();
+				    $o_input->PushWhere ( array ('&&', 'SurveyId', '=',$this->getPost('Id')) );
+				    $o_input->PushWhere ( array ('&&', 'SchoolId', '=',$o_school->getDeptId(0)) );
+				    $o_input->DeletionWhere();		
+				}						
 				for($currentRow = 2; $currentRow <= $allRow; $currentRow ++) {
 					$o_school=new Base_Dept();
 					$o_school->PushWhere ( array ('&&', 'Name', '=',$currentSheet->getCell ($this->get_column_number(2,$currentRow))->getValue ()) );
