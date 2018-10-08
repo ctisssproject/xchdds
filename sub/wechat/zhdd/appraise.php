@@ -17,7 +17,10 @@ for ($i=0;$i<$o_input->getAllCount();$i++)
 {
 	array_push($a_type, $o_input->getType($i));
 	array_push($a_schoolName, $o_input->getSchoolName($i));
-	array_push($a_subject, $o_input->getKey3($i));
+	if ($o_input->getType($i)!='中小学主题班（队）会')
+	{
+		array_push($a_subject, $o_input->getKey3($i));
+	}	
 }
 $a_type=array_values(array_unique($a_type));
 $a_schoolName=array_values(array_unique($a_schoolName));
@@ -39,7 +42,7 @@ $a_subject=array_values(array_unique($a_subject));
                 <label for="" class="weui-label">类型</label>
             </div>
             <div class="weui-cell__bd">
-                <select class="weui-select" id="Vcl_Type" >
+                <select class="weui-select" id="Vcl_Type" onchange="changeType(this)">
                 	<?php
                 	for($i=0;$i<count($a_type);$i++)
                 	{
@@ -64,7 +67,7 @@ $a_subject=array_values(array_unique($a_subject));
                 </select>
             </div>
         </div>
-        <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div id="subject" class="weui-cell weui-cell_select weui-cell_select-after">
             <div class="weui-cell__hd">
                 <label for="" class="weui-label">科目</label>
             </div>
@@ -100,7 +103,18 @@ $(function () {
 			$('.sss_gotop').fadeOut(300)
 		}
     });
+    changeType(document.getElementById('Vcl_Type'))
 }); 
+function changeType(obj)
+{
+	$('#Vcl_Subject').val('');
+	if (obj.value=="中小学主题班（队）会")
+	{
+		$('#subject').hide();
+	}else{
+		$('#subject').show();
+	}
+}
 //禁止分享
 //document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {WeixinJSBridge.call('hideOptionMenu');});
 </script>  

@@ -40,12 +40,20 @@ if((int)$_GET['school_id']>0)
 	echo "<script>location.href='loading_failed.php'</script>";
 	exit(0);
 }
+//判断问卷是否已经做过
+$o_answer=new Zhdd_Appraise_Answers();
+$o_answer->PushWhere ( array ('&&', 'Uid', '<>',$o_temp->getUid(0)) ); 
+$o_answer->PushWhere ( array ('&&', 'Parameter', '=',$_SERVER['QUERY_STRING']) );
+if ($o_answer->getAllCount()>0)
+{
+	echo "<script>location.href='access_failed2.php'</script>"; 
+	exit(0);
+}
 //查看这个督学是否已经评价过该项目
 $o_answer=new Zhdd_Appraise_Answers();
 $o_answer->PushWhere ( array ('&&', 'Uid', '=',$o_temp->getUid(0)) ); 
 $o_answer->PushWhere ( array ('&&', 'Parameter', '=',$_SERVER['QUERY_STRING']) ); 
 $o_answer->getAllCount();
-
 
 
 //http://10.189.240.42/xchdds/sub/wechat/zhdd/appraise_answer.php?id=11&school_id=141&info_0=%E5%88%9D%E4%B8%80%E7%8F%AD&info_1=%E8%AF%AD%E6%96%87&info_2=2014-12-12&info_3=%E4%BD%9C%E6%96%87&info_4=%E6%9D%8E%E5%B0%8F%E7%92%90
