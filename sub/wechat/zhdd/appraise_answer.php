@@ -125,7 +125,7 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 	    	<div class="weui-cell">
 	            <div class="weui-cell__hd"><label class="weui-label">学校名称</label></div>
 	            <div class="weui-cell__bd">
-	                <input readonly="readonly" class="weui-input" value="<?php echo($o_dept->getName(0))?>" name="" type="text" placeholder="必填">
+	                <input readonly="readonly" class="weui-input" value="<?php echo($o_dept->getName(0))?>" name="" type="text" placeholder="必填" readonly="readonly">
 	            </div>
 	        </div>
 	    	<?php 
@@ -136,7 +136,7 @@ if ($o_stu->getAllCount()==0 || $o_role->getAllCount()==0)
 	    		<div class="weui-cell">
 	                <div class="weui-cell__hd"><label class="weui-label"><?php echo(rawurldecode($a_vcl[$i]))?></label></div>
 	                <div class="weui-cell__bd">
-	                    <input class="weui-input" value="<?php echo(rawurldecode($_GET['info_'.$i]))?>" name="Vcl_Info_<?php echo($i)?>" type="text" placeholder="必填">
+	                    <input class="weui-input" value="<?php echo(rawurldecode($_GET['info_'.$i]))?>" name="Vcl_Info_<?php echo($i)?>" type="text" placeholder="必填"  readonly="readonly">
 	                </div>
 	            </div>	
 	    			<?php

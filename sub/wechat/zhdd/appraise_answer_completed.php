@@ -15,7 +15,7 @@ require_once RELATIVITY_PATH . 'sub/survey/include/db_table.class.php';
         </div>
     </div>
     <div style="padding:15px;">
-		<a class="weui-btn weui-btn_primary" onclick="document.addEventListener('WeixinJSBridgeReady', WeixinJSBridge.call('closeWindow'));">确定</a>
+		<a class="weui-btn weui-btn_primary" onclick="location='appraise.php'">确定</a>
 	</div>
 <script>
 $(function () {

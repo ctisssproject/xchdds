@@ -65,7 +65,7 @@ function getList()
 			}
 			$a_button='';
 			$a_add_button='';
-			//根据权限 判断按钮显示，杜学科36，督学科管理员39，责任督学37
+			//根据权限 判断按钮显示，杜学科36，督学科管理员39，责任督学37，临时督学40
 			if (have_role(39))
 			{
 				$a_add_button='<input value="添加" class="BigButtonB" onclick="location=\'zbtx_manage_project_modify.php\'" type="button" />';
@@ -90,7 +90,15 @@ function getList()
 				{
 					$a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
 				}
-			}			
+			}else if (have_role(40))
+			{
+			    $a_add_button='';
+			    $a_button='';
+			    if($o_term->getState($i)==1)
+			    {
+			        $a_button='<a href="javascript:;" onclick="location=\'zbtx_manage_list_school.php?id='.$o_term->getId ( $i ).'\'">查看</a>';
+			    }
+			}	
 			$s_record_list .= '
 				             <tr class="TableLine1">
 					                <td align="center" style="font-size:14px">
