@@ -341,10 +341,10 @@ class Operate extends Bn_Basic {
 				}
 				mkdir ( RELATIVITY_PATH . 'userdata/zhdd', 0777 );
 				mkdir ( RELATIVITY_PATH . 'userdata/zhdd/zbtx', 0777 );
-				$allowpictype = array ('jpg', 'jpeg', 'pdf', 'png' );
+				$allowpictype = array ('jpg', 'jpeg', 'pdf','pptx','ppt', 'png' );
 				$fileext = strtolower ( trim ( substr ( strrchr ( $_FILES ['Vcl_File'] ['name'], '.' ), 1 ) ) );
 				if (! in_array ( $fileext, $allowpictype )) {
-					$this->setReturn('parent.parent.parent.Dialog_Message("只能上传PDF 或 图片文件！");');
+					$this->setReturn('parent.parent.parent.Dialog_Message("只能上传PDF、PPT或 图片文件！");');
 				}
 				sleep(1);
 				$o_user_info=new Base_User_Info_View($n_uid);

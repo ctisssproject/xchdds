@@ -71,8 +71,8 @@ $o_result->getAllCount()
 		</tr>
 		<tr>
 			<td class="TableData" nowrap="nowrap" width="120"><span style="color:red">*</span> 上传文件：</td>
-			<td class="TableData"><input id="Vcl_File" name="Vcl_File" type="file" accept=".png,.jpg,.pdf"/><br/>
-			<span style="color:red">注：只能上传PDF 或 图片文件	</span>
+			<td class="TableData"><input id="Vcl_File" name="Vcl_File" type="file" accept=".png,.jpg,.pdf.ppt.pptx"/><br/>
+			<span style="color:red">注：只能上传PDF、PPT 或 图片文件	</span>
 				</td>
 		</tr>		
 		<tr class="TableControl" align="center">
