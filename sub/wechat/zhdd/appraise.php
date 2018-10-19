@@ -10,6 +10,7 @@ $o_bn_basic=new Bn_Basic();
 //读取当前所有日期下的记录
 $o_input=new Zhdd_Appraise_Input();
 $o_input->PushWhere ( array ('&&', 'Key1', '=',$o_bn_basic->GetDate()) );
+$o_input->PushWhere ( array ('||', 'Key1', '=',str_replace('-', '/',$o_bn_basic->GetDate())) );
 $a_type=array();
 $a_schoolName=array();
 $a_subject=array();
