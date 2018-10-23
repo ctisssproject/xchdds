@@ -163,10 +163,16 @@ class Operate extends Bn_Basic {
 			eval('$o_answer->setAnswer'.$n_column.'(json_encode($a_question_result[$i]));');
 			$n_column++;
 		}
-		if ($o_answer->Save()==false)
+		if($_COOKIE ['Answered']==1 && $_COOKIE ['SchoolId']==$this->getPost ( 'SchoolId' ) && $_COOKIE ['AppraiseId']==$o_survey->getId())
 		{
-			$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，服务器忙，请重试！\');' );
-		}
+		    
+		}else{
+		    if ($o_answer->Save()==false)
+		    {
+		        $this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，服务器忙，请重试！\');' );
+		    }
+		    setcookie ( 'Answered','1', 0 ,'/','',false,true);
+		}		
 		$this->setReturn ( "parent.location.href='".$this->getPost ( 'Url' )."appraise_answer_completed.php?id=".$o_survey->getId()."';" );
 	}
 	}

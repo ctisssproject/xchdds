@@ -5,21 +5,21 @@ $s_title='综合督导-评价';
 require_once '../header.php';
 require_once RELATIVITY_PATH . 'sub/duzheng/include/db_table.class.php';
 require_once RELATIVITY_PATH . 'include/bn_basic.class.php';  
+if ($_COOKIE ['AppraiseId']!=$_GET['id'])
+{
+    setcookie ( 'AppraiseId',$_GET['id'], 0 ,'/','',false,true);
+    setcookie ( 'SchoolId',$_GET['school_id'], 0 ,'/','',false,true);
+    setcookie ( 'Answered','0', 0 ,'/','',false,true);
+}
+//如果第二次进入该页面，并且之前做过，那么调整到完成
+if($_COOKIE ['Answered']==1 && $_COOKIE ['SchoolId']==$_GET['school_id'] && $_COOKIE ['AppraiseId']==$_GET['id'])
+{
+    echo "<script>location.href='appraise_answer_completed.php'</script>";
+    exit(0);
+}
 $o_bn_basic=new Bn_Basic();
 $o_survey=new Dz_Appraise($_GET['id']);
-/*
-//判断用户是否已经做过此问卷
-$o_answer=new Dz_Appraise_Answers();
-$o_answer->PushWhere ( array ('&&', 'AppraiseId', '=',$_GET['id']) ); 
-$o_answer->PushWhere ( array ('&&', 'Uid', '=',$o_temp->getUid(0)) );
-$o_answer->PushWhere ( array ('&&', 'School', '=',$o_temp->getUid(0)) );
-if ($o_answer->getAllCount()>0)
-{
-	//已经答题，跳转到完成页面
-	echo "<script>location.href='survey_answer_completed.php?id=".$o_survey->getId()."'</script>"; 
-	exit(0);
-}
-*/
+
 if($o_survey->getState()!='1')
 {
 	echo "<script>location.href='access_failed.php'</script>"; 
@@ -34,7 +34,7 @@ if((int)$_GET['school_id']>0)
 }
 //查看这个督学是否已经评价过该项目
 $o_answer=new Dz_Appraise_Answers();
-$o_answer->PushWhere ( array ('&&', 'Uid', '=',100) ); 
+$o_answer->PushWhere ( array ('&&', 'Uid', '=',10000) ); 
 $o_answer->getAllCount();
 
 
