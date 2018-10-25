@@ -29,6 +29,13 @@ class Operate extends Bn_Basic {
 			}
 			$o_input->PushWhere ( array ('&&', 'Type', '=',$this->getPost('type')) );
 			$o_input->PushWhere ( array ('&&', 'SchoolName', '=',$this->getPost('schoolname')) );
+			$o_input->PushWhere ( array ('||', 'Key1', '=',str_replace('-', '/', $this->GetDate())) );
+			if ($this->getPost('subject')!='')
+			{
+			    $o_input->PushWhere ( array ('&&', 'Key3', '=',$this->getPost('subject')) );
+			}
+			$o_input->PushWhere ( array ('&&', 'Type', '=',$this->getPost('type')) );
+			$o_input->PushWhere ( array ('&&', 'SchoolName', '=',$this->getPost('schoolname')) );
 			for ($i=0;$i<$o_input->getAllCount();$i++)
 			{
 				$s_rul='id='.$o_input->getSurveyId($i);
