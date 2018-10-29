@@ -147,7 +147,25 @@ class Operate extends Bn_Basic {
 	    {
 	    	$o_answer=new Zhdd_Appraise_Answers($this->getPost ( 'AnswerId' ));
 	    }else{
+	    	//判断问卷是否已经做过
 	    	$o_answer=new Zhdd_Appraise_Answers();
+	    	$o_answer->PushWhere ( array ('&&', 'Uid', '<>',$o_stu->getUid(0)) );
+	    	$o_answer->PushWhere ( array ('&&', 'Parameter', '=',$this->getPost ( 'Parameter' )) );
+	    	if ($o_answer->getAllCount()>0)
+	    	{
+	    		$this->setReturn ( 'parent.Common_CloseDialog();parent.Dialog_Error(\'对不起，该课程已被其他督学评价，请更换！\');' );
+	    		exit(0);
+	    	}
+	    	//查看这个督学是否已经评价过该项目
+	    	$o_answer=new Zhdd_Appraise_Answers();
+	    	$o_answer->PushWhere ( array ('&&', 'Uid', '=',$o_stu->getUid(0)) );
+	    	$o_answer->PushWhere ( array ('&&', 'Parameter', '=',$this->getPost ( 'Parameter' )) );
+	    	if ($o_answer->getAllCount()>0)
+	    	{
+	    		$o_answer=new Zhdd_Appraise_Answers($o_answer->getId(0));
+	    	}else{
+	    		$o_answer=new Zhdd_Appraise_Answers();
+	    	}	    	
 	    }
 		$o_answer->setAppraiseId($o_survey->getId());
 		$o_answer->setSchoolId($this->getPost ( 'SchoolId' ));
