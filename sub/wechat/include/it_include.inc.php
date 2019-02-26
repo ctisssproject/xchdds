@@ -1,4 +1,5 @@
 <?php
+exit();
 if(isset($RELATIVITY_PATH))
 {
 	//如果相对路径设置过，那么相对路径改为设置的值，否则用默认值
