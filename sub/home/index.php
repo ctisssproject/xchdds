@@ -289,7 +289,7 @@ function get_week($date){
                 <div class="open_government">
                     <img class="government_title" alt="" src="images/government_img.jpg" />
                     <div class="government_btn_box">
-                        <div class="government_btn" onclick="location='http://dudao.xchjw.gov.cn/sub/survey/'">督导问卷调查</div>
+                        <div class="government_btn" onclick="location='<?php echo(currentPath())?>../../sub/survey/'">督导问卷调查</div>
                         <div class="government_btn" style="border:0px;">&nbsp;</div>
                         <div class="government_btn" style="border:0px;">&nbsp;</div>
                         <div class="government_btn" style="border:0px;">&nbsp;</div>
@@ -442,5 +442,9 @@ function get_week($date){
             </div>
         </div>
 <?php 
+function currentPath()
+{
+    return str_replace ( substr( $_SERVER['PHP_SELF'] , strrpos($_SERVER['PHP_SELF'] , '/')+1 ), '', $_SERVER['PHP_SELF']);
+}
 require_once 'index_footer.php';
 ?>
