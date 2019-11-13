@@ -195,76 +195,157 @@ echo ($o_subject->getTitle ())?></h2>
         <br/>
         <br/>
   	<div class="centent">
-		<p><strong>一、发展规划</strong></p>
+		<p><strong>一、组织领导</strong></p>
 	</div>
 	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(一) 办学思想与学校规划</strong></p>
+		<p><strong>(一) 党的领导</strong></p>
 	</div>    
 	<?php 
 	OutputItem(1,2);
 	?>  
-	<div class="centent" style="margin-top:40px;">
-		<p><strong>二、队伍建设</strong></p>
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>(二) 办学方向</strong></p>
+	</div>  
+	<?php 
+	OutputItem(3,4);
+	?>  
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（三）发展规划</strong></p>
+	</div>  
+	<?php 
+	OutputItem(5,5); 
+	?>  
+	<div class="centent">
+		<p><strong>二、学校治理</strong></p>
 	</div>
 	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(二) 干部队伍建设</strong></p>
-	</div>    
+		<p><strong>（四）依法办学</strong></p>
+	</div>  
 	<?php 
-	OutputItem(3,6);
+	OutputItem(6,8);
+	?>  
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（五）民主管理</strong></p>
+	</div>  
+	<?php 
+	OutputItem(9,10);
+	?>  
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（六）社会参与</strong></p>
+	</div>  
+	<?php 
+	OutputItem(11,12);
+	?>  
+	<div class="centent">
+		<p><strong>三、教师队伍</strong></p>
+	</div>
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（七）师德师风建设</strong></p>
+	</div>  
+	<?php 
+	OutputItem(13,14);
+	?>  
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（八）专业化发展</strong></p>
+	</div>  
+	<?php 
+	OutputItem(15,16);
 	?> 
 	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(三) 教师队伍建设</strong></p>
-	</div>    
+		<p><strong>（九）发展保障</strong></p>
+	</div>  
 	<?php 
-	OutputItem(7,9);
-	?> 
-	<div class="centent" style="margin-top:40px;">
-		<p><strong>三、各项工作管理</strong></p>
+	OutputItem(17,18);
+	?>  
+	<div class="centent">
+		<p><strong>四、教育教学</strong></p>
 	</div>
 	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(四) 行政工作</strong></p>
-	</div>
+		<p><strong>（十）德育工作</strong></p>
+	</div>  
 	<?php 
-	OutputItem(10,14);
+	OutputItem(19,24);
+	?>  
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（十一）体卫工作</strong></p>
+	</div>  
+	<?php 
+	OutputItem(25,27);
 	?>
 	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(五) 德育工作</strong></p>
-	</div>
+		<p><strong>（十二）美育工作</strong></p>
+	</div>  
 	<?php 
-	OutputItem(15,19);
+	OutputItem(28,29);
 	?>
 	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(六) 教学工作</strong></p>
-	</div>
-	<?php 
-	OutputItem(20,26);
-	?>
-	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(七) 体育美育科技卫生健康教育</strong></p>
-	</div>
-	<?php 
-	OutputItem(27,29);
-	?>
-	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(八) 安全工作</strong></p>
-	</div>
+		<p><strong>（十三）劳动教育</strong></p>
+	</div>  
 	<?php 
 	OutputItem(30,30);
 	?>
-	<div class="centent" style="margin-top:40px;">
-		<p><strong>四、发展绩效与办学特色</strong></p>
-	</div>
 	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(九) 学生发展</strong></p>
-	</div>
+		<p><strong>（十四）课程建设</strong></p>
+	</div>  
 	<?php 
-	OutputItem(31,34);
+	OutputItem(31,32);
 	?>
 	<div class="centent" style="padding-top:35px;padding-left:15px;">
-		<p><strong>(十) 学校发展和特色</strong></p>
-	</div>
+		<p><strong>（十五）教学实施</strong></p>
+	</div>  
 	<?php 
-	OutputItem(35,37);
+	OutputItem(33,35);
+	?>
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（十六）质量监控</strong></p>
+	</div>  
+	<?php 
+	OutputItem(36,38);
+	?>
+	<div class="centent">
+		<p><strong>五、实践育人</strong></p>
+	</div>
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（十七）实践课程</strong></p>
+	</div>  
+	<?php 
+	OutputItem(39,40);
+	?>
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（十八）实践活动</strong></p>
+	</div>  
+	<?php 
+	OutputItem(41,42);
+	?>
+	<div class="centent">
+		<p><strong>六、办学成效</strong></p>
+	</div>
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（十九）学生发展</strong></p>
+	</div>  
+	<?php 
+	OutputItem(43,46);
+	?>
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（二十）教师发展</strong></p>
+	</div>  
+	<?php 
+	OutputItem(47,48);
+	?>
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（二十一）学校发展</strong></p>
+	</div>  
+	<?php 
+	OutputItem(49,50);
+	?>
+	<div class="centent">
+		<p><strong>七、特色工作（附加分10分）</strong></p>
+	</div>
+	<div class="centent" style="padding-top:35px;padding-left:15px;">
+		<p><strong>（二十二）创新发展</strong></p>
+	</div>  
+	<?php 
+	OutputItem(51,51);
 	?>
 </div>
     <div style="clear:both;padding:30px; text-align: right; font-style: italic; width: 750px; font-weight: bold;color:red"><p>完成所有打分，请点击"提交"按钮，并不要做任何操作，耐心等待系统提示！！</p></div>

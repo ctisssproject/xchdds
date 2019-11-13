@@ -166,6 +166,18 @@ function getScore($number)
 			4.79～0
 			</td>');
 	}
+	if ($number==10)
+	{
+	    echo('<td>
+			10～8
+			</td>
+			<td>
+			7.9～6
+			</td>
+			<td>
+			5.9～0
+			</td>');
+	}
 }
 function getScoreSingle($o_item,$o_subject_item,$n_number,$b=FALSE)
 {
@@ -276,36 +288,34 @@ $o_date = new DateTime ( 'Asia/Chongqing' );
 		//------------------------------------------------------------------------------------------------------
 		?>
 	<tr>
-		<td rowspan="3">&nbsp;一.<br /><br />
-		&nbsp;发&nbsp;<br /><br />
-		&nbsp;展&nbsp;<br /><br />
-		&nbsp;规&nbsp;<br /><br />
-		&nbsp;划&nbsp;</td>
+		<td rowspan="5">&nbsp;一.<br /><br />
+		&nbsp;组&nbsp;<br /><br />
+		&nbsp;织&nbsp;<br /><br />
+		&nbsp;领&nbsp;<br /><br />
+		&nbsp;导&nbsp;</td>
 		<td rowspan="2" style="padding-top:10px;padding-bottom:10px;">（一）<br />
-		办学<br />
-		思想<br />
-		与<br />
-		学校<br />
-		规划
-		</td>
+		党的<br />领导		
+		</td>		
 		<?php getScoreSingle($o_item,$o_subject_item,1);?>
 	</tr>
-	<tr>
+	<tr>	
 		<?php getScoreSingle($o_item,$o_subject_item,2);?>
 	</tr>
 	<tr>
-		<td colspan="6" class="sum">《发展规划》指标评分合计</td>
-		<td>
-			<?php echo($sum1)?>
-			</td>
-		<td>
-			<?php echo($sum2)?>
-			</td>
-		<td>
-			<?php echo($sum3)?>
-			</td>
+		<td rowspan="2" style="padding-top:10px;padding-bottom:10px;">（二）<br />
+		办学<br />方向
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,3);?>
 	</tr>
-		
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,4);?>
+	</tr>
+	<tr>
+		<td style="padding-top:10px;padding-bottom:10px;">（三）<br />
+		发展<br />规划
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,5);?>
+	</tr>
 	<?php 
 	//------------------------------------------------------------------------------------------------------
 		$sum1=0;
@@ -313,71 +323,53 @@ $o_date = new DateTime ( 'Asia/Chongqing' );
 		$sum3=0;
 	?>
 	<tr>
-		<td rowspan="8">&nbsp;&nbsp;二.&nbsp;<br /><br />
-		&nbsp;队&nbsp;<br /><br />&nbsp;伍&nbsp;<br /><br />&nbsp;建&nbsp;<br /><br />&nbsp;设&nbsp;
+		<td rowspan="7">&nbsp;&nbsp;二.&nbsp;<br /><br />
+		&nbsp;学&nbsp;<br /><br />&nbsp;校&nbsp;<br /><br />&nbsp;治&nbsp;<br /><br />&nbsp;理&nbsp;
 		</td>
-		<td rowspan="4">（二）<br />
-		干部<br />队伍<br />建设<br />
+		<td rowspan="3">（四）<br />
+		依法<br />办学<br />
 		</td>
-		<?php getScoreSingle($o_item,$o_subject_item,3,true);?>
+		<?php getScoreSingle($o_item,$o_subject_item,6,true);?>
 	</tr>
 	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,4);?>
-	</tr>
-	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,5);?>
-	</tr>
-	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,6);?>
-	</tr>
-	<tr>
-		<td rowspan="3">（三）<br />
-		教师<br />队伍<br />建设<br />
-		</td>
 		<?php getScoreSingle($o_item,$o_subject_item,7);?>
 	</tr>
 	<tr>
 		<?php getScoreSingle($o_item,$o_subject_item,8);?>
 	</tr>
 	<tr>
+		<td rowspan="2">（五）<br />
+		民主<br />管理<br />
+		</td>
 		<?php getScoreSingle($o_item,$o_subject_item,9);?>
 	</tr>
-		<tr>
-		<td colspan="6" class="sum">《队伍建设》指标评分合计</td>
-		<td>
-			<?php echo($sum1)?>
-			</td>
-		<td>
-			<?php echo($sum2)?>
-			</td>
-		<td>
-			<?php echo($sum3)?>
-			</td>
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,10);?>
 	</tr>
 	<tr>
-		<td rowspan="22">&nbsp;&nbsp;三.&nbsp;<br /><br />
-		&nbsp;各&nbsp;<br /><br />&nbsp;项&nbsp;<br /><br />&nbsp;工&nbsp;<br /><br />&nbsp;作&nbsp;<br /><br />&nbsp;管&nbsp;<br /><br />&nbsp;理&nbsp;
+		<td rowspan="2">（六）<br />
+		社会<br />参与<br />
 		</td>
-		<td rowspan="5">（四）<br />
-		行政<br />工作<br />
-		</td>
-		<?php getScoreSingle($o_item,$o_subject_item,10,true);?>
-	</tr>
-	<tr>
 		<?php getScoreSingle($o_item,$o_subject_item,11);?>
 	</tr>
 	<tr>
 		<?php getScoreSingle($o_item,$o_subject_item,12);?>
 	</tr>
 	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,13);?>
+		<td rowspan="6">&nbsp;&nbsp;三.&nbsp;<br /><br />
+		&nbsp;教&nbsp;<br /><br />&nbsp;师&nbsp;<br /><br />&nbsp;队&nbsp;<br /><br />&nbsp;伍&nbsp;
+		</td>
+		<td rowspan="2">（七）<br />
+		师德<br />师风<br />建设<br />
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,13,true);?>
 	</tr>
 	<tr>
 		<?php getScoreSingle($o_item,$o_subject_item,14);?>
 	</tr>
 	<tr>
-		<td rowspan="5">（五）<br />
-		德育<br />工作<br />
+		<td rowspan="2">（八）<br />
+		专业<br />化发<br />展
 		</td>
 		<?php getScoreSingle($o_item,$o_subject_item,15);?>
 	</tr>
@@ -385,13 +377,13 @@ $o_date = new DateTime ( 'Asia/Chongqing' );
 		<?php getScoreSingle($o_item,$o_subject_item,16);?>
 	</tr>
 	<tr>
+		<td rowspan="2">（九）<br />
+		发展<br />保障
+		</td>
 		<?php getScoreSingle($o_item,$o_subject_item,17);?>
 	</tr>
 	<tr>
 		<?php getScoreSingle($o_item,$o_subject_item,18);?>
-	</tr>
-	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,19);?>
 	</tr>
 </table>
 </div>
@@ -399,12 +391,15 @@ $o_date = new DateTime ( 'Asia/Chongqing' );
 <table class="score_table" border="0" cellpadding="0" cellspacing="0"
 	style="margin-top: 10px;">
 	<tr>
-		<td rowspan="12">&nbsp;&nbsp;三.&nbsp;<br /><br />
-		&nbsp;各&nbsp;<br /><br />&nbsp;项&nbsp;<br /><br />&nbsp;工&nbsp;<br /><br />&nbsp;作&nbsp;<br /><br />&nbsp;管&nbsp;<br /><br />&nbsp;理&nbsp;
+		<td rowspan="20">&nbsp;&nbsp;四.&nbsp;<br /><br />
+		&nbsp;教&nbsp;<br /><br />&nbsp;育&nbsp;<br /><br />&nbsp;教&nbsp;<br /><br />&nbsp;学&nbsp;
 		</td>
-		<td rowspan="7">（六）<br />
-		教学<br />工作<br />
+		<td rowspan="6">（十）<br />
+		德育<br />工作<br />
 		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,19);?>
+	</tr>
+	<tr>
 		<?php getScoreSingle($o_item,$o_subject_item,20);?>
 	</tr>
 	<tr>
@@ -420,40 +415,64 @@ $o_date = new DateTime ( 'Asia/Chongqing' );
 		<?php getScoreSingle($o_item,$o_subject_item,24);?>
 	</tr>
 	<tr>
+		<td rowspan="3">（十一）<br />
+		体卫<br />工作
+		</td>
 		<?php getScoreSingle($o_item,$o_subject_item,25);?>
 	</tr>
 	<tr>
 		<?php getScoreSingle($o_item,$o_subject_item,26);?>
 	</tr>
 	<tr>
-		<td rowspan="3">（七）<br />
-		体育<br />美育<br />科技<br />卫生<br />健康<br />教育<br />
-		</td>
 		<?php getScoreSingle($o_item,$o_subject_item,27);?>
 	</tr>
 	<tr>
+		<td rowspan="2">（十二）<br />
+		美育<br />工作
+		</td>
 		<?php getScoreSingle($o_item,$o_subject_item,28);?>
 	</tr>
 	<tr>
 		<?php getScoreSingle($o_item,$o_subject_item,29);?>
 	</tr>
 	<tr>
-		<td>（八）<br />
-		安全<br />工作
+		<td rowspan="1">（十三）<br />
+		劳动<br />教育
 		</td>
 		<?php getScoreSingle($o_item,$o_subject_item,30);?>
 	</tr>
-		<tr>
-		<td colspan="6" class="sum">《各项工作管理》指标评分合计</td>
-		<td>
-			<?php echo($sum1)?>
-			</td>
-		<td>
-			<?php echo($sum2)?>
-			</td>
-		<td>
-			<?php echo($sum3)?>
-			</td>
+	<tr>
+		<td rowspan="2">（十四）<br />
+		课程<br />建设
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,31);?>
+	</tr>
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,32);?>
+	</tr>
+	<tr>
+		<td rowspan="3">（十五）<br />
+		教学<br />实施
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,33);?>
+	</tr>
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,34);?>
+	</tr>
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,35);?>
+	</tr>
+	<tr>
+		<td rowspan="3">（十六）<br />
+		质量<br />监控
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,36);?>
+	</tr>
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,37);?>
+	</tr>
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,38);?>
 	</tr>
 	<?php 
 	//------------------------------------------------------------------------------------------------------
@@ -462,46 +481,70 @@ $o_date = new DateTime ( 'Asia/Chongqing' );
 		$sum3=0;
 	?>
 	<tr>
-		<td rowspan="8" style="padding-top:10px;padding-bottom:10px;">&nbsp;&nbsp;四.&nbsp;<br /><br />
-		&nbsp;发&nbsp;<br />&nbsp;展&nbsp;<br />&nbsp;绩&nbsp;<br />&nbsp;效&nbsp;<br />&nbsp;与&nbsp;<br />&nbsp;办&nbsp;<br />&nbsp;学&nbsp;<br />&nbsp;特&nbsp;<br />&nbsp;色&nbsp;
+		<td rowspan="4" style="padding-top:10px;padding-bottom:10px;">&nbsp;&nbsp;五.&nbsp;<br /><br />
+		&nbsp;实&nbsp;<br />&nbsp;践&nbsp;<br />&nbsp;育&nbsp;<br />&nbsp;人&nbsp;
 		</td>
-		<td rowspan="4">（九）<br />
-		学生<br />发展<br />
+		<td rowspan="2">（十七）<br />
+		实践<br />课程<br />
 		</td>
-		<?php getScoreSingle($o_item,$o_subject_item,31,true);?>
+		<?php getScoreSingle($o_item,$o_subject_item,39);?>
 	</tr>
 	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,32);?>
+		<?php getScoreSingle($o_item,$o_subject_item,40);?>
 	</tr>
 	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,33);?>
-	</tr>
-	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,34);?>
-	</tr>
-	<tr>
-		<td rowspan="3">（十）<br />
-		学校<br />发展<br />和特色
+		<td rowspan="2">（十八）<br />
+		实践<br />活动
 		</td>
-		<?php getScoreSingle($o_item,$o_subject_item,35);?>
+		<?php getScoreSingle($o_item,$o_subject_item,41);?>
 	</tr>
 	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,36);?>
+		<?php getScoreSingle($o_item,$o_subject_item,42);?>
+	</tr>	
+	<tr>
+		<td rowspan="8" style="padding-top:10px;padding-bottom:10px;">&nbsp;&nbsp;六.&nbsp;<br /><br />
+		&nbsp;办&nbsp;<br />&nbsp;学&nbsp;<br />&nbsp;成&nbsp;<br />&nbsp;效&nbsp;
+		</td>
+		<td rowspan="4">（十九）<br />
+		学生<br />课程<br />
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,43);?>
 	</tr>
 	<tr>
-		<?php getScoreSingle($o_item,$o_subject_item,37);?>
+		<?php getScoreSingle($o_item,$o_subject_item,44);?>
 	</tr>
 	<tr>
-		<td colspan="6" class="sum">《发展绩效与办学特色》指标评分合计</td>
-		<td>
-			<?php echo($sum1)?>
-			</td>
-		<td>
-			<?php echo($sum2)?>
-			</td>
-		<td>
-			<?php echo($sum3)?>
-			</td>
+		<?php getScoreSingle($o_item,$o_subject_item,45);?>
+	</tr>
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,46);?>
+	</tr>
+	<tr>
+		<td rowspan="2">（二十）<br />
+		教师<br />发展
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,47);?>
+	</tr>
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,48);?>
+	</tr>
+	<tr>
+		<td rowspan="2">（二十一）<br />
+		学校<br />发展
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,49);?>
+	</tr>
+	<tr>
+		<?php getScoreSingle($o_item,$o_subject_item,50);?>
+	</tr>
+	<tr>
+		<td rowspan="1" style="padding-top:10px;padding-bottom:10px;">&nbsp;&nbsp;七.&nbsp;<br />
+		&nbsp;特&nbsp;<br />&nbsp;色&nbsp;<br />&nbsp;工&nbsp;<br />&nbsp;作&nbsp;
+		</td>
+		<td rowspan="1">（二十二）<br />
+		创新<br />发展<br />
+		</td>
+		<?php getScoreSingle($o_item,$o_subject_item,51);?>
 	</tr>
 	<tr>
 		<td colspan="7" class="sum">评&nbsp;&nbsp;分&nbsp;&nbsp;总&nbsp;&nbsp;计</td>
