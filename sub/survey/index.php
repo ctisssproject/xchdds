@@ -66,7 +66,7 @@ $s_date=$o_date->format ( 'Y' ) . '-' . $o_date->format ( 'm' ) . '-' . $o_date-
     <div id="bottom" style="margin-top:80px;float:right;width:auto;">
               	<div class="title">
                 <h3 align="right">西城区人民政府教育督导室&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-                <h4 align="right">2014年9月&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+                <h4 align="right">2019年9月&nbsp;&nbsp;&nbsp;&nbsp;</h4>
                 </div>
        </div>
    </div>
