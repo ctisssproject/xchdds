@@ -681,6 +681,26 @@ ob_start();
 		<?php getScoreSingle($o_item,$o_subject_item,50);?>
 	</tr>
 	<tr>
+		<td colspan="7" class="sum" style="border-left: solid 1px #000000;">评&nbsp;&nbsp;分&nbsp;&nbsp;总&nbsp;&nbsp;计</td>
+		<td>
+			<?php echo($total1)?>
+			</td>
+		<td>
+			<?php echo($total2)?>
+			</td>
+		<td>
+			<?php echo($total3)?>
+			</td>
+	</tr>
+		<?php 
+	$total1=0;
+	$total2=0;
+	$total3=0;
+	$sum1=0;
+	$sum2=0;
+	$sum3=0;
+	?>
+	<tr>
 		<td rowspan="1" style="padding-top: 10px; padding-bottom: 10px;border-left: solid 1px #000000;">&nbsp;&nbsp;五.&nbsp;<br /><br />
 		&nbsp;特&nbsp;<br />&nbsp;色&nbsp;<br />&nbsp;工&nbsp;<br />&nbsp;作&nbsp;
 		</td>
